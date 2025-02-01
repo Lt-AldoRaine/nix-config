@@ -1,34 +1,26 @@
 {
   inputs,
+  lib,
+  config,
   pkgs,
   ...
 }: {
-  # You can import other home-manager modules here
   imports = [
-    # Split up your configuration and import pieces of it here:
-    ../modules/shell/zsh.nix
-    ../modules/style/stylixUser.nix
-    ../modules/alacritty.nix
+    ../modules/home-manager/shell/zsh.nix
+    ../modules/home-manager/style/stylixUser.nix
+    ../modules/home-manager/alacritty.nix
   ];
 
   home = {
     username = "connor";
     homeDirectory = "/home/connor";
     packages = with pkgs; [
-      gcc
       git
       firefox
       neovim
-      ripgrep
       zsh
-      zsh-powerlevel10k
     ];
     stateVersion = "24.11";
-  };
-
-  nixpkgs.config = {
-    allowUnfree = false;
-    allowUnfreePredicate = _: false;
   };
 
   #enable home-manager programs

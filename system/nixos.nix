@@ -53,5 +53,9 @@
 	    home-manager.useUserPackages = true;
 	    home-manager.users."${username}" = home-manager;
 	  }
+
+	  {
+            stylix.enable = true;
+	  }
       ];
     }

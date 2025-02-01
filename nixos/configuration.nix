@@ -6,7 +6,11 @@
   ...
 }: {
 
-  boot.loader.efi.canTouchEfiVariables = true;
+  imports = [
+    ./hardware-configuration.nix
+  ];
+
+  # boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.enable = true;
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -24,10 +28,10 @@
 
   nix = {
     settings = {
-      auto-optimise-store = true;
-      substituters = [ "https://nix-community.cachix.org" ];
-
-      trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs" ];
+      # auto-optimise-store = true;
+      # substituters = [ "https://nix-community.cachix.org" ];
+      #
+      # trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs" ];
       trusted-users = ["@wheel"];
       warn-dirty = false;
 
@@ -36,7 +40,7 @@
       # Opinionated: disable global registry
       flake-registry = "";
       # Workaround for https://github.com/NixOS/nix/issues/9574
-      # nix-path = config.nix.nixPath;
+      nix-path = config.nix.nixPath;
     };
     # Opinionated: disable channels
     channel.enable = false;
@@ -90,5 +94,5 @@
   users.mutableUsers = true;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "24.11";
+  system.stateVersion = "24.12";
 }

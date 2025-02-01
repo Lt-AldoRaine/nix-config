@@ -1,7 +1,7 @@
 { pkgs, config, lib, ... }:
 
 let 
-  themeName = "tokyo-night";
+  themeName = "nord";
   themePath = ../../../themes/${themeName};
   themePolarity = lib.removeSuffix "\n" (builtins.readFile ("${themePath}/polarity.txt"));
   backgroundUrl = builtins.readFile "${themePath}/backgroundurl.txt";
@@ -48,7 +48,6 @@ in
     };  
 
     targets = {
-      lightdm.enable = true;
       console.enable = true;
     };
   };

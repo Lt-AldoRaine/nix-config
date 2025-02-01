@@ -22,7 +22,7 @@ in
       name = "Bibata-Modern-Ice";
       size = 24;
     };
- 
+
     opacity = {
       terminal = 0.9;
       applications = 0.9;
@@ -39,7 +39,7 @@ in
         name = "JetBrainsMono NF";
         package = pkgs.nerdfonts;
       };
- 
+
       monospace = {
         name = "JetBrainsMono NF";
         package = pkgs.nerdfonts;
