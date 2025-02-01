@@ -1,16 +1,16 @@
 {
-  description = "Your new nix config";
+  description = "My Nix Config";
 
   inputs = {
-    # Home manager
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    stylix.url = "github:danth/stylix";
   };
 
   outputs = {
@@ -19,11 +19,14 @@
     home-manager,
     ...
   } @ inputs: let
-    nixos-system = import ./nixos.nix {
+    nixos-system = import ./system/nixos.nix {
       inherit inputs; 
       username = "connor";
       password = "cpenn";
     };
+
+    nixosModules = import ./modules/nixos;
+    homeManagerModules = import ./modules/home-manager;
   in {
       nixosConfigurations = {
            workspace = nixos-system "x86_64-linux";

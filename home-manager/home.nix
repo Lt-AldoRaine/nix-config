@@ -1,5 +1,3 @@
-# This is your home-manager configuration file
-# Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 {
   inputs,
   pkgs,
@@ -8,6 +6,9 @@
   # You can import other home-manager modules here
   imports = [
     # Split up your configuration and import pieces of it here:
+    ../modules/shell/zsh.nix
+    ../modules/style/stylixUser.nix
+    ../modules/alacritty.nix
   ];
 
   home = {
