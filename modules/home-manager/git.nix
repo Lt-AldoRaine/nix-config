@@ -4,4 +4,4 @@
     userName = "Connor Pennington";
     userEmail = "harambefallon@gmail.com";
   };
-};
+}
