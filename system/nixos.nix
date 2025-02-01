@@ -42,7 +42,7 @@
 	    home = "/home/${username}";
 	    isNormalUser = true;
 	    password = password;
-	    shell = pkgs.starship;
+	    shell = pkgs.zsh;
 	    extraGroups = [ "wheel" ];
 	  };
 	}

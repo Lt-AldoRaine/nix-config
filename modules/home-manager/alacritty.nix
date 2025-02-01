@@ -10,9 +10,18 @@
 
   settings = {
       window = {
-      padding = {
-        x = 8; 
-      };
+      	padding = {
+          x = 0; 
+          y = 0; 
+        };
+
+	dynamic_padding = false;
+	decorations = "Transparent";
+
+        dimensions = {
+	  lines = 45;
+	  columns = 200;
+	};
     };
   };
  };
