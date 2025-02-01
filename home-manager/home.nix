@@ -9,6 +9,7 @@
     ../modules/home-manager/shell/zsh.nix
     ../modules/home-manager/style/stylixUser.nix
     ../modules/home-manager/alacritty.nix
+    ../modules/home-manager/shell/starship.nix
   ];
 
   home = {

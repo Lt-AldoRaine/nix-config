@@ -11,17 +11,5 @@
 	    vi = "nvim";
 	    vim = "nvim";
 	};
-
-	plugins = [
-	];
-
-	    oh-my-zsh = {
-	         enable = true;
-		 plugins = [
-		     "git"
-		     "thefuck"
-		 ];
-		 theme = "powerlevel10k";
-	    };
-	   };
+   };
 }

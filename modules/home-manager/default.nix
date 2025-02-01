@@ -1,8 +1,8 @@
 {
   import = [
     ./alacritty.nix
-    ./hyprland.nix
     ./shell/zsh.nix
+    ./shell/startship.nix
     ./style/stylixUser.nix
   ];
 }
