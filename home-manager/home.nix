@@ -10,6 +10,7 @@
     ../modules/home-manager/style/stylixUser.nix
     ../modules/home-manager/alacritty.nix
     ../modules/home-manager/shell/starship.nix
+    ../modules/home-manager/git.nix
   ];
 
   home = {
