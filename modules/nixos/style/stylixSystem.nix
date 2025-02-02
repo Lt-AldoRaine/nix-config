@@ -20,18 +20,18 @@ in
 
     fonts = {
       serif = {
+        package = pkgs.nerd-fonts.jetbrains-mono;
         name = "JetBrainsMono NF";
-        package = pkgs.nerdfonts;
       };
 
       sansSerif = {
+        package = pkgs.nerd-fonts.jetbrains-mono;
         name = "JetBrainsMono NF";
-        package = pkgs.nerdfonts;
       };
- 
+
       monospace = {
+        package = pkgs.nerd-fonts.jetbrains-mono;
         name = "JetBrainsMono NF";
-        package = pkgs.nerdfonts;
       };
 
       sizes = {

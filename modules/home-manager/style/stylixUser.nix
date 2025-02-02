@@ -31,18 +31,18 @@ in
 
     fonts = {
       serif = {
-        name = "JetBrainsMono NF";
-        package = pkgs.nerdfonts;
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono";
       };
 
       sansSerif = {
-        name = "JetBrainsMono NF";
-        package = pkgs.nerdfonts;
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono";
       };
 
       monospace = {
-        name = "JetBrainsMono NF";
-        package = pkgs.nerdfonts;
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono";
       };
 
       sizes = {

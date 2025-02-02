@@ -5,9 +5,9 @@
   desktop ? "gnome",
 }: system: let
     configuration = import ../nixos/configuration.nix;
-    stylixSystem = import ../modules/nixos/style/stylixSystem.nix;
     hardware-configuration = import ../nixos/hardware-configuration.nix;
     home-manager = import ../home-manager/home.nix;
+    stylixSystem = import ../modules/nixos/style/stylixSystem.nix;
 
     pkgs = inputs.nixpkgs.legacyPackages.${system};
     stylix = inputs.stylix.nixosModules.stylix;
@@ -29,8 +29,8 @@
             git
 	    gcc
 	    neofetch
-	    (nerdfonts.override { fonts = ["JetBrainsMono"]; })
-	    neovim
+	    nerd-fonts.jetbrains-mono
+	    ripgrep
 	    wget
 	  ];
 
@@ -49,6 +49,9 @@
 
 	  inputs.home-manager.nixosModules.home-manager
 	  {
+	    home-manager.extraSpecialArgs = {
+              inherit inputs;
+	    };
             home-manager.useGlobalPkgs = true;
 	    home-manager.useUserPackages = true;
 	    home-manager.users."${username}" = home-manager;

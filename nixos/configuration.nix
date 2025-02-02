@@ -5,11 +5,6 @@
   pkgs,
   ...
 }: {
-
-  imports = [
-    ./hardware-configuration.nix
-  ];
-
   # boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.enable = true;
 
@@ -26,11 +21,16 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+    };
+  };
+
   nix = {
     settings = {
       # auto-optimise-store = true;
       # substituters = [ "https://nix-community.cachix.org" ];
-      #
       # trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs" ];
       trusted-users = ["@wheel"];
       warn-dirty = false;
@@ -90,6 +90,10 @@
 
   systemd.services."getty#tty1".enable = false;
   systemd.services."autovt#tty1".enable = false;
+
+  environment.systemPackages = [
+    pkgs.base16-schemes
+  ];
 
   users.mutableUsers = true;
 
