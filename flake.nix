@@ -37,6 +37,7 @@
   in {
       nixosConfigurations = {
 	workspace = nixos-system "x86_64-linux";
+	modules = [ stylix.nixosModules.stylix ];
 	};
       homeConfigurations = {
         "connor@workspace" = home-manager.lib.homeManagerConfiguration {

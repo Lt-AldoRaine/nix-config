@@ -61,12 +61,12 @@
 
   services.xserver = {
     enable = true;
-    displayManager.autoLogin.enable = false;
-    layout = "us";
-    xkbVariant = "";
+    xkb.layout = "us";
+    xkb.variant = "";
   };
 
-  hardware.pulseaudio.enable = false;
+  services.displayManager.autoLogin.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;

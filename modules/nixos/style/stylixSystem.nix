@@ -21,23 +21,23 @@ in
     fonts = {
       serif = {
         package = pkgs.nerd-fonts.jetbrains-mono;
-        name = "JetBrainsMono NF";
+        name = "JetBrainsMono";
       };
 
       sansSerif = {
         package = pkgs.nerd-fonts.jetbrains-mono;
-        name = "JetBrainsMono NF";
+        name = "JetBrainsMono";
       };
 
       monospace = {
         package = pkgs.nerd-fonts.jetbrains-mono;
-        name = "JetBrainsMono NF";
+        name = "JetBrainsMono";
       };
 
       sizes = {
-        applications = 12;
-        desktop = 12;
-	terminal = 14;
+        applications = 14;
+        desktop = 14;
+	terminal = 16;
       };
     };
 

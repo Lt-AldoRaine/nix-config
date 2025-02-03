@@ -1,7 +1,6 @@
 { nixvim, pkgs, ... }: {
   programs.nixvim.plugins.treesitter = {
     enable = true;
-    folding = true;
     nixvimInjections = true;
 
     settings = {

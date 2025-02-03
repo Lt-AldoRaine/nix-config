@@ -34,7 +34,7 @@
 	    wget
 	  ];
 
-	  services.xserver.displayManager.autoLogin.user = username;
+	  services.displayManager.autoLogin.user = username;
 
 	  services.xserver.desktopManager.gnome.enable = enabledDesktopGnome;
 

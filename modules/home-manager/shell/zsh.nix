@@ -9,8 +9,6 @@
             ls = "ls -la";
 	    ll = "ls -l";
 
-	    # vi = "nvim";
-	    # vim = "nvim";
 
 	    update-workspace = "sudo nixos-rebuild switch --flake ~/nix-config#workspace";
 	};
