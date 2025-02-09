@@ -7,13 +7,6 @@
 }: {
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
-    # ../modules/home-manager/shell/zsh.nix
-    # ../modules/home-manager/style/stylixUser.nix
-    # ../modules/home-manager/alacritty.nix
-    # ../modules/home-manager/shell/starship.nix
-    # ../modules/home-manager/git.nix
-    ../modules/home-manager/nixvim-config/nixvim.nix
-    ../modules/home-manager/nixvim-config/plugins
     ../modules/home-manager
   ];
 
