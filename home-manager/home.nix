@@ -6,7 +6,6 @@
   ...
 }: {
   imports = [
-    inputs.nixvim.homeManagerModules.nixvim
     ../modules/home-manager
   ];
 
