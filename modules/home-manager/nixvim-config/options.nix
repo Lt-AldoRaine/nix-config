@@ -8,10 +8,11 @@
     };  
 
 	clipboard = {
-      clipboard = "unnamedplus"
+	  register = "unnamedplus";
+	  providers.wl-copy.enable = true;
 	};
 
-    options = {
+    opts = {
       relativenumber = true;
 
       shiftwidth = 4;

@@ -1,7 +1,7 @@
 { pkgs, config, lib, ... }:
 
 let 
-  themeName = "nord";
+  themeName = "tokyo-night";
   themePath = ../../../themes/${themeName};
   themePolarity = lib.removeSuffix "\n" (builtins.readFile ("${themePath}/polarity.txt"));
   backgroundUrl = builtins.readFile "${themePath}/backgroundurl.txt";
