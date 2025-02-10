@@ -47,8 +47,6 @@
       updatetime = 250;
       timeoutlen = 300;
 
-      completeopt = "menuone,noselect";
-
       termguicolors = true;
     };
   }; 
