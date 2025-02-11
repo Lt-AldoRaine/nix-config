@@ -27,6 +27,7 @@ in inputs.nixpkgs.lib.nixosSystem {
         neofetch
         ripgrep
         wget
+		wayland
 		nerd-fonts.jetbrains-mono
       ];
 

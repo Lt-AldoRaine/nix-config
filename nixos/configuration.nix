@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{ config, pkgs, ... }: {
   boot.loader.systemd-boot.enable = true;
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -18,18 +14,16 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-    };
-  };
+  nixpkgs = { config = { allowUnfree = true; }; };
 
   nix = {
     settings = {
       auto-optimise-store = true;
       substituters = [ "https://nix-community.cachix.org" ];
-      trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs" ];
-      trusted-users = ["@wheel"];
+      trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs"
+      ];
+      trusted-users = [ "@wheel" ];
       warn-dirty = false;
 
       # Enable flakes and new 'nix' command
@@ -57,6 +51,9 @@
     xkb.layout = "us";
     xkb.variant = "";
   };
+
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
   services.displayManager.autoLogin.enable = false;
   services.pulseaudio.enable = false;

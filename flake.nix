@@ -41,7 +41,6 @@
           modules = [
             stylix.homeManagerModules.stylix
             ./home-manager/home.nix
-            { wayland.windowManager.hyprland = { enable = true; }; }
           ];
         };
       };

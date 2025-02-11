@@ -1,8 +1,12 @@
-{ pkgs, inputs, ... }: 
-{
+{ pkgs, inputs, ... }: {
   wayland.windowManager.hyprland = {
-    package = null;
-    portalPackage = null;
+    enable = true;
+    xwayland.enable = true;
+
+    package =
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    portalPackage =
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
     settings = {
       "$MOD" = "SUPER";
@@ -16,8 +20,10 @@
           ]) 9));
     };
 
-    plugins = [
-      inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprbars
-    ];
+    # plugins = [
+    #   inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprbars
+    # ];
+
+    systemd.variables = [ "--all" ];
   };
 }
