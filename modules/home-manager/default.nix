@@ -1,12 +1,11 @@
 {
   imports = [
-    # ./alacritty.nix
     ./git.nix
+	./hyprland.nix
     ./kitty.nix
-    ./shell/zsh.nix
-    ./shell/starship.nix
-    ./style/stylixUser.nix
     ./nixvim-config
-    # ./awesome.nix
+    ./shell/starship.nix
+    ./shell/zsh.nix
+    ./style/stylixUser.nix
   ];
 }

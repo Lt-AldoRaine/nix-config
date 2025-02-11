@@ -12,44 +12,38 @@
 
     stylix.url = "github:danth/stylix/";
 
-	# base16.url = "github:SenchoPens/base16";
-    
+    hyprland.url = "github:hyprwm/Hyprland";
+
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    stylix,
-    ...
-  } @ inputs: let
-    nixos-system = import ./system/nixos.nix {
-      inherit inputs; 
-      username = "connor";
-      password = "cpenn";
-    };
-
-    nixosModules = import ./modules/nixos;
-    homeManagerModules = import ./modules/home-manager;
-  in {
+  outputs = { self, nixpkgs, home-manager, stylix, hyprland, ... }@inputs:
+    let
+      nixos-system = import ./system/nixos.nix {
+        inherit inputs;
+        username = "connor";
+        password = "cpenn";
+      };
+    in {
       nixosConfigurations = {
-	workspace = nixos-system "x86_64-linux";
-	modules = [ stylix.nixosModules.stylix ];
-	};
+        workspace = nixos-system "x86_64-linux";
+        modules = [ stylix.nixosModules.stylix ];
+      };
       homeConfigurations = {
         "connor@workspace" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."x86_64-linux"; # Home-manager requires 'pkgs' instance
+          pkgs =
+            nixpkgs.legacyPackages."x86_64-linux"; # Home-manager requires 'pkgs' instance
           extraSpecialArgs = { inherit inputs; };
           # > Our main home-manager configuration file <
-          modules = [ 
-	    stylix.homeManagerModules.stylix
-	    ./home-manager/home.nix
-	  ];
-      	};
+          modules = [
+            stylix.homeManagerModules.stylix
+            ./home-manager/home.nix
+            { wayland.windowManager.hyprland = { enable = true; }; }
+          ];
+        };
       };
     };
-  }
+}

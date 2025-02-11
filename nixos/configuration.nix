@@ -3,7 +3,6 @@
   pkgs,
   ...
 }: {
-  # boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.enable = true;
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -27,9 +26,9 @@
 
   nix = {
     settings = {
-      # auto-optimise-store = true;
-      # substituters = [ "https://nix-community.cachix.org" ];
-      # trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs" ];
+      auto-optimise-store = true;
+      substituters = [ "https://nix-community.cachix.org" ];
+      trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs" ];
       trusted-users = ["@wheel"];
       warn-dirty = false;
 
@@ -42,10 +41,6 @@
     };
     # Opinionated: disable channels
     channel.enable = false;
-
-    # Opinionated: make flake registry and nix path match flake inputs
-    # registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
-    # nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
 
   # FIXME: Add the rest of your current configuration

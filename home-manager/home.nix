@@ -25,6 +25,8 @@
   #enable home-manager programs
   programs.home-manager.enable = true;
 
+  wayland.windowManager.hyprland.systemd.variables = ["--all"];
+
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 }

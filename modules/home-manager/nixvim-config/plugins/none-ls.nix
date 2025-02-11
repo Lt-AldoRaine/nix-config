@@ -9,6 +9,7 @@
 		  prettierd.enable = true;
 		  clang_format.enable = true;
 		  black.enable = true;
+		  nixfmt.enable = true;
 		  
 		};
 
