@@ -11,6 +11,8 @@
     # nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     stylix.url = "github:danth/stylix/";
+
+	# base16.url = "github:SenchoPens/base16";
     
     nixvim = {
       url = "github:nix-community/nixvim";
@@ -22,7 +24,6 @@
     self,
     nixpkgs,
     home-manager,
-    nixvim,
     stylix,
     ...
   } @ inputs: let

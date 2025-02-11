@@ -89,10 +89,6 @@
   systemd.services."getty#tty1".enable = false;
   systemd.services."autovt#tty1".enable = false;
 
-  environment.systemPackages = [
-    pkgs.base16-schemes
-  ];
-
   users.mutableUsers = true;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

@@ -1,5 +1,5 @@
 {
-  			programs.nixvim = {
+  	  programs.nixvim = {
 	  plugins = {
 	    lsp-format = {
         enable = true;
@@ -17,18 +17,19 @@
           gd = "definition";
 	      gD = "references";
 	      gt = "type_definition";
-	      gi = "implementation";
+	      gI = "implementation";
 	      K = "hover";
-	      "<F2>" = "rename";
+	      "<leader>rn" = "rename";
+		  "<leader>f" = "format";
+		  "<leader>wa" = "add_workspace_folder";
 		  };
 		};
 
 		servers = {
           clangd.enable = true;
     	  nixd.enable = true;
+		  lua_ls.enable = true;
         };
-	
-       
       };
     };
   };

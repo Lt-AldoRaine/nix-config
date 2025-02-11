@@ -1,7 +1,9 @@
 {
   imports = [
-    ./treesitter.nix
-    ./lsp.nix
 	./lualine.nix
+    ./lsp.nix
+	./none-ls.nix
+    ./treesitter.nix
   ];
+
 }
