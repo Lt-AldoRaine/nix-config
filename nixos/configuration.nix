@@ -1,5 +1,8 @@
 { config, pkgs, ... }: {
   boot.loader.systemd-boot.enable = true;
+  boot.loader.grub.extraConfig = ''
+	options nvidia-drm.modeset=1 
+  '';
 
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -42,20 +45,41 @@
   networking.hostName = "adloraine";
 
   programs.zsh.enable = true;
+  programs.noisetorch.enable = true;
 
   security.sudo.enable = true;
   security.sudo.wheelNeedsPassword = false;
 
+  hardware.graphics = { enable = true; };
+
   services.xserver = {
     enable = true;
+    videoDrivers = [ "nvidia" ];
     xkb.layout = "us";
     xkb.variant = "";
   };
 
+  hardware.nvidia = {
+    modesetting.enable = true;
+
+    open = true;
+
+    nvidiaSettings = true;
+
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
+  };
+
+  boot.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ]; 
+
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
-  services.displayManager.autoLogin.enable = false;
+  services.displayManager = {
+	autoLogin.enable = false;
+	sddm.enable = true;
+	sddm.wayland.enable = true;
+  };
+
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -63,6 +87,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+
   };
 
   # This setups a SSH server. Very important if you're setting up a headless system.

@@ -20,7 +20,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, stylix, hyprland, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, stylix, ... }@inputs:
     let
       nixos-system = import ./system/nixos.nix {
         inherit inputs;
