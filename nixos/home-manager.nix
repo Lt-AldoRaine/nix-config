@@ -1,9 +1,9 @@
-{ inputs, username, ... }: {
+{ inputs, ... }: {
 
   home-manager = {
-    home-manager.extraSpecialArgs = { inherit inputs; };
-    home-manager.useGlobalPkgs = true;
-    home-manager.useUserPackages = true;
-    # home-manager.users."${username}" = home-manager;
+    extraSpecialArgs = { inherit inputs; };
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    backupFileExtension = "hm-backup";
   };
 }

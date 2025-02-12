@@ -10,7 +10,6 @@
 		  clang_format.enable = true;
 		  black.enable = true;
 		  nixfmt.enable = true;
-		  
 		};
 
 		diagnostics = {

@@ -20,12 +20,12 @@ in {
       warn-dirty = false;
       experimental-features = [ "nix-command" "flakes" ];
 
-      gc = {
-        automatic = autoGarbageCollector;
-        persistent = true;
-        dates = "weekly";
-        options = "--delete-older-than 7d";
-      };
+    };
+    gc = {
+      automatic = autoGarbageCollector;
+      persistent = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
     };
   };
 }

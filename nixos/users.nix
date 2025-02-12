@@ -1,12 +1,15 @@
-{ config, pkgs, username, password, ... }: {
+{ config, pkgs, ... }: 
+  let username = config.var.username;
+  in {
   programs.zsh.enable = true;
   users = {
     defaultUserShell = pkgs.zsh;
     users."${username}" = {
       home = "/home/${username}";
       isNormalUser = true;
-      password = password;
       extraGroups = [ "wheel" "networkmanager" ];
     };
+
+	mutableUsers = true;
   };
 }
