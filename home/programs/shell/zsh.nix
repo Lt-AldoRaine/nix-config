@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, ... }: {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -10,9 +10,9 @@
       ll = "ls -l";
 
       update-workspace =
-        "sudo nixos-rebuild switch --flake ~/nix-config#workspace";
+        "sudo nixos-rebuild switch --flake ${config.var.configDirectory}#${config.var.hostname}";
 
-	  test-workspace = "sudo nixos-rebuild test --flake ~/nix-config#workspace";
+	  test-workspace = "sudo nixos-rebuild test --flake ${config.var.configDirectory}#${config.var.hostname}";
     };
 
     initExtra = "eval $(starship init zsh)";

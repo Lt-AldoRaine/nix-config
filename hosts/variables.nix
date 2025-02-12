@@ -20,6 +20,6 @@
 
     autoGarbageCollector = true;
 
-    them = import ../themes/var/2025.nix;
+    theme = import ../themes/var/dark.nix;
   };
 }

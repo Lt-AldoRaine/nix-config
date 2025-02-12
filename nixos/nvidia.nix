@@ -1,11 +1,14 @@
 { lib, pkgs, config, ... }:
 let
   nvidiaDriverChannel =
-    config.boot.kernelPackages.nvidiaPackages.beta; # stable, latest, beta, etc.
+    config.boot.kernelPackages.nvidiaPackages.latest; # stable, latest, beta, etc.
 in {
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers =
     [ "nvidia" "displayLink" ]; # or "nvidiaLegacy470 etc.
+
+  boot.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+
   boot.kernelParams =
     lib.optionals (lib.elem "nvidia" config.services.xserver.videoDrivers) [
       "nvidia-drm.modeset=1"
@@ -13,7 +16,7 @@ in {
       "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
     ];
   environment.variables = {
-    # GBM_BACKEND = "nvidia-drm"; # If crash in firefox, remove this line
+    GBM_BACKEND = "nvidia-drm"; # If crash in firefox, remove this line
     LIBVA_DRIVER_NAME = "nvidia"; # hardware acceleration
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     NVD_BACKEND = "direct";
@@ -30,10 +33,10 @@ in {
   };
   hardware = {
     nvidia = {
-      open = false;
+      open = true;
       nvidiaSettings = true;
       powerManagement.enable =
-        true; # This can cause sleep/suspend to fail and saves entire VRAM to /tmp/
+        false; # This can cause sleep/suspend to fail and saves entire VRAM to /tmp/
       modesetting.enable = true;
       package = nvidiaDriverChannel;
     };

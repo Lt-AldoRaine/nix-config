@@ -4,7 +4,8 @@
 
     # system
     ../home/system/wofi
-    ../home/system/waybar
+    # ../home/system/waybar
+	../home/system/hyprpanel
     ../home/system/hyprland
 
     # programs

@@ -5,6 +5,7 @@
       "$MOD SHIFT, f, exec, firefox"
       "$MOD SHIFT, r, exec, wofi"
       "$MOD, RETURN, exec, kitty"
+	  "$MOD, 0, exec, alacritty"
 
       # ------------------------- 
       "$MOD SHIFT, q, killactive"

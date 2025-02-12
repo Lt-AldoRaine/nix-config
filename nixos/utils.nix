@@ -68,7 +68,6 @@ in {
     xdg-utils
     wget
     curl
-
   ];
 
   services.logind.extraConfig = ''
