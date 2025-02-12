@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   imports = [ ./bindings.nix ];
 
-  home.packages = with pkgs; [ waybar swww ];
+  home.packages = with pkgs; [ swww ];
 
   wayland.windowManager.hyprland = {
     enable = true;

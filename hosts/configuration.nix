@@ -19,26 +19,6 @@
 
   nixpkgs = { config = { allowUnfree = true; }; };
 
-  nix = {
-    settings = {
-      auto-optimise-store = true;
-      substituters = [ "https://nix-community.cachix.org" ];
-      trusted-public-keys = [
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs"
-      ];
-      trusted-users = [ "@wheel" ];
-      warn-dirty = false;
-
-      # Enable flakes and new 'nix' command
-      experimental-features = [ "nix-command" "flakes" ];
-      # Opinionated: disable global registry
-      flake-registry = "";
-      # Workaround for https://github.com/NixOS/nix/issues/9574
-      nix-path = config.nix.nixPath;
-    };
-    # Opinionated: disable channels
-    channel.enable = false;
-  };
 
   # FIXME: Add the rest of your current configuration
 
@@ -89,6 +69,7 @@
     pulse.enable = true;
 
   };
+
 
   # This setups a SSH server. Very important if you're setting up a headless system.
   # Feel free to remove if you don't need it.
