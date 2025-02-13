@@ -1,11 +1,13 @@
 {
   imports = [
+	./cmp.nix
 	./dashboard.nix
-	./lualine.nix
+	./harpoon.nix
     ./lsp.nix
+	./lualine.nix
 	./none-ls.nix
-    ./treesitter.nix
 	./telescope.nix
+    ./treesitter.nix
 	./utils.nix
   ];
 
