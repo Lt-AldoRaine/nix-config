@@ -2,7 +2,7 @@
   stylix = {
     enable = true;
 
-	base16Scheme = "${pkgs.base16-schemes}/share/themes/eva-dim.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyodark.yaml";
 
     cursor = {
       package = pkgs.bibata-cursors;
@@ -33,6 +33,7 @@
         popups = 14;
         terminal = 14;
       };
+
     };
 
     polarity = "dark";

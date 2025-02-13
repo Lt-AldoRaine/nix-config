@@ -1,24 +1,16 @@
 {
   programs.nixvim = {
-    globals = {
-      mapLeader = " ";
-      mapLocalLeader = " ";
-      loaded_netrw = 1;
-      loaded_netrwPlugin = 1;
-    };
-
-    clipboard = {
-      register = "unnamedplus";
-      providers.wl-copy.enable = true;
-    };
-
+    globals.mapLeader = "";
     opts = {
-      relativenumber = true;
+      autoindent = true;
+      smartindent = true;
 
       shiftwidth = 2;
-      softtabstop = 0;
-      tabstop = 4;
+      softtabstop = 2;
+      tabstop = 2;
       scrolloff = 8;
+
+      clipboard = "unnamed,unnamedplus";
 
       wrap = false;
 
@@ -27,21 +19,23 @@
 
       pumheight = 15;
 
-      hlsearch = false;
+      hlsearch = true;
       incsearch = true;
+      
+      mouse = "a";
 
       number = true;
 
-      mouse = "a";
+      relativenumber = true;
 
       breakindent = true;
 
       undofile = true;
 
+      signcolumn = "yes";
+
       ignorecase = true;
       smartcase = true;
-
-      # signcolumn = "yes";
 
       updatetime = 250;
       timeoutlen = 300;

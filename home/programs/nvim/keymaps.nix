@@ -1,5 +1,10 @@
 { config, lib, ... }: {
   programs.nixvim = {
+    globals = {
+      mapleader = " ";
+      mapLocalleader = " ";
+    };
+
     plugins.which-key = {
       enable = true;
       settings = {
@@ -12,10 +17,6 @@
         };
 
       };
-    };
-    globals = {
-      mapleader = " ";
-      mapLocalleader = " ";
     };
 
     keymaps = let

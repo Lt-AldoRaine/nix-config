@@ -9,6 +9,9 @@
       ls = "ls -la";
       ll = "ls -l";
 
+	  vi = "nvim";
+	  vim = "nvim";
+
       update-workspace =
         "sudo nixos-rebuild switch --flake ${config.var.configDirectory}#${config.var.hostname}";
 

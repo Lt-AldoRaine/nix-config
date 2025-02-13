@@ -37,14 +37,6 @@
           ./hosts/configuration.nix
         ];
       };
-      # homeConfigurations = {
-      #   "connor@workspace" = home-manager.lib.homeManagerConfiguration {
-      #     pkgs =
-      #       nixpkgs.legacyPackages."x86_64-linux"; # Home-manager requires 'pkgs' instance
-      #     extraSpecialArgs = { inherit inputs; };
-      #     # > Our main home-manager configuration file <
-      #     modules = [ stylix.homeManagerModules.stylix ./home-manager/home.nix ];
-      #   };
     };
   };
 }

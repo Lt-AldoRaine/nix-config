@@ -38,7 +38,6 @@
       ripgrep
 
       firefox
-      neovim
     ];
     stateVersion = "24.11";
   };

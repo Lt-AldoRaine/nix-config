@@ -5,7 +5,19 @@
     nixGrammars = true;
 
     settings = {
-      ensure_installed = "all";
+      ensure_installed = [
+		"nix"
+		"go"
+		"python"
+		"javascript"
+		"c"
+		"rust"
+		"lua"
+		"markdown"
+		"json"
+		"toml"
+		"yaml"
+	  ];
       indent.enable = true;
 
       highlight = {
