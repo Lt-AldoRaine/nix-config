@@ -34,7 +34,7 @@
     };
 
     polarity = "dark";
-    image = ./wallpapers/Beer-Girl.png;
+    image = ./wallpapers/girl-laying-down.jpg;
   };
 
 }
