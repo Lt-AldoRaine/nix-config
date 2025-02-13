@@ -4,18 +4,18 @@
 
     # system
     ../home/system/wofi
-	../home/system/hyprpanel
+    ../home/system/hyprpanel
     ../home/system/hyprland
-	../home/system/hyprpaper
+    ../home/system/hyprpaper
 
-	../home/scripts
+    # ../home/scripts
 
     # programs
     ../home/programs/git
     ../home/programs/kitty
     ../home/programs/shell
     ../home/programs/nvim
-	../home/programs/thunar
+    ../home/programs/thunar
   ];
 
   home = {
@@ -35,8 +35,7 @@
       optipng
       pfetch
       pandoc
-      curtail
-	  swww
+      ripgrep
 
       firefox
       neovim

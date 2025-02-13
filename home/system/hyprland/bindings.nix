@@ -1,11 +1,11 @@
 { pkgs, ... }: {
   wayland.windowManager.hyprland.settings = {
     bind = [
+	  # --------------------------
       "$MOD SHIFT, d, exec, discord"
       "$MOD SHIFT, f, exec, firefox"
       "$MOD SHIFT, r, exec, wofi"
       "$MOD, RETURN, exec, kitty"
-	  "$MOD, 0, exec, alacritty"
 
       # ------------------------- 
       "$MOD SHIFT, q, killactive"
@@ -14,7 +14,6 @@
       "$MOD, down, movefocus, d"
       "$MOD, left, movefocus, l"
       "$MOD, right, movefocus, r"
-      "$MOD SHIFT, k, focusmonitor, 1"
       "$MOD SHIFT, j, focusmonitor, -1"
     ] ++ (builtins.concatLists (builtins.genList (i:
       let ws = i + 1;

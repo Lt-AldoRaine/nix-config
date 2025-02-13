@@ -5,17 +5,17 @@
       mapLocalLeader = " ";
       loaded_netrw = 1;
       loaded_netrwPlugin = 1;
-    };  
+    };
 
-	clipboard = {
-	  register = "unnamedplus";
-	  providers.wl-copy.enable = true;
-	};
+    clipboard = {
+      register = "unnamedplus";
+      providers.wl-copy.enable = true;
+    };
 
     opts = {
       relativenumber = true;
 
-      shiftwidth = 4;
+      shiftwidth = 2;
       softtabstop = 0;
       tabstop = 4;
       scrolloff = 8;
@@ -30,10 +30,9 @@
       hlsearch = false;
       incsearch = true;
 
-      # vim.wo.number = true
+      number = true;
 
       mouse = "a";
-
 
       breakindent = true;
 
@@ -42,12 +41,12 @@
       ignorecase = true;
       smartcase = true;
 
-      signcolumn = "yes";
+      # signcolumn = "yes";
 
       updatetime = 250;
       timeoutlen = 300;
 
       termguicolors = true;
     };
-  }; 
+  };
 }

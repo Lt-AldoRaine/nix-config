@@ -8,6 +8,8 @@
         consoleMode = "auto";
         configurationLimit = 8;
       };
+
+      grub.extraConfig = "options nvidia-drm.modeset=1 ";
     };
     tmp.cleanOnBoot = true;
     kernelPackages =
