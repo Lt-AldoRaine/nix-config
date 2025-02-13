@@ -1,51 +1,29 @@
 {
-  programs.nixvim.plugins = {
-	web-devicons.enable = true;
+  programs.nixvim.plugins.lualine = {
+    enable = true;
+    settings = {
+      options.disabled_filetypes.statusline =
+        [ "dashboard" "alpha" "neo-tree" ];
 
-    lualine = {
-      enable = true;
-
-      settings = {
-        options.globalstatus = true;
-
-        # +-------------------------------------------------+
-        # | A | B | C                             X | Y | Z |
-        # +-------------------------------------------------+
-        sections = {
-          lualine_a = [ "mode" ];
-          lualine_b = [ "branch" ];
-          lualine_c = [ "filename" "diff" ];
-
-          lualine_x = [
-            "diagnostics"
-
-            # Show active language server
-            {
-              __unkeyed.__raw = ''
-                function()
-                    local msg = ""
-                    local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-                    local clients = vim.lsp.get_active_clients()
-                    if next(clients) == nil then
-                        return msg
-                    end
-                    for _, client in ipairs(clients) do
-                        local filetypes = client.config.filetypes
-                        if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                            return client.name
-                        end
-                    end
-                    return msg
-                end
-              '';
-              icon = "";
-              color.fg = "#ffffff";
-            }
-            "encoding"
-            "fileformat"
-            "filetype"
-          ];
-        };
+      alwaysDivideMiddle = true;
+      globalstatus = true;
+      ignoreFocus = [ "neo-tree" ];
+      extensions = [ "fzf" ];
+      componentSeparators = {
+        left = "|";
+        right = "|";
+      };
+      sectionSeparators = {
+        left = "█"; # 
+        right = "█"; # 
+      };
+      sections = {
+        lualine_a = [ "mode" ];
+        lualine_b = [ "branch" "diff" "diagnostics" ];
+        lualine_c = [ "filename" ];
+        lualine_x = [ "filetype" ];
+        lualine_y = [ "progress" ];
+        lualine_z = [ ''" " .. os.date("%R")'' ];
       };
     };
   };

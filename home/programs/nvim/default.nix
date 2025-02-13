@@ -18,10 +18,6 @@
 
     nixpkgs.useGlobalPackages = true;
 
-	highlightOverride = {
-	  FloatBorder.fg = "#${config.lib.stylix.colors.base0D}";
-	};
-
     performance = {
 	  combinePlugins = {
         enable = true;

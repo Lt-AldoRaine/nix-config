@@ -6,6 +6,7 @@
 	./none-ls.nix
     ./treesitter.nix
 	./telescope.nix
+	./utils.nix
   ];
 
 }
