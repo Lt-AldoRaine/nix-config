@@ -15,6 +15,7 @@
     ../home/programs/kitty
     ../home/programs/shell
     ../home/programs/nixvim-config
+	../home/programs/thunar
   ];
 
   home = {

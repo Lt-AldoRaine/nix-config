@@ -52,7 +52,7 @@ in {
         "hyprpanel"
       ];
 
-      monitor = [ "DP-1, 2560x1440, 1920x0, 1" "DP-2, auto, 0x0, 1" ];
+      monitor = [ "DP-1, 2560x1440, 1920x0, 1" "DP-2, 1920x1080, 0x0, 1" ];
 
       cursor = {
         no_hardware_cursors = true;
