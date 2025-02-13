@@ -1,12 +1,10 @@
 { pkgs, config, ... }:
 let
-  themeDir = "${config.var.configDirectory}" + "/themes";
-
   wallpaper = pkgs.writeShellScriptBin "wallpaper"
     #bash
     ''
 
-            WALLPAPER_DIR="$HOME/Pictures/wallpapers";
+            WALLPAPER_DIR="${config.var.configDirectory}/themes/style/wallpapers";
             CURRENT_WALL=$(hyprctl hyprpaper listloaded)
 
             # Get a random wallpaper that is not the current one
@@ -14,8 +12,6 @@ let
 
             # Apply the selected wallpaper
             hyprctl hyprpaper reload ,"$WALLPAPER"
-
-      	  echo "$WALLPAPER" > ${themeDir}/style/currentWallpaper.txt
 
 
             		'';

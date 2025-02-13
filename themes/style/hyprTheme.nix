@@ -1,5 +1,4 @@
-{ pkgs, inputs, config, ... }: 
-{
+{ pkgs, inputs, config, ... }: {
   stylix = {
     enable = true;
 
@@ -27,15 +26,15 @@
         name = "Noto Color Emoji";
       };
       sizes = {
-        applications = 16;
-        desktop = 16;
+        applications = 14;
+        desktop = 14;
         popups = 14;
-        terminal = 16;
+        terminal = 14;
       };
     };
 
     polarity = "dark";
-	image = ./wallpapers/Beer-Girl.png;
+    image = ./wallpapers/Beer-Girl.png;
   };
 
 }
