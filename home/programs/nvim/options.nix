@@ -42,7 +42,7 @@
       ignorecase = true;
       smartcase = true;
 
-      # vim.wo.signcolumn = "yes"
+      signcolumn = "yes";
 
       updatetime = 250;
       timeoutlen = 300;

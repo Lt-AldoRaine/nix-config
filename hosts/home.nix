@@ -14,7 +14,7 @@
     ../home/programs/git
     ../home/programs/kitty
     ../home/programs/shell
-    ../home/programs/nixvim-config
+    ../home/programs/nvim
 	../home/programs/thunar
   ];
 

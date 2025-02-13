@@ -2,15 +2,16 @@
   programs.nixvim.plugins.treesitter = {
     enable = true;
     nixvimInjections = true;
+    nixGrammars = true;
 
     settings = {
+      ensure_installed = "all";
+      indent.enable = true;
+
       highlight = {
         enable = true;
-	additional_vim_regex_highlighting = true;
-	clearOnCursonMove = false;
+        clearOnCursonMove = false;
       };
-
-      indent.enable = true;
     };
   };
 }
