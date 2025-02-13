@@ -4,9 +4,11 @@
 
     # system
     ../home/system/wofi
-    # ../home/system/waybar
 	../home/system/hyprpanel
     ../home/system/hyprland
+	../home/system/hyprpaper
+
+	../home/scripts
 
     # programs
     ../home/programs/git
@@ -32,9 +34,8 @@
       optipng
       pfetch
       pandoc
-      btop
-      textpieces
       curtail
+	  swww
 
       firefox
       neovim

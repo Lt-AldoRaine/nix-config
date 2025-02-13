@@ -14,12 +14,6 @@ in {
       xkb.variant = "";
     };
 
-    displayManager = {
-      autoLogin.enable = false;
-      sddm.enable = true;
-      sddm.wayland.enable = true;
-    };
-
     gnome.gnome-keyring.enable = true;
   };
   console.keyMap = keyboardLayout;

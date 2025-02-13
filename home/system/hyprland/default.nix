@@ -9,7 +9,7 @@ let
   blur = config.var.theme.blur;
   keyboardLayout = config.var.keyboardLayout;
 in {
-  imports = [ ./bindings.nix ];
+  imports = [ ./bindings.nix ./animations.nix ];
 
   home.packages = with pkgs; [
     qt5.qtwayland
@@ -47,11 +47,17 @@ in {
       env = [ "LIBVA_DRIVER_NAME,nvidia" "__GLX_VENDOR_LIBRARY_NAME,nvidia" ];
 
       exec-once = [
+		"hyprctl setcursor Bibata-ModernIce 22"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-		"hyprpanel"
+        "hyprpanel"
       ];
 
-      monitor = [ "DP-1, 2560x1440, 2560x0, 1" "DP-2, 1920x1080, 0x0, 1" ];
+      monitor = [ "DP-1, 2560x1440, 1920x0, 1" "DP-2, 1920x1080, 0x0, 1" ];
+
+      cursor = {
+        no_hardware_cursors = true;
+        default_monitor = "DP-1";
+      };
 
       general = {
         resize_on_border = true;
@@ -73,8 +79,25 @@ in {
         };
         blur = { enabled = if blur then "true" else "false"; };
       };
+
+      windowrulev2 =
+        [ "float, tag:modal" "pin, tag:modal" "center, tag:modal" ];
+
+      layerrule = [ "noanim, launcher" "noanim, ^ags-.*" ];
+
+      input = {
+        kb_layout = keyboardLayout;
+
+        kb_options = "caps:escape";
+        follow_mouse = 1;
+        sensitivity = 0.5;
+        repeat_delay = 300;
+        repeat_rate = 50;
+        numlock_by_default = true;
+      };
     };
   };
 
-  systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
+  systemd.user.targets.hyprland-session.Unit.Wants =
+    [ "xdg-desktop-autostart.target" ];
 }

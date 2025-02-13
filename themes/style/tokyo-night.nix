@@ -2,8 +2,8 @@
 
 let 
   themeName = "tokyo-night";
-  themePath = ../../../themes/${themeName};
-  themePolarity = lib.removeSuffix "\n" (builtins.readFile ("${themePath}/polarity.txt"));
+  themePath = ./${themeName};
+  themePolarity = lib.removeSuffix "\n" (builtins.readFile "${themePath}/polarity.txt");
   backgroundUrl = builtins.readFile "${themePath}/backgroundurl.txt";
   backgroundSha256 = builtins.readFile "${themePath}/backgroundsha.txt";
 in

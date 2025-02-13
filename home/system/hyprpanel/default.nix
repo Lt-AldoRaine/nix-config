@@ -41,10 +41,8 @@ in {
             "systray"
             "volume"
             "bluetooth"
-            "battery"
             "network"
             "clock"
-            "notifications"
           ];
         };
       };
