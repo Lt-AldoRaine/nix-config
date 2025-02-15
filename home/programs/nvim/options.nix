@@ -12,7 +12,7 @@
 
       clipboard = "unnamed,unnamedplus";
 
-      wrap = false;
+			cursorline = false;
 
       swapfile = false;
       backup = false;
@@ -41,6 +41,8 @@
       timeoutlen = 300;
 
       termguicolors = true;
+
+      wrap = false;
     };
   };
 }

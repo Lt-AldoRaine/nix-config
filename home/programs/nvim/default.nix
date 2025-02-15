@@ -7,5 +7,5 @@
   ];
 
   programs.nixvim = { enable = true; };
-
+	
 }
