@@ -36,6 +36,16 @@
 
     };
 
+    targets.nixvim = {
+      enable = true;
+      plugin = "base-16-nvim";
+      transparentBackground = {
+        main = true;
+        signColumn = true;
+      };
+
+    };
+
     polarity = "dark";
     image = ./wallpapers/Manga-Shrine.png;
   };
