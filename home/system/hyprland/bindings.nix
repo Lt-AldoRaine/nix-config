@@ -2,25 +2,36 @@
   wayland.windowManager.hyprland.settings = {
     bind = [
 	  # --------------------------
-      "$MOD SHIFT, d, exec, discord"
-      "$MOD SHIFT, f, exec, firefox"
-      "$MOD SHIFT, r, exec, wofi"
-      "$MOD, RETURN, exec, kitty"
+			"$mod, E, exec, ${pkgs.xfce.thunar}/bin/thunar"
+      "$mod , D, exec, discord"
+      "$mod, B, exec, firefox"
+      "$mod, SPACE, exec, menu"
+      "$mod, RETURN, exec, kitty"
+			"$mod, C, exec, quickmenu"
 
       # ------------------------- 
-      "$MOD SHIFT, q, killactive"
-      "$MOD, f, fullscreen, 1"
-      "$MOD, up, movefocus, u"
-      "$MOD, down, movefocus, d"
-      "$MOD, left, movefocus, l"
-      "$MOD, right, movefocus, r"
-      "$MOD SHIFT, j, focusmonitor, -1"
+      "$mod, q, killactive"
+      "$mod, f, fullscreen, 1"
+      "$mod, up, movefocus, u"
+      "$mod, down, movefocus, d"
+      "$mod, left, movefocus, l"
+      "$mod, right, movefocus, r"
+      "$mod SHIFT, up, movewindow, u"
+      "$mod SHIFT, down, movewindow, d"
+      "$mod SHIFT, left, movewindow, l"
+      "$mod SHIFT, right, movewindow, r"
+
     ] ++ (builtins.concatLists (builtins.genList (i:
       let ws = i + 1;
       in [
-        "$MOD, code:1${toString i}, workspace, ${toString ws}"
-        "$MOD SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+        "$mod, code:1${toString i}, workspace, ${toString ws}"
+        "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
       ]) 9));
+
+		bindm = [
+			"$mod,mouse:272, movewindow"
+      "$mod,R, resizewindow" 
+		];
 
   };
 }

@@ -9,7 +9,7 @@ let
   blur = config.var.theme.blur;
   keyboardLayout = config.var.keyboardLayout;
 in {
-  imports = [ ./bindings.nix ./animations.nix ];
+  imports = [ ./bindings.nix ./animations.nix ./env.nix ];
 
   home.packages = with pkgs; [
     qt5.qtwayland
@@ -42,12 +42,12 @@ in {
     package = inputs.hyprland.packages."${pkgs.system}".hyprland;
 
     settings = {
-      "$MOD" = "SUPER";
+      "$mod" = "SUPER";
 
       env = [ "LIBVA_DRIVER_NAME,nvidia" "__GLX_VENDOR_LIBRARY_NAME,nvidia" ];
 
       exec-once = [
-		"hyprctl setcursor Bibata-ModernIce 22"
+        "hyprctl setcursor Bibata-ModernIce 22"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "hyprpanel"
       ];

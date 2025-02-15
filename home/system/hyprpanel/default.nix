@@ -34,8 +34,8 @@ in {
     overlay.enable = true;
     layout = {
       "bar.layouts" = {
-        "0" = {
-          "left" = [ "dashboard" "workspaces" "windowtitle" ];
+        "0" = { 
+          "left" = [ "dashboard" "workspaces" "cpu" "cputemp" "ram" "windowtitle" ];
           "middle" = [ "media" ];
           "right" = [
             "systray"
@@ -43,6 +43,16 @@ in {
             "bluetooth"
             "network"
             "clock"
+            "notifications"
+          ];
+        };
+        "1" = {
+          "left" = [ "windowtitle" ];
+          "middle" = [ "media" ];
+          "right" = [
+            "volume"
+            "network"
+						"clock"
           ];
         };
       };
@@ -91,19 +101,9 @@ in {
       "theme.osd.margins" = "0px 0px 0px 10px";
       "theme.osd.muted_zero" = true;
       "menus.clock.weather.location" = "${location}";
-      "menus.clock.weather.unit" = "metric";
+      "menus.clock.weather.unit" = "imperial";
       "menus.dashboard.powermenu.confirmation" = false;
 
-      "menus.dashboard.shortcuts.left.shortcut1.icon" = "";
-      "menus.dashboard.shortcuts.left.shortcut1.command" = "zen";
-      "menus.dashboard.shortcuts.left.shortcut1.tooltip" = "Zen";
-      "menus.dashboard.shortcuts.left.shortcut2.icon" = "󰅶";
-      "menus.dashboard.shortcuts.left.shortcut2.command" = "caffeine";
-      "menus.dashboard.shortcuts.left.shortcut2.tooltip" = "Caffeine";
-      "menus.dashboard.shortcuts.left.shortcut3.icon" = "󰖔";
-      "menus.dashboard.shortcuts.left.shortcut3.command" = "night-shift";
-      "menus.dashboard.shortcuts.left.shortcut3.tooltip" = "Night-shift";
-      "menus.dashboard.shortcuts.left.shortcut4.icon" = "";
       "menus.dashboard.shortcuts.left.shortcut4.command" = "menu";
       "menus.dashboard.shortcuts.left.shortcut4.tooltip" = "Search Apps";
       "menus.dashboard.shortcuts.right.shortcut1.icon" = "";
