@@ -15,7 +15,7 @@
     ../nixos/network-manager.nix
     ../nixos/variables-config.nix
 
-    ../themes/style/shrineTheme.nix
+    ../themes/style/rain.nix
 
     ./hardware-configuration.nix
     ./variables.nix

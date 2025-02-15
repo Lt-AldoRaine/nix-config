@@ -8,8 +8,8 @@
 
     keyboardLayout = "us";
 
-    location = "Chicago";
-    timeZone = "Chicago";
+    location = "America/Chicago";
+    timeZone = "America/Chicago";
     defaultLocale = "en_US.UTF-8";
     extraLocale = "en_US.UTF-8";
 
@@ -20,6 +20,6 @@
 
     autoGarbageCollector = true;
 
-    theme = import ../themes/var/dark.nix;
+    theme = import ../themes/var/rain.nix;
   };
 }

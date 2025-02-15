@@ -54,11 +54,15 @@ in {
     nixos.enable = false;
   };
 
+	hardware.logitech.wireless.enable = true;
+
   environment.systemPackages = with pkgs; [
     fd
     bc
     gcc
-    git-ignore
+    git-ignore		
+		logitech-udev-rules
+		solaar
     xdg-utils
     wget
     curl
