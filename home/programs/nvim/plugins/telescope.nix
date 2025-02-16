@@ -6,11 +6,11 @@
       keymaps = {
         "<leader>gf" = "git_files";
         "<leader>sf" = "find_files";
+        "<leader>sr" = "oldfiles";
         "<leader>sh" = "help_tags";
         "<leader>sw" = "grep_string";
         "<leader>sg" = "live_grep";
         "<leader>sd" = "diagnostics";
-        "<leader>sr" = "resume";
       };
 
       settings = {

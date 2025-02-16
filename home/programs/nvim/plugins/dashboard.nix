@@ -3,7 +3,6 @@ let
   accent = "#${config.lib.stylix.colors.base0D}";
   muted = "#${config.lib.stylix.colors.base03}";
   foreground = "#${config.lib.stylix.colors.base05}";
-  configDir = config.var.configDirectory;
 in {
 
   programs.nixvim.highlight = {
@@ -40,6 +39,55 @@ in {
       {
         type = "padding";
         val = 4;
+      }
+      {
+        type = "group";
+
+        val = [
+          {
+            type = "button";
+            val = "󰭎  Find file";
+            on_press.__raw = "function() vim.cmd[[Telescope find_files]] end";
+            opts = {
+              shortcut = "<Leader> sf";
+              position = "center";
+              cursor = 3;
+              width = 50;
+              align_shortcut = "right";
+              hl_shortcut = "AlphaShortcutColor";
+              hl = "AlphaTextColor";
+            };
+          }
+          {
+            type = "button";
+            val = "  Recently files";
+            on_press.__raw = "function() vim.cmd[[Telescope oldfiles]] end";
+            opts = {
+              shortcut = "<Leader> sr";
+              position = "center";
+              cursor = 3;
+              width = 50;
+              align_shortcut = "right";
+              hl_shortcut = "AlphaShortcutColor";
+              hl = "AlphaTextColor";
+            };
+          }
+          {
+            type = "button";
+            val = "󰱽  Find word";
+            on_press.__raw = "function() vim.cmd[[Telescope live_grep]] end";
+            opts = {
+              shortcut = "<Leader> sg";
+              position = "center";
+              cursor = 3;
+              width = 50;
+              align_shortcut = "right";
+              hl_shortcut = "AlphaShortcutColor";
+              hl = "AlphaTextColor";
+            };
+          }
+        ];
+
       }
     ];
   };

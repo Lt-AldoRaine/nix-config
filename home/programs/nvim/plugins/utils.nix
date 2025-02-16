@@ -11,6 +11,7 @@
     nixpkgs.config = { allowUnfree = true; };
 
     plugins = {
+			lazy.enable = true;
       tmux-navigator.enable = true;
       comment.enable = true;
       nvim-autopairs.enable = true;
@@ -18,6 +19,16 @@
       gitsigns = {
         enable = true;
         settings = { current_line_blame = false; };
+
+      };
+      snacks = {
+        enable = true;
+        settings = {
+          words = {
+            enable = true;
+            debounce = 100;
+          };
+        };
       };
       trouble.enable = true;
     };
