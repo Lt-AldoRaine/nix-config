@@ -8,7 +8,7 @@
     ../home/system/hyprland
     ../home/system/hyprpaper
 
-    # ../home/scripts
+    ../home/scripts
 
     # programs
     ../home/programs/git
@@ -24,6 +24,7 @@
 
     packages = with pkgs; [
       discord
+			steam
 
       go
       git

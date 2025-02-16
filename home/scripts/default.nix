@@ -1,5 +1,5 @@
 {
   imports = [
-    ./wallpaper
+    ./change-theme
 ];
 }

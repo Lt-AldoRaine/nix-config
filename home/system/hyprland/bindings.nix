@@ -5,9 +5,8 @@
 			"$mod, E, exec, ${pkgs.xfce.thunar}/bin/thunar"
       "$mod , D, exec, discord"
       "$mod, B, exec, firefox"
-      "$mod, SPACE, exec, menu"
+      "$mod, SPACE, exec, wofi"
       "$mod, RETURN, exec, kitty"
-			"$mod, C, exec, quickmenu"
 
       # ------------------------- 
       "$mod, q, killactive"
