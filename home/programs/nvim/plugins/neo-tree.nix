@@ -12,13 +12,35 @@
             };
           };
         };
-        window = {
-          mappings = {
-            "<leader>t" = "open";
-            "<leader>tc" = "close_node";
-          };
-        };
-
+        # window = {
+        #   mappings = {
+        #     "<space>" = {
+        #       command = "toggle_mode";
+        #       nowait = false;
+        #     };
+        #
+        #     "<cr>" = "open";
+        #     P = {
+        #       command = "toggle_preview";
+        #       config = { use_float = true; };
+        #     };
+        #
+        #     C = "close_node";
+        #     R = "refresh";
+        #
+        #     a = {
+        #       command = "add";
+        #       config = { show_path = "relative"; };
+        #     };
+        #     A = "add_directory";
+        #     d = "delete";
+        #     r = "rename";
+        #     c = "copy";
+        #     m = "move";
+        #     q = "close_window";
+        #   };
+        # };
+        #
       };
     };
   };

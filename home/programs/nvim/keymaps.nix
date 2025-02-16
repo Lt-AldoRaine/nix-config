@@ -29,12 +29,14 @@
         # "k" = "v:count == 0 ? 'gk' : 'k'";
         # "j" = "v:count == 0 ? 'gj' : 'j'";
 
+        "p" = "P";
         "U" = "vim.cmd.redo";
-        "J" = "mzJ`z";
         "<C-d>" = "<C-d>zz";
         "<C-u>" = "<C-u>zz";
         "n" = "nzzzv";
         "N" = "Nzzzv";
+
+        "<leader>tt" = "<Cmd>Neotree toggle<CR>";
       };
       visual = lib.mapAttrsToList (key: action: {
         mode = "v";
