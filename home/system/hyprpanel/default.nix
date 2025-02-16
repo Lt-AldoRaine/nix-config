@@ -2,7 +2,12 @@
 # Display informations like workspaces, battery, wifi, ...
 { inputs, config, ... }:
 let
-  transparentButtons = config.var.theme.bar.transparentButtons;
+  inherit (config.var.theme) rounding border-size gaps-out gaps-in;
+
+  inherit (config.var.theme.bar)
+    transparentButtons floating transparent position;
+
+  inherit (config.var) location;
 
   accent = "#${config.lib.stylix.colors.base0D}";
   accent-alt = "#${config.lib.stylix.colors.base03}";
@@ -11,20 +16,7 @@ let
   foreground = "#${config.lib.stylix.colors.base05}";
   font = "${config.stylix.fonts.serif.name}";
   fontSize = "${toString config.stylix.fonts.sizes.desktop}";
-
-  rounding = config.var.theme.rounding;
-  border-size = config.var.theme.border-size;
-
-  gaps-out = config.var.theme.gaps-out;
-  gaps-in = config.var.theme.gaps-in;
-
-  floating = config.var.theme.bar.floating;
-  transparent = config.var.theme.bar.transparent;
-  position = config.var.theme.bar.position;
-
-  location = config.var.location;
 in {
-
   imports = [ inputs.hyprpanel.homeManagerModules.hyprpanel ];
 
   programs.hyprpanel = {
@@ -34,8 +26,9 @@ in {
     overlay.enable = true;
     layout = {
       "bar.layouts" = {
-        "0" = { 
-          "left" = [ "dashboard" "workspaces" "cpu" "cputemp" "ram" "windowtitle" ];
+        "0" = {
+          "left" =
+            [ "dashboard" "workspaces" "cpu" "cputemp" "ram" "windowtitle" ];
           "middle" = [ "media" ];
           "right" = [
             "systray"
@@ -47,13 +40,9 @@ in {
           ];
         };
         "1" = {
-          "left" = [ "windowtitle" ];
-          "middle" = [ "media" ];
-          "right" = [
-            "volume"
-            "network"
-						"clock"
-          ];
+          "left" = [ ];
+          "middle" = [ ];
+          "right" = [ ];
         };
       };
     };
@@ -84,6 +73,7 @@ in {
       "theme.bar.border_radius" = "${toString rounding}px";
       "bar.launcher.icon" = "";
       "theme.bar.transparent" = "${if transparent then "true" else "false"}";
+			"bar.autoHide" = "fullscreen";
       "bar.workspaces.show_numbered" = false;
       "bar.workspaces.workspaces" = 5;
       "bar.workspaces.hideUnoccupied" = false;

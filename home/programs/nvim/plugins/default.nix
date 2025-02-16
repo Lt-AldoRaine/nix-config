@@ -1,14 +1,14 @@
 {
   imports = [
-	./cmp.nix
-	./dashboard.nix
-	./harpoon.nix
+    ./cmp.nix
+    ./dashboard.nix
+    ./harpoon.nix
     ./lsp.nix
-	./lualine.nix
-	./none-ls.nix
-	./telescope.nix
+    ./lualine.nix
+		./neo-tree.nix
+    ./telescope.nix
     ./treesitter.nix
-	./utils.nix
+    ./utils.nix
   ];
 
 }

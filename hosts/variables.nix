@@ -20,6 +20,6 @@
 
     autoGarbageCollector = true;
 
-    theme = import ../themes/var/rain.nix;
+    theme = import ../themes/var/tokyo-night.nix;
   };
 }
