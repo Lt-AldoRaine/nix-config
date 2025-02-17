@@ -1,7 +1,5 @@
 { pkgs, config, ... }:
-let
-  hostname = config.var.hostname;
-  keyboardLayout = config.var.keyboardLayout;
+let inherit (config.var) hostname keyboardLayout;
 in {
   networking.hostName = hostname;
 
@@ -12,8 +10,8 @@ in {
       enable = true;
       xkb.layout = keyboardLayout;
       xkb.variant = "";
-    };
 
+    };
     gnome.gnome-keyring.enable = true;
   };
   console.keyMap = keyboardLayout;
@@ -54,18 +52,19 @@ in {
     nixos.enable = false;
   };
 
-	hardware.logitech.wireless.enable = true;
+  hardware.logitech.wireless.enable = true;
 
   environment.systemPackages = with pkgs; [
     fd
     bc
     gcc
-    git-ignore		
-		logitech-udev-rules
-		solaar
+    git-ignore
+    logitech-udev-rules
+    solaar
     xdg-utils
     wget
     curl
+		nerdfetch
   ];
 
   services.logind.extraConfig = ''

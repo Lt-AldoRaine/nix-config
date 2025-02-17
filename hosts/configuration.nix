@@ -14,6 +14,7 @@
     ../nixos/home-manager.nix
     ../nixos/network-manager.nix
     ../nixos/variables-config.nix
+		../nixos/greetd.nix
 
     ../themes/style/gruv.nix
 
