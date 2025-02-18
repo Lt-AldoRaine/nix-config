@@ -3,10 +3,10 @@
     ./variables.nix
 
     # system
-		./home/system
+		../home/system
 
     # programs
-		./home/programs
+		../home/programs
   ];
 
   home = {
