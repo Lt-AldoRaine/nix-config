@@ -3,10 +3,19 @@
     ./variables.nix
 
     # system
-		../home/system
+    ../home/system/wofi
+    ../home/system/hyprpanel
+    ../home/system/hyprland
+    ../home/system/hyprpaper
+
+    ../home/scripts
 
     # programs
-		../home/programs
+    ../home/programs/git
+    ../home/programs/kitty
+    ../home/programs/shell
+    ../home/programs/nvim
+    ../home/programs/thunar
   ];
 
   home = {

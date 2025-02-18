@@ -1,13 +1,11 @@
 { pkgs, inputs, config, ... }:
 let
-  border-size = config.var.theme.border-size;
-  gaps-in = config.var.theme.gaps-in;
-  gaps-out = config.var.theme.gaps-out;
-  active-opacity = config.var.theme.active-opacity;
-  inactive-opacity = config.var.theme.inactive-opacity;
-  rounding = config.var.theme.rounding;
-  blur = config.var.theme.blur;
-  keyboardLayout = config.var.keyboardLayout;
+
+  inherit (config.var.theme)
+    border-size gaps-in gaps-out active-opacity inactive-opacity rounding blur;
+
+  inherit (config.var) keyboardLayout;
+
 in {
   imports = [ ./bindings.nix ./animations.nix ./env.nix ];
 
@@ -52,7 +50,7 @@ in {
         "hyprpanel"
       ];
 
-      monitor = [ "DP-1, 2560x1440, 1920x0, 1" "DP-2, 1920x1080, 0x0, 1" ];
+      monitor = [ "DP-1, 2560x1440@170, 1920x0, 1" "DP-2, 1920x1080@144, 0x0, 1" ];
 
       cursor = {
         no_hardware_cursors = true;
