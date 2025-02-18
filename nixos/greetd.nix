@@ -1,3 +1,5 @@
+# sourced from https://github.com/anotherhadi/nixy/blob/main/nixos/tuigreet.nix
+
 { pkgs, ... }: {
   services.greetd = {
     enable = true;

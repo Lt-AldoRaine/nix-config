@@ -3,19 +3,10 @@
     ./variables.nix
 
     # system
-    ../home/system/wofi
-    ../home/system/hyprpanel
-    ../home/system/hyprland
-    ../home/system/hyprpaper
-
-    ../home/scripts
+		./home/system
 
     # programs
-    ../home/programs/git
-    ../home/programs/kitty
-    ../home/programs/shell
-    ../home/programs/nvim
-    ../home/programs/thunar
+		./home/programs
   ];
 
   home = {
@@ -24,7 +15,7 @@
 
     packages = with pkgs; [
       discord
-			steam
+      steam
 
       go
       git

@@ -41,7 +41,7 @@ in {
         };
         "1" = {
           "left" = [ ];
-          "middle" = [ ];
+          "middle" = [ "clock" ];
           "right" = [ ];
         };
       };
@@ -54,7 +54,7 @@ in {
         "${if floating && transparent then "0" else "8"}px";
       "theme.bar.buttons.y_margins" =
         "${if floating && transparent then "0" else "8"}px";
-      "theme.bar.buttons.spacing" = "0.3em";
+      "theme.bar.buttons.spacing" = "0.2em";
       "theme.bar.buttons.radius" = "${
           if transparent then toString rounding else toString (rounding - 8)
         }px";

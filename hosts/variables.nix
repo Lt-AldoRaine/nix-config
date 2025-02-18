@@ -20,6 +20,6 @@
 
     autoGarbageCollector = true;
 
-    theme = import ../themes/var/dracula.nix;
+    theme = import ../themes/var/gruv.nix;
   };
 }

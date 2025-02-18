@@ -16,7 +16,7 @@
     ../nixos/variables-config.nix
     ../nixos/greetd.nix
 
-    ../themes/style/dracula.nix
+    ../themes/style/gruv.nix
 
     ./hardware-configuration.nix
     ./variables.nix
