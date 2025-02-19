@@ -8,8 +8,6 @@
     ../home/system/hyprland
     ../home/system/hyprpaper
 
-    ../home/scripts
-
     # programs
     ../home/programs/git
     ../home/programs/kitty

@@ -45,12 +45,14 @@ in {
       env = [ "LIBVA_DRIVER_NAME,nvidia" "__GLX_VENDOR_LIBRARY_NAME,nvidia" ];
 
       exec-once = [
-        "hyprctl setcursor Bibata-ModernIce 22"
+        "hyprctl setcursor Bibata-ModernClassic 22"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "hyprpanel"
+        "solaar -w 'hide'"
       ];
 
-      monitor = [ "DP-1, 2560x1440@170, 1920x0, 1" "DP-2, 1920x1080@144, 0x0, 1" ];
+      monitor =
+        [ "DP-1, 2560x1440@170, 1920x0, 1" "DP-2, 1920x1080@144, 0x0, 1" ];
 
       cursor = {
         no_hardware_cursors = true;

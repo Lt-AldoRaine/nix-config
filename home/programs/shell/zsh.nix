@@ -9,13 +9,18 @@
       ls = "ls -la";
       ll = "ls -l";
 
-	  vi = "nvim";
-	  vim = "nvim";
+      vi = "nvim";
+      vim = "nvim";
+
+      gc = "git commit";
+      gs = "git status";
+      gl = "git log";
 
       update-workspace =
         "sudo nixos-rebuild switch --flake ${config.var.configDirectory}#${config.var.hostname}";
 
-	  test-workspace = "sudo nixos-rebuild test --flake ${config.var.configDirectory}#${config.var.hostname}";
+      test-workspace =
+        "sudo nixos-rebuild test --flake ${config.var.configDirectory}#${config.var.hostname}";
     };
 
     initExtra = "eval $(starship init zsh)";

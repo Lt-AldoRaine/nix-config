@@ -55,16 +55,17 @@ in {
   hardware.logitech.wireless.enable = true;
 
   environment.systemPackages = with pkgs; [
-    fd
+    curl
     bc
+    fd
     gcc
     git-ignore
     logitech-udev-rules
+    libnotify
+    nerdfetch
     solaar
-    xdg-utils
     wget
-    curl
-		nerdfetch
+    xdg-utils
   ];
 
   services.logind.extraConfig = ''

@@ -1,6 +1,6 @@
 # Hyprpanel is the bar on top of the screen
 # Display informations like workspaces, battery, wifi, ...
-{ inputs, config, ... }:
+{ inputs, config, pkgs, ... }:
 let
   inherit (config.var.theme) rounding border-size gaps-out gaps-in;
 
@@ -18,6 +18,12 @@ let
   fontSize = "${toString config.stylix.fonts.sizes.desktop}";
 in {
   imports = [ inputs.hyprpanel.homeManagerModules.hyprpanel ];
+
+	home.packages = with pkgs; [
+		libgtop
+		bluez
+		dart-sass
+	];
 
   programs.hyprpanel = {
     enable = true;
