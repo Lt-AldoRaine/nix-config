@@ -15,6 +15,7 @@
     ../nixos/network-manager.nix
     ../nixos/variables-config.nix
     ../nixos/greetd.nix
+		../nixos/plex.nix
 
     ../themes/style/gruv.nix
 
