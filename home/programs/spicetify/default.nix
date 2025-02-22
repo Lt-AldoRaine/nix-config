@@ -3,7 +3,7 @@ let
   spicetify = inputs.spicetify-nix.legacyPackages.${pkgs.system};
   ac = "${config.lib.stylix.colors.base0D}";
 in {
-  impots = [ inputs.spicetify-nix.homeManagerModules.default ];
+  imports = [ inputs.spicetify-nix.homeManagerModules.default ];
 
   stylix.targets.spicetify.enable = false;
 
@@ -11,7 +11,7 @@ in {
     enable = true;
     theme = lib.mkForce spicetify.themes.text;
 
-    colorscheme = "custom";
+    colorScheme = "custom";
 
     customColorScheme = {
       button = ac;
