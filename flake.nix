@@ -15,6 +15,11 @@
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
     nur.url = "github:nix-community/NUR";
 
+		spicetify-nix = {
+			url = "github:Gerg-L/spicetify-nix";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
+
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -14,6 +14,7 @@
     ../home/programs/shell
     ../home/programs/nvim
     ../home/programs/thunar
+    ../home/programs/spicetify
   ];
 
   home = {
@@ -29,6 +30,7 @@
       nodejs
       python3
 
+      libation
       zip
       unzip
       optipng
