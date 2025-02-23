@@ -39,7 +39,21 @@
 
           inputs.stylix.nixosModules.stylix
           inputs.home-manager.nixosModules.home-manager
-          ./hosts/configuration.nix
+          ./hosts/main-pc/configuration.nix
+        ];
+      };
+      homeserver = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          {
+            nixpkgs.overlays =
+              [ inputs.hyprpanel.overlay inputs.nur.overlays.default ];
+            _module.args = { inherit inputs; };
+          }
+
+          inputs.stylix.nixosModules.stylix
+          inputs.home-manager.nixosModules.home-manager
+          ./hosts/home-server/configuration.nix
         ];
       };
     };

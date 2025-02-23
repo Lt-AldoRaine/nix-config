@@ -1,8 +1,8 @@
 { config, ... }: {
   imports = [ ../../nixos/variables-config.nix ];
   config.var = {
-    hostname = "aldoraine";
-    username = "home-server";
+    hostname = "homeserver";
+    username = "connor";
 
     configDirectory = "/home/" + config.var.username + "/nix-config";
 
