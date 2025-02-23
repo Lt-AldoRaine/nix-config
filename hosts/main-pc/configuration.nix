@@ -16,6 +16,7 @@
     ../../nixos/variables-config.nix
     ../../nixos/greetd.nix
 		../../nixos/plex.nix
+		../../nixos/docker.nix
 
     ../../themes/style/gruv.nix
 
