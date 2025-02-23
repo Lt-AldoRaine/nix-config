@@ -42,7 +42,7 @@
           ./hosts/main-pc/configuration.nix
         ];
       };
-      homeserver = nixpkgs.lib.nixosSystem {
+      homelab = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           {
@@ -53,7 +53,7 @@
 
           inputs.stylix.nixosModules.stylix
           inputs.home-manager.nixosModules.home-manager
-          ./hosts/home-server/configuration.nix
+          ./hosts/homelab/configuration.nix
         ];
       };
     };
