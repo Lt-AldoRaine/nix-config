@@ -1,6 +1,7 @@
-{ config, pkgs, ... }: 
-  let username = config.var.username;
-  in {
+{ config, pkgs, ... }:
+let inherit (config.var) username;
+
+in {
   programs.zsh.enable = true;
   users = {
     defaultUserShell = pkgs.zsh;
@@ -10,6 +11,6 @@
       extraGroups = [ "wheel" "networkmanager" ];
     };
 
-	mutableUsers = true;
+    mutableUsers = true;
   };
 }

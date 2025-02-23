@@ -3,18 +3,16 @@
     ./variables.nix
 
     # system
-    ../home/system/wofi
-    ../home/system/hyprpanel
-    ../home/system/hyprland
-    ../home/system/hyprpaper
+    ../../home/system/wofi
+    ../../home/system/hyprpanel
+    ../../home/system/hyprland
 
     # programs
-    ../home/programs/git
-    ../home/programs/kitty
-    ../home/programs/shell
-    ../home/programs/nvim
-    ../home/programs/thunar
-    ../home/programs/spicetify
+    ../../home/programs/git
+    ../../home/programs/kitty
+    ../../home/programs/shell
+    ../../home/programs/nvim
+    ../../home/programs/thunar
   ];
 
   home = {
@@ -22,10 +20,6 @@
     homeDirectory = "/home/" + config.var.username;
 
     packages = with pkgs; [
-      discord
-      steam
-
-      go
       git
       nodejs
       python3
@@ -35,7 +29,6 @@
       unzip
       optipng
       pfetch
-      pandoc
       ripgrep
 
       firefox

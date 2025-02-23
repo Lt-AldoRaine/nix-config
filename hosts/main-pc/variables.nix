@@ -1,5 +1,5 @@
 { config, ... }: {
-  imports = [ ../nixos/variables-config.nix ];
+  imports = [ ../../nixos/variables-config.nix ];
   config.var = {
     hostname = "aldoraine";
     username = "connor";
@@ -20,6 +20,6 @@
 
     autoGarbageCollector = true;
 
-    theme = import ../themes/var/gruv.nix;
+    theme = import ../../themes/var/gruv.nix;
   };
 }

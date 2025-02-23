@@ -1,8 +1,5 @@
-{ pkgs, ... }:
-{
-  environment.systemPackages = with pkgs; [
-	noisetorch
-  ];
+{ pkgs, ... }: {
+  environment.systemPackages = with pkgs; [ noisetorch ];
 
   security.rtkit.enable = true;
   services.pulseaudio.enable = false;
