@@ -7,7 +7,7 @@
   blur = true;
   border-size = 3;
   animation-speed = "medium"; # "fast" | "medium" | "slow"
-  fetch = "neofetch"; # "nerdfetch" | "neofetch" | "pfetch" | "none"
+  fetch = "nerdfetch"; # "nerdfetch" | "neofetch" | "pfetch" | "none"
 
   bar = {
     position = "top"; # "top" | "bottom"

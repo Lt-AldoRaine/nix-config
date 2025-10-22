@@ -39,6 +39,7 @@ in {
         false; # This can cause sleep/suspend to fail and saves entire VRAM to /tmp/
       modesetting.enable = true;
       package = nvidiaDriverChannel;
+			forceFullCompositionPipeline = true;
     };
     graphics = {
       enable = true;

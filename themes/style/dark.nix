@@ -61,12 +61,12 @@
     };
 
     polarity = "dark";
-    image = pkgs.fetchurl {
-      url =
-        "https://github.com/anotherhadi/nixy-wallpapers/blob/main/wallpapers/"
-        + "832209.png" + "?raw=true";
-      sha256 = "sha256-jNUSNqahzr3pvLZptWdWWX0BSZwHECaDZLVxlAH4WGI=";
-    };
+    # image = pkgs.fetchurl {
+    #   url =
+    #     "https://github.com/anotherhadi/nixy-wallpapers/blob/main/wallpapers/"
+    #     + "832209.png" + "?raw=true";
+    #   sha256 = "sha256-jNUSNqahzr3pvLZptWdWWX0BSZwHECaDZLVxlAH4WGI=";
+    # };
   };
 
 }

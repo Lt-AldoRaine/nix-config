@@ -37,6 +37,6 @@
 
     polarity = "dark";
     image = ./wallpapers/Lofi-Anime-Girl.jpeg;
-  };
 
+  };
 }

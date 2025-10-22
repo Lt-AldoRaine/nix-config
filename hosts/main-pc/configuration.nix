@@ -15,10 +15,10 @@
     ../../nixos/network-manager.nix
     ../../nixos/variables-config.nix
     ../../nixos/greetd.nix
-		../../nixos/plex.nix
-		../../nixos/docker.nix
+    ../../nixos/plex.nix
+    ../../nixos/docker.nix
 
-    ../../themes/style/gruv.nix
+    ../../themes/style/dracula.nix
 
     ./hardware-configuration.nix
     ./variables.nix
