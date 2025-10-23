@@ -1,7 +1,10 @@
 { pkgs, config, ... }:
 let inherit (config.var) hostname keyboardLayout;
 in {
-  networking.hostName = hostname;
+	networking = {
+		hostName = hostname;
+		firewall.allowedTCPPorts = [ 8080 ];
+	};
 
   programs.noisetorch.enable = true;
 
@@ -13,6 +16,7 @@ in {
 
     };
     gnome.gnome-keyring.enable = true;
+
   };
   console.keyMap = keyboardLayout;
 

@@ -11,10 +11,11 @@
     ../../nixos/systemd-boot.nix
     ../../nixos/home-manager.nix
     ../../nixos/network-manager.nix
+		../../nixos/nvidia.nix
     ../../nixos/variables-config.nix
     ../../nixos/greetd.nix
-    ../../nixos/plex.nix
     ../../nixos/docker.nix
+		../../nixos/jellyfin.nix
 
     ../../themes/style/dracula.nix
 
