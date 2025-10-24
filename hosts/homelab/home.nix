@@ -19,18 +19,16 @@
     inherit (config.var) username;
     homeDirectory = "/home/" + config.var.username;
 
+
     packages = with pkgs; [
       git
-      nodejs
-      python3
 
-      libation
       zip
       unzip
-      optipng
       pfetch
       ripgrep
 
+			discord
       firefox
     ];
     stateVersion = "24.11";
