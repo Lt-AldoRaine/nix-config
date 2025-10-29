@@ -11,7 +11,7 @@
     nixpkgs.config = { allowUnfree = true; };
 
     plugins = {
-			lazy.enable = true;
+			#lazy.enable = true;
       tmux-navigator.enable = true;
       comment.enable = true;
       nvim-autopairs.enable = true;

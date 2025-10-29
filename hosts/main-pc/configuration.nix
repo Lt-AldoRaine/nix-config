@@ -1,6 +1,6 @@
 { config, ... }: {
   imports = [
-		../../nixos/system/default.nix
+		#../../nixos/system/default.nix
 		../../nixos/services/default.nix
 
     ../../themes/style/dracula.nix

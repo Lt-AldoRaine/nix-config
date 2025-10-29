@@ -3,7 +3,7 @@ let
   spicetify = inputs.spicetify-nix.legacyPackages.${pkgs.system};
   ac = "${config.lib.stylix.colors.base0D}";
 in {
-  imports = [ inputs.spicetify-nix.homeManagerModules.default ];
+  imports = [ inputs.spicetify-nix.homeModules.default ];
 
   stylix.targets.spicetify.enable = false;
 

@@ -42,7 +42,11 @@ in {
     settings = {
       "$mod" = "SUPER";
 
-      env = [ "LIBVA_DRIVER_NAME,nvidia" "__GLX_VENDOR_LIBRARY_NAME,nvidia" ];
+      env = [
+        "LIBVA_DRIVER_NAME,nvidia"
+        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        "AQM_DRM_DEVICES, /dev/dri/gpu1"
+      ];
 
       exec-once = [
         "hyprctl setcursor Bibata-ModernClassic 22"
@@ -64,7 +68,7 @@ in {
         gaps_in = gaps-in;
         gaps_out = gaps-out;
         border_size = border-size;
-        border_part_of_window = true;
+        # border_part_of_window = true;
         layout = "master";
       };
 

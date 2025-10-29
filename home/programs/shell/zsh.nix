@@ -23,6 +23,6 @@
         "sudo nixos-rebuild test --flake ${config.var.configDirectory}#${config.var.hostname}";
     };
 
-    initExtra = "eval $(starship init zsh)";
+    initContent = "eval $(starship init zsh)";
   };
 }

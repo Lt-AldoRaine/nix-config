@@ -1,10 +1,23 @@
 { pkgs, config, ... }:
 let inherit (config.var) hostname keyboardLayout;
 in {
-	networking = {
-		hostName = hostname;
-		firewall.allowedTCPPorts = [ 8080 ];
-	};
+  networking = {
+    hostName = hostname;
+    firewall = {
+      enable = true;
+
+      allowedTCPPorts = [ 22 ];
+
+      trustedInterfaces = [ "tailscale0" ];
+
+      allowedUDPPorts = [ config.services.tailscale.port ];
+    };
+
+		resolvconf.enable = true;
+		resolvconf.useLocalResolver = true;
+
+    nameservers = [ "::1" "127.0.0.1" ];
+  };
 
   programs.noisetorch.enable = true;
 
@@ -40,10 +53,12 @@ in {
       settings = {
         # Opinionated: forbid root login through SSH.
         PermitRootLogin = "no";
+        KbdInteractiveAuthentication = false;
         # Opinionated: use keys only.
         # Remove if you want to SSH using passwords
         PasswordAuthentication = false;
       };
+      openFirewall = true;
     };
   };
 
@@ -71,8 +86,4 @@ in {
     wget
     xdg-utils
   ];
-
-  services.logind.extraConfig = ''
-        HandlePowerKey = ignore;
-    	'';
 }

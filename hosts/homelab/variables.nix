@@ -1,5 +1,5 @@
 { config, ... }: {
-  imports = [ ../../nixos/system/variables-config/default.nix ];
+  imports = [ ../../nixos/system/variables-config.nix ];
   config.var = {
     hostname = "homelab";
     username = "connor";
@@ -14,12 +14,14 @@
     extraLocale = "en_US.UTF-8";
 
     git = {
-      username = "Lt-AldoRaine";
-      email = "harambefallon@gmail.com";
+			settings = {
+				username = "Lt-AldoRaine";
+				email = "harambefallon@gmail.com";
+			};
     };
 
     autoGarbageCollector = true;
 
-    theme = import ../../themes/var/2025.nix;
+    theme = import ../../themes/var/dracula.nix;
   };
 }

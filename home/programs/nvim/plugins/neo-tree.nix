@@ -4,6 +4,8 @@
       neo-tree = {
         enable = true;
 
+        settings = {
+
         filesystem = {
           window = {
             mappings = {
@@ -44,6 +46,7 @@
         };
 
       };
+};
     };
   };
 }

@@ -4,5 +4,7 @@
     ./docker/default.nix
     ./jellyfin/default.nix
     ./bluetooth/default.nix
+    ./tailscale/default.nix
+
   ];
 }

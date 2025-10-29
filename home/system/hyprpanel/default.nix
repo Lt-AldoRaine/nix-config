@@ -17,7 +17,7 @@ let
   font = "${config.stylix.fonts.serif.name}";
   fontSize = "${toString config.stylix.fonts.sizes.desktop}";
 in {
-  imports = [ inputs.hyprpanel.homeManagerModules.hyprpanel ];
+  imports = [ inputs.hyprpanel.homeModules.hyprpanel ];
 
 	home.packages = with pkgs; [
 		libgtop
@@ -27,11 +27,9 @@ in {
 
   programs.hyprpanel = {
     enable = true;
-    hyprland.enable = true;
-    overwrite.enable = true;
-    overlay.enable = true;
-    layout = {
-      "bar.layouts" = {
+    settings = {
+    bar = {
+      layouts = {
         "0" = {
           "left" =
             [ "dashboard" "workspaces" "cpu" "cputemp" "ram" "windowtitle" ];
@@ -53,7 +51,6 @@ in {
       };
     };
 
-    override = {
       "theme.font.name" = "${font}";
       "theme.font.size" = "${fontSize}px";
       "theme.bar.outer_spacing" =

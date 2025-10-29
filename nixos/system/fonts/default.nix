@@ -12,8 +12,8 @@
     fontconfig = {
       defaultFonts = {
         monospace = [ "JetBrainsMono" "Noto Color Emoji" ];
-        serif = [ "SFProDisplay Nerd Font" "Noto Color Emoji" ];
-        sansSerif = [ "SFProDisplay Nerd Font" "Noto Color Emoji" ];
+        serif = [ "JetBrainsMonot" "Noto Color Emoji" ];
+        sansSerif = [ "JetBrainsMono" "Noto Color Emoji" ];
         emoji = [ "Noto Color Emoji" ];
       };
     };

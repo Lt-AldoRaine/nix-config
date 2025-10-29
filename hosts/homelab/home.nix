@@ -3,16 +3,15 @@
     ./variables.nix
 
     # system
-    ../../home/system/wofi
-    ../../home/system/hyprpanel
-    ../../home/system/hyprland
+    #../../home/system/wofi
+    #../../home/system/hyprpanel
+    #../../home/system/hyprland
 
     # programs
     ../../home/programs/git
     ../../home/programs/kitty
     ../../home/programs/shell
     ../../home/programs/nvim
-    ../../home/programs/thunar
   ];
 
   home = {
@@ -28,6 +27,9 @@
       pfetch
       ripgrep
 
+			dnsutils
+			unixtools.netstat
+			lm_sensors
 			discord
       firefox
     ];
