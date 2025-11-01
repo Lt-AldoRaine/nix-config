@@ -1,8 +1,8 @@
 { config, ... }: {
   imports = [ ../../nixos/system/variables-config/default.nix ];
   config.var = {
-    hostname = "homelab";
-    username = "connor";
+    hostname = "nix-vps";
+    username = "root";
 
     configDirectory = "/home/" + config.var.username + "/nix-config";
 
@@ -21,7 +21,5 @@
     };
 
     autoGarbageCollector = true;
-
-    theme = import ../../themes/var/dracula.nix;
   };
 }

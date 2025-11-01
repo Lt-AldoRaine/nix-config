@@ -24,6 +24,7 @@
     packages = with pkgs; [
       discord
       steam
+			noisetorch
 
       go
       git

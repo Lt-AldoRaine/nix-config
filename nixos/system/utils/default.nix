@@ -6,20 +6,12 @@ in {
     firewall = {
       enable = true;
 
-      allowedTCPPorts = [ 22 ];
-
-      trustedInterfaces = [ "tailscale0" ];
-
-      allowedUDPPorts = [ config.services.tailscale.port ];
+      allowedTCPPorts = [ 22 8096 8082 ];
     };
 
 		resolvconf.enable = true;
 		resolvconf.useLocalResolver = true;
-
-    nameservers = [ "::1" "127.0.0.1" ];
   };
-
-  programs.noisetorch.enable = true;
 
   services = {
     xserver = {

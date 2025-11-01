@@ -1,10 +1,10 @@
 { pkgs, ... }: {
   services.homepage-dashboard = {
     enable = true;
-    package = pkgs.unstable.homepage-dashboard;
+    package = pkgs.homepage-dashboard;
 
     settings = {
-      title = "sgrs dashboard";
+      title = "dashboard";
       headerStyle = "clean";
       layout = {
         media = {
@@ -43,6 +43,8 @@
         }
       ];
     };
+
+		allowedHosts = "localhost:8082";
 
     services = [{
       media = [{

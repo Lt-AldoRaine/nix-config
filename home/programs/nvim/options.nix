@@ -10,9 +10,9 @@
       tabstop = 2;
       scrolloff = 8;
 
-      clipboard = "unnamed,unnamedplus";
+      clipboard = "unnamedplus";
 
-			cursorline = false;
+      cursorline = false;
 
       swapfile = false;
       backup = false;
@@ -21,7 +21,7 @@
 
       hlsearch = true;
       incsearch = true;
-      
+
       mouse = "a";
 
       number = true;

@@ -36,18 +36,18 @@
 
         sources = {
           formatting = {
-            black.enable = true;
-            clang_format.enable = true;
-            gofmt.enable = true;
+						#black.enable = true;
+						clang_format.enable = true;
+						#gofmt.enable = true;
             nixfmt.enable = true;
-            prettierd.enable = true;
+						#prettierd.enable = true;
             stylua.enable = true;
           };
 
           diagnostics = {
-            pylint.enable = true;
+						#pylint.enable = true;
             statix.enable = true;
-            golangci_lint.enable = true;
+						#golangci_lint.enable = true;
           };
         };
       };
