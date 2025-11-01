@@ -1,7 +1,19 @@
 { config, ... }: {
   imports = [
-		#../../nixos/system/default.nix
-		../../nixos/services/default.nix
+		#services
+		../../nixos/services/audio/default.nix
+		../../nixos/services/bluetooth/default.nix
+		../../nixos/services/docker/default
+
+		#system
+		../../nixos/system/nix/default.nix
+		../../nixos/system/fonts/default.nix
+		../../nixos/system/users/default.nix
+		../../nixos/system/utils/default.nix
+		../../nixos/system/timezone/default.nix
+		../../nixos/system/home-manager/default.nix
+		../../nixos/system/systemd-boot/default.nix
+		../../nixos/system/network-manager/default.nix
 
     ../../themes/style/dracula.nix
 
