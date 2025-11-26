@@ -1,11 +1,14 @@
-{ config, ... }: {
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
+{ lib, config, ... }: {
+  programs.zsh = lib.mkMerge [
+    {
+      enable = lib.mkDefault true;
+      enableCompletion = true;
+      autosuggestion.enable = true;
+      syntaxHighlighting.enable = true;
+    }
 
-    shellAliases = {
+    {
+      shellAliases = {
       ls = "ls -la";
       ll = "ls -l";
 
@@ -22,7 +25,8 @@
       test-workspace =
         "sudo nixos-rebuild test --flake ${config.var.configDirectory}#${config.var.hostname}";
     };
-
-    initContent = "eval $(starship init zsh)";
-  };
+    {
+      initContent = "eval $(starship init zsh)";
+    }
+  ];
 }

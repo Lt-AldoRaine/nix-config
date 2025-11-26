@@ -1,25 +1,30 @@
+{ lib, ... }:
+let
+  dnsPort = 53;
+  loopbackResolvers = [ "127.0.0.1" "::1" ];
+in
 {
   networking = {
-    nameservers = [ "127.0.0.1" "::1" ];
+    nameservers = lib.mkForce loopbackResolvers;
     networkmanager.dns = "none";
+    firewall = {
+      allowedTCPPorts = lib.mkAfter [ dnsPort ];
+      allowedUDPPorts = lib.mkAfter [ dnsPort ];
+    };
   };
 
   services.blocky = {
     enable = true;
     settings = {
       bootstrapDns = [ "9.9.9.9" "1.1.1.1" ];
-			ports.dns = 53;
+      ports.dns = dnsPort;
 
-      upstreams = {
-        groups = {
-          default = [
-            "9.9.9.9"
-            "149.112.112.112"
-            "https://dns.quad9.net/dns-query"
-            "tcp-tls:dns.quad9.net"
-          ];
-        };
-      };
+      upstreams.groups.default = [
+        "9.9.9.9"
+        "149.112.112.112"
+        "https://dns.quad9.net/dns-query"
+        "tcp-tls:dns.quad9.net"
+      ];
 
       blocking = {
         denylists = {
@@ -38,9 +43,7 @@
           ];
         };
 
-        clientGroupsBlock = {
-          default = [ "ads" "fakenews" "gambling" "adult" ];
-        };
+        clientGroupsBlock.default = [ "ads" "fakenews" "gambling" "adult" ];
       };
     };
   };

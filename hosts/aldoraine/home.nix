@@ -3,18 +3,18 @@
     ./variables.nix
 
     # system
-    ../../home/system/wofi
-    ../../home/system/hyprpanel
-    ../../home/system/hyprland
-    ../../home/system/hyprpaper
+    ../../modules/home/system/wofi
+    ../../modules/home/system/hyprpanel
+    ../../modules/home/system/hyprland
+    ../../modules/home/system/hyprpaper
 
     # programs
-    ../../home/programs/git
-    ../../home/programs/kitty
-    ../../home/programs/shell
-    ../../home/programs/nvim
-    ../../home/programs/thunar
-    ../../home/programs/spicetify
+    ../../modules/home/programs/git
+    ../../modules/home/programs/kitty
+    ../../modules/home/programs/shell
+    ../../modules/home/programs/nvim
+    ../../modules/home/programs/thunar
+    ../../modules/home/programs/spicetify
   ];
 
   home = {

@@ -3,9 +3,10 @@ let
   accent = "#${config.lib.stylix.colors.base0D}";
   background-alt = "#${config.lib.stylix.colors.base01}";
 in {
-  programs.starship = {
-    enable = true;
-    settings = {
+  programs.starship = lib.mkMerge [
+    { enable = lib.mkDefault true; }
+    {
+      settings = {
       add_newline = true;
       format = lib.concatStrings [
         "$directory"
@@ -42,6 +43,6 @@ in {
         format = "([$state( $progress_current/$progress_total)]($style)) ";
         style = "bright-black";
       };
-    };
-  };
+    }
+  ];
 }

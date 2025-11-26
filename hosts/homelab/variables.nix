@@ -1,5 +1,5 @@
 { config, ... }: {
-  imports = [ ../../nixos/system/variables-config/default.nix ];
+  imports = [ ../../modules/nixos/system/variables-config/default.nix ];
   config.var = {
     hostname = "homelab";
     username = "connor";

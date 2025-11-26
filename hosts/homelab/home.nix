@@ -3,9 +3,9 @@
     ./variables.nix
 
     # programs
-    ../../home/programs/git
-    ../../home/programs/shell
-    ../../home/programs/nvim
+    ../../modules/home/programs/git
+    ../../modules/home/programs/shell
+    ../../modules/home/programs/nvim
   ];
 
   home = {

@@ -1,7 +1,8 @@
-{
-  programs.nixvim = {
-    globals.mapLeader = "";
-    opts = {
+{ lib, ... }: {
+  programs.nixvim = lib.mkMerge [
+    { globals.mapLeader = ""; }
+    {
+      opts = {
       autoindent = true;
       smartindent = true;
 
@@ -43,6 +44,7 @@
       termguicolors = true;
 
       wrap = false;
-    };
-  };
+      };
+    }
+  ];
 }

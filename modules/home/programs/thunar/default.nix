@@ -1,12 +1,15 @@
-{ pkgs, ... }: {
-  # ctrl + m to toggle the menubar
-  home.packages = with pkgs.xfce; [
+{ lib, pkgs, ... }:
+let
+  thunarPackages = with pkgs.xfce; [
     thunar
     xfconf
     tumbler
     thunar-archive-plugin
     thunar-volman
   ];
+in {
+  # ctrl + m to toggle the menubar
+  home.packages = lib.mkAfter thunarPackages;
 
   home.file.".config/xfce4/xfconf/xfce-perchannel-xml/thunar.xml".text = ''
     <?xml version="1.0" encoding="UTF-8"?>
