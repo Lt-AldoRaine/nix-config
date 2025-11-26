@@ -25,6 +25,7 @@
       test-workspace =
         "sudo nixos-rebuild test --flake ${config.var.configDirectory}#${config.var.hostname}";
     };
+    }
     {
       initContent = "eval $(starship init zsh)";
     }
