@@ -2,8 +2,7 @@
 let
   dnsPort = 53;
   loopbackResolvers = [ "127.0.0.1" "::1" ];
-in
-{
+in {
   networking = {
     nameservers = lib.mkForce loopbackResolvers;
     networkmanager.dns = "none";
@@ -18,6 +17,12 @@ in
     settings = {
       bootstrapDns = [ "9.9.9.9" "1.1.1.1" ];
       ports.dns = dnsPort;
+      ports.http = 4000; # Enable HTTP port for metrics
+      
+      prometheus = {
+        enable = true;
+        path = "/metrics";
+      };
 
       upstreams.groups.default = [
         "9.9.9.9"
@@ -29,9 +34,22 @@ in
       blocking = {
         denylists = {
           ads = [
-            "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
             "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/pro.txt"
+						"https://adaway.org/hosts.txt"
+						"https://v.firebog.net/hosts/AdguardDNS.txt"
           ];
+          threats = [
+            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/tif.txt"
+            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/dyndns.txt"
+          ];
+
+					trackers = [
+						"https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/native.apple.txt"
+						"https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/native.samsung.txt"
+						"https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/native.lgwebos.txt"
+						"https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/native.amazon.txt"
+					];
+
           fakenews = [
             "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-only/hosts"
           ];
@@ -41,10 +59,21 @@ in
           adult = [
             "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/porn-only/hosts"
           ];
+
         };
 
-        clientGroupsBlock.default = [ "ads" "fakenews" "gambling" "adult" ];
+        clientGroupsBlock.default = [ "ads" "adult" "fakenews" "gambling" "trackers"  "threats" ];
       };
     };
   };
+
+  # Add Blocky to Prometheus scrape targets
+  services.prometheus.scrapeConfigs = [
+    {
+      job_name = "blocky";
+      static_configs = [{
+        targets = [ "localhost:4000" ];
+      }];
+    }
+  ];
 }

@@ -193,7 +193,7 @@
           }
         ];
       }];
-      server = { host = "100.84.95.66"; };
+      server = { host = "localhost"; port = 8282; };
     };
   };
 }

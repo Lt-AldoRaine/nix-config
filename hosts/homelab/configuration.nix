@@ -4,7 +4,10 @@
     ../../modules/nixos/services/docker/default.nix
     ../../modules/nixos/services/jellyfin/default.nix
     ../../modules/nixos/services/tailscale/default.nix
+    ../../modules/nixos/services/caddy/default.nix
     ../../modules/nixos/services/homepage/default.nix
+    ../../modules/nixos/services/prometheus/default.nix
+    ../../modules/nixos/services/grafana/default.nix
     ../../modules/nixos/services/glance/default.nix
     ../../modules/nixos/services/blocky/default.nix
 
@@ -24,6 +27,8 @@
     ./variables.nix
   ];
 	 
+  services.my-caddy.enable = true;
+
   home-manager.users."${config.var.username}" = import ./home.nix;
 
   system.stateVersion = "24.11";

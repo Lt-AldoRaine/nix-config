@@ -20,13 +20,10 @@
       unzip
       pfetch
       ripgrep
-			just
 			ansible
 			terraform
 			nodejs
 
-			dnsutils
-			unixtools.netstat
 			lm_sensors
     ];
     stateVersion = "24.11";
