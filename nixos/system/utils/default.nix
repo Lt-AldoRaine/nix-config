@@ -6,11 +6,9 @@ in {
     firewall = {
       enable = true;
 
-      allowedTCPPorts = [ 22 8096 8082 ];
-    };
+      allowedTCPPorts = [ 22 8096 8082 8080 ];
 
-		resolvconf.enable = true;
-		resolvconf.useLocalResolver = true;
+    };
   };
 
   services = {
@@ -31,6 +29,7 @@ in {
     EDITOR = "nvim";
   };
 
+	services.mullvad-vpn.enable = true;
   services.libinput.enable = true;
   programs.dconf.enable = true;
   services = {
@@ -77,5 +76,6 @@ in {
     solaar
     wget
     xdg-utils
+		age
   ];
 }

@@ -2,13 +2,12 @@
   services = {
     tailscale = {
       enable = true;
-      useRoutingFeatures = "server";
+      useRoutingFeatures = "both";
     };
 
   };
 
   networking.firewall = {
-    checkReversePath = "loose";
     trustedInterfaces = [ "tailscale0" ];
     allowedUDPPorts = [ config.services.tailscale.port ];
   };

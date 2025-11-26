@@ -3,7 +3,6 @@
 		#services
 		../../nixos/services/audio/default.nix
 		../../nixos/services/bluetooth/default.nix
-		../../nixos/services/docker/default
 
 		#system
 		../../nixos/system/nix/default.nix
@@ -14,6 +13,7 @@
 		../../nixos/system/home-manager/default.nix
 		../../nixos/system/systemd-boot/default.nix
 		../../nixos/system/network-manager/default.nix
+    ../../nixos/system/xdg-portal/default.nix
 
     ../../themes/style/dracula.nix
 
@@ -23,5 +23,5 @@
 
   home-manager.users."${config.var.username}" = import ./home.nix;
 
-  system.stateVersion = "24.12";
+  system.stateVersion = "24.11";
 }

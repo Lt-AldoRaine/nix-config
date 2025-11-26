@@ -3,6 +3,8 @@
     enable = true;
     package = pkgs.homepage-dashboard;
 
+		openFirewall = true;
+
     settings = {
       title = "dashboard";
       headerStyle = "clean";
@@ -44,16 +46,16 @@
       ];
     };
 
-		allowedHosts = "localhost:8082";
+		allowedHosts = "dash.aldoraine.com, localhost:8082";
 
     services = [{
       media = [{
         Jellyfin = {
-          href = "localhost:8096";
+          href = "jelly.aldoraine.com";
           description = "Media Management";
           widget = {
             type = "jellyfin";
-            url = "localhost:8096";
+            url = "jelly.aldoraine.com";
           };
         };
       }];

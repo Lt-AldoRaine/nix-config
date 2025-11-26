@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, inputs, ... }: {
   imports = [
     ./variables.nix
 
@@ -20,6 +20,10 @@
       unzip
       pfetch
       ripgrep
+			just
+			ansible
+			terraform
+			nodejs
 
 			dnsutils
 			unixtools.netstat

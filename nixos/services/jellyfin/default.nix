@@ -3,7 +3,7 @@
 {
 	services.jellyfin = {
 		enable = true;
-		openFirewall = true;
+		dataDir = "/media";
 	};
 
 	environment.systemPackages = [

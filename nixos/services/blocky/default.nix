@@ -1,31 +1,45 @@
 {
+  networking = {
+    nameservers = [ "127.0.0.1" "::1" ];
+    networkmanager.dns = "none";
+  };
+
   services.blocky = {
     enable = true;
     settings = {
-      ports.dns = 53; # Port for incoming DNS Queries.
-      upstreams.groups.default = [
-				"https://one.one.one.one/dns-query"
-      ];
-      # For initially solving DoH/DoT Requests when no system Resolver is available.
-      bootstrapDns = {
-        upstream = "https://one.one.one.one/dns-query";
-        ips = [ "1.1.1.1" "8.8.8.8" "8.8.4.4" "1.0.0.1" ];
+      bootstrapDns = [ "9.9.9.9" "1.1.1.1" ];
+			ports.dns = 53;
+
+      upstreams = {
+        groups = {
+          default = [
+            "9.9.9.9"
+            "149.112.112.112"
+            "https://dns.quad9.net/dns-query"
+            "tcp-tls:dns.quad9.net"
+          ];
+        };
       };
-      #Enable Blocking of certain domains.
+
       blocking = {
         denylists = {
-          #Adblocking
           ads = [
             "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
+            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/pro.txt"
           ];
-          #Another filter for blocking adult sites
-          adult = [ "https://blocklistproject.github.io/Lists/porn.txt" ];
-          #You can add additional categories
+          fakenews = [
+            "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-only/hosts"
+          ];
+          gambling = [
+            "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/gambling-only/hosts"
+          ];
+          adult = [
+            "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/porn-only/hosts"
+          ];
         };
-        #Configure what block categories are used
+
         clientGroupsBlock = {
-          default = [ "ads" ];
-          kids = [ "ads" "adult" ];
+          default = [ "ads" "fakenews" "gambling" "adult" ];
         };
       };
     };
