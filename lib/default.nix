@@ -42,8 +42,10 @@ let
         else
           lib.nameValuePair (lib.removeSuffix ".nix" name) (import (dir + "/${name}")))
       wanted;
+
+  monitoring = import ./monitoring { inherit lib; };
 in
 {
-  inherit baseModules mkHost mkNixosConfigurations collectModules;
+  inherit baseModules mkHost mkNixosConfigurations collectModules monitoring;
 }
 
