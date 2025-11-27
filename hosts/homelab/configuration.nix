@@ -1,4 +1,4 @@
-{ config, ... }: {
+{ config, inputs, ... }: {
   imports = [
     # services
     ../../modules/nixos/services/docker/default.nix
@@ -10,6 +10,7 @@
     ../../modules/nixos/services/grafana/default.nix
     ../../modules/nixos/services/glance/default.nix
     ../../modules/nixos/services/blocky/default.nix
+    ../../modules/nixos/services/authentik/default.nix
 
     # system
     ../../modules/nixos/system/nix/default.nix
@@ -21,13 +22,18 @@
     ../../modules/nixos/system/systemd-boot/default.nix
     ../../modules/nixos/system/network-manager/default.nix
 
+    # agenix
+    inputs.agenix.nixosModules.age
+
     ../../themes/style/dracula.nix
 
     ./hardware-configuration.nix
     ./variables.nix
+    ./secrets.nix
   ];
 	 
   services.my-caddy.enable = true;
+  services.authentik.enable = true;
 
   home-manager.users."${config.var.username}" = import ./home.nix;
 
