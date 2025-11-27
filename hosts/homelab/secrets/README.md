@@ -16,25 +16,24 @@ This directory contains encrypted secrets managed by agenix.
    For Authentik secret key:
    ```bash
    # Generate a random secret key
-   openssl rand -base64 32 | agenix -e hosts/homelab/secrets/authentik-secret-key.age
    ```
 
    For Cloudflare API token:
    ```bash
    # Read your Cloudflare API token and encrypt it
    echo "CLOUDFLARE_DNS_API_TOKEN=your-token-here" | agenix -e hosts/homelab/secrets/cloudflare-api-token.age
+
+   For Authelia, you'll need to create user accounts in the users database file at /var/lib/authelia/users_database.yml
    ```
 
 ## Managing Secrets
 
 - **Edit a secret:**
   ```bash
-  agenix -e hosts/homelab/secrets/authentik-secret-key.age
   ```
 
 - **View a secret:**
   ```bash
-  agenix -d hosts/homelab/secrets/authentik-secret-key.age
   ```
 
 - **Re-encrypt secrets after adding/removing keys:**

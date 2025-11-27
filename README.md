@@ -16,7 +16,7 @@ The homelab runs a bunch of services for media, monitoring, and infrastructure:
 - **Caddy** - Reverse proxy with automatic HTTPS via Cloudflare DNS challenge
 - **Jellyfin** - Media server for movies, TV shows, and music
 - **Blocky** - DNS proxy with ad-blocking and multiple blocklists
-- **Authentik** - Identity provider for SSO and authentication
+- **Authelia** - Authentication and authorization server with 2FA and SSO
 - **Prometheus** - Metrics collection and monitoring
 - **Grafana** - Dashboards and visualization for Prometheus metrics
 - **Homepage** - Simple dashboard for accessing all services
@@ -56,7 +56,6 @@ I've set up a monitoring stack with Prometheus and Grafana. Each service can eas
 Secrets are managed with [agenix](https://github.com/ryantm/agenix), which encrypts secrets using SSH keys. See `hosts/homelab/AGENIX_SETUP.md` for setup instructions.
 
 Currently encrypted secrets:
-- Authentik secret key
 - Cloudflare API token (for Caddy DNS challenge)
 
 ## Usage

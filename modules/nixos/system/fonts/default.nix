@@ -1,7 +1,7 @@
 { pkgs, inputs, ... }: {
   fonts = {
     packages = with pkgs; [
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       nerd-fonts.fira-code
       nerd-fonts.jetbrains-mono
       inputs.apple-fonts.packages.${pkgs.system}.sf-pro-nerd

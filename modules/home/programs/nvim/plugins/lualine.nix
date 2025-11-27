@@ -1,6 +1,6 @@
 {
   programs.nixvim.plugins.lualine = {
-    enable = true;
+    enable = false; # Temporarily disabled due to hash mismatch - will re-enable after nixvim update
     settings = {
       options.disabled_filetypes.statusline =
         [ "dashboard" "alpha" "neo-tree" ];

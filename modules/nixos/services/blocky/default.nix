@@ -28,11 +28,11 @@ in {
       };
 
       upstreams.groups.default = [
-        "9.9.9.9"
-        "149.112.112.112"
-        "https://dns.quad9.net/dns-query"
-        "tcp-tls:dns.quad9.net"
-      ];
+            "9.9.9.9"
+            "149.112.112.112"
+            "https://dns.quad9.net/dns-query"
+            "tcp-tls:dns.quad9.net"
+          ];
 
       blocking = {
         denylists = {

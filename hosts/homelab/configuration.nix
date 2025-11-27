@@ -10,7 +10,7 @@
     ../../modules/nixos/services/grafana/default.nix
     ../../modules/nixos/services/glance/default.nix
     ../../modules/nixos/services/blocky/default.nix
-    ../../modules/nixos/services/authentik/default.nix
+    ../../modules/nixos/services/authelia/default.nix
 
     # system
     ../../modules/nixos/system/nix/default.nix
@@ -29,12 +29,18 @@
 
     ./hardware-configuration.nix
     ./variables.nix
-    ./secrets.nix
   ];
 	 
   services.my-caddy.enable = true;
-  services.authentik.enable = true;
+  services.authelia.enable = true;
 
+  age.secrets."cloudflare-api-token" = {
+    file = ./secrets/cloudflare-api-token.age;
+    owner = "caddy";
+    group = "caddy";
+    mode = "600";
+  };
+	 
   home-manager.users."${config.var.username}" = import ./home.nix;
 
   system.stateVersion = "24.11";

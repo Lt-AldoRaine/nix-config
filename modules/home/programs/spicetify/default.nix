@@ -10,24 +10,24 @@ in {
   programs.spicetify = lib.mkMerge [
     {
       enable = lib.mkDefault true;
-      theme = lib.mkForce spicetify.themes.text;
+    theme = lib.mkForce spicetify.themes.text;
     }
     {
-      colorScheme = "custom";
-      customColorScheme = {
-        button = ac;
-        button-active = ac;
-        tab-active = ac;
-      };
+    colorScheme = "custom";
+    customColorScheme = {
+      button = ac;
+      button-active = ac;
+      tab-active = ac;
+    };
 
-      enabledExtensions = with spicetify.extensions; [
-        playlistIcons
-        lastfm
-        hidePodcasts
-        fullAppDisplay
-        shuffle
-        adblock
-      ];
+    enabledExtensions = with spicetify.extensions; [
+      playlistIcons
+      lastfm
+      hidePodcasts
+      fullAppDisplay
+      shuffle
+      adblock
+    ];
     }
   ];
 }

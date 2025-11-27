@@ -18,14 +18,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    # Use agenix secret for Cloudflare API token
-    age.secrets."cloudflare-api-token" = {
-      file = ../../../../hosts/homelab/secrets/cloudflare-api-token.age;
-      owner = "caddy";
-      group = "caddy";
-      mode = "600";
-    };
-
     # Open ports
     networking.firewall.allowedTCPPorts = [ 80 443 ];
     networking.firewall.allowedUDPPorts = [ 443 ];
@@ -80,9 +72,13 @@ in {
               reverse_proxy localhost:3000
             }
 
-            @authentik host authentik.${baseDomain}
-            handle @authentik {
-              reverse_proxy localhost:9000
+            @authelia host auth.${baseDomain}
+            handle @authelia {
+              forward_auth localhost:9091 {
+                uri /api/verify?rd=https://auth.${baseDomain}
+                copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+              }
+              reverse_proxy localhost:9091
             }
 
             # Add other services here

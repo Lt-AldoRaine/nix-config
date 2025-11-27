@@ -15,13 +15,6 @@ Edit `hosts/homelab/secrets.nix` and replace the placeholder `homelabHostKey` wi
 
 ## Step 3: Create the Encrypted Secrets
 
-### For Authentik Secret Key:
-
-```bash
-# Generate and encrypt the Authentik secret key
-openssl rand -base64 32 | agenix -e hosts/homelab/secrets/authentik-secret-key.age
-```
-
 ### For Cloudflare API Token:
 
 First, get your Cloudflare API token from the Cloudflare dashboard, then:
@@ -38,9 +31,6 @@ Replace `your-actual-token-here` with your actual Cloudflare DNS API token.
 You can verify the secrets were created correctly:
 
 ```bash
-# View Authentik secret (should show the base64 key)
-agenix -d hosts/homelab/secrets/authentik-secret-key.age
-
 # View Cloudflare token (should show CLOUDFLARE_DNS_API_TOKEN=...)
 agenix -d hosts/homelab/secrets/cloudflare-api-token.age
 ```
@@ -62,7 +52,7 @@ If you get permission errors:
 
 If you need to edit a secret later:
 ```bash
-agenix -e hosts/homelab/secrets/authentik-secret-key.age
+agenix -e hosts/homelab/secrets/cloudflare-api-token.age
 ```
 
 ## Notes

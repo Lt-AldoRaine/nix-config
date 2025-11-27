@@ -2,13 +2,13 @@
   programs.zsh = lib.mkMerge [
     {
       enable = lib.mkDefault true;
-      enableCompletion = true;
-      autosuggestion.enable = true;
-      syntaxHighlighting.enable = true;
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
     }
 
     {
-      shellAliases = {
+    shellAliases = {
       ls = "ls -la";
       ll = "ls -l";
 
@@ -27,7 +27,7 @@
     };
     }
     {
-      initContent = "eval $(starship init zsh)";
+    initContent = "eval $(starship init zsh)";
     }
   ];
 }

@@ -6,7 +6,7 @@ in {
   programs.starship = lib.mkMerge [
     { enable = lib.mkDefault true; }
     {
-      settings = {
+    settings = {
       add_newline = true;
       format = lib.concatStrings [
         "$directory"
@@ -43,7 +43,7 @@ in {
         format = "([$state( $progress_current/$progress_total)]($style)) ";
         style = "bright-black";
       };
-      };
+    };
     }
   ];
 }

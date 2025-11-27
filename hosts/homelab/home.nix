@@ -12,7 +12,6 @@
     inherit (config.var) username;
     homeDirectory = "/home/" + config.var.username;
 
-
     packages = with pkgs; [
       git
 
@@ -21,10 +20,10 @@
       pfetch
       ripgrep
 			ansible
-			terraform
 			nodejs
 
 			lm_sensors
+      inputs.agenix.packages.${pkgs.system}.default
     ];
     stateVersion = "24.11";
   };
