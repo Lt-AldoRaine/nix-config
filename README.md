@@ -91,12 +91,6 @@ All available homelab services:
   </tr>
   <tr>
     <td align="center" width="16%">
-      <a href="https://gethomepage.dev" title="Highly customisable dashboard with Docker and service API integrations">
-        <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/homepage.png" width="48" height="48" alt="Homepage"/>
-        <br/>Homepage
-      </a>
-    </td>
-    <td align="center" width="16%">
       <a href="https://github.com/glance-app/glance" title="Self-hosted dashboard">
         <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/glance.png" width="48" height="48" alt="Glance"/>
         <br/>Glance
