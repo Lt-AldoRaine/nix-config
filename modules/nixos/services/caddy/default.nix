@@ -74,10 +74,6 @@ in {
 
             @authelia host auth.${baseDomain}
             handle @authelia {
-              forward_auth localhost:9091 {
-                uri /api/verify?rd=https://auth.${baseDomain}
-                copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
-              }
               reverse_proxy localhost:9091
             }
 
