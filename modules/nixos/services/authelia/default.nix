@@ -7,21 +7,19 @@ let
 in {
   config = {
     services.authelia.instances.${instanceName} = {
+			enable = true;
       secrets = {
         jwtSecretFile = config.age.secrets."authelia-jwt-secret".path;
         storageEncryptionKeyFile = config.age.secrets."authelia-storage-encryption-key".path;
       };
       settings = {
         server = {
-          host = "127.0.0.1";
-          port = httpPort;
-          path = "api";
+          address = "tcp://127.0.0.1:${toString httpPort}";
         };
         theme = "dark";
         log = {
           level = "info";
         };
-        default_redirection_url = "https://auth.aldoraine.com";
         authentication_backend = {
           file = {
             path = "/var/lib/authelia-${instanceName}/users_database.yml";
@@ -51,8 +49,14 @@ in {
           name = "authelia_session";
           expiration = "1h";
           inactivity = "5m";
-          remember_me_duration = "1M";
-          domain = "aldoraine.com";
+          remember_me = "1M";
+          cookies = [
+            {
+              domain = "aldoraine.com";
+              authelia_url = "https://auth.aldoraine.com";
+              default_redirection_url = "https://dash.aldoraine.com";
+            }
+          ];
         };
         regulation = {
           max_retries = 3;
@@ -70,11 +74,6 @@ in {
           };
         };
       };
-    };
-
-    systemd.services."authelia-${instanceName}".serviceConfig = {
-      StateDirectory = "authelia-${instanceName}";
-      StateDirectoryMode = "0750";
     };
 
     services.prometheus.scrapeConfigs = lib.mkMerge [

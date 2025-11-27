@@ -43,15 +43,15 @@
 
   age.secrets."authelia-jwt-secret" = {
     file = ./secrets/authelia-jwt-secret.age;
-    owner = "authelia";
-    group = "authelia";
+    owner = "authelia-main";
+    group = "authelia-main";
     mode = "600";
   };
 
   age.secrets."authelia-storage-encryption-key" = {
     file = ./secrets/authelia-storage-encryption-key.age;
-    owner = "authelia";
-    group = "authelia";
+    owner = "authelia-main";
+    group = "authelia-main";
     mode = "600";
   };
 	 

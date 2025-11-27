@@ -12,7 +12,7 @@ in {
     enable = lib.mkEnableOption "Caddy web server";
     email = lib.mkOption {
       type = lib.types.str;
-      default = "harambefallon@gmail.com";
+      default = "cpenn@aldoraine.com";
       description = "Email for ACME registration";
     };
   };
