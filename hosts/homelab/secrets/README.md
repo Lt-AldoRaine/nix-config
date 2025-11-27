@@ -13,11 +13,6 @@ This directory contains encrypted secrets managed by agenix.
 
 3. **Create the encrypted secret files:**
 
-   For Authentik secret key:
-   ```bash
-   # Generate a random secret key
-   ```
-
    For Cloudflare API token:
    ```bash
    # Read your Cloudflare API token and encrypt it
