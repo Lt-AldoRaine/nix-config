@@ -1,7 +1,10 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 let
+  monitoring = import ../../../../lib/monitoring { inherit lib; };
   dnsPort = 53;
   loopbackResolvers = [ "127.0.0.1" "::1" ];
+  serviceName = "blocky";
+  metricsPort = 4000;
 in {
   networking = {
     nameservers = lib.mkForce loopbackResolvers;
@@ -17,7 +20,7 @@ in {
     settings = {
       bootstrapDns = [ "9.9.9.9" "1.1.1.1" ];
       ports.dns = dnsPort;
-      ports.http = 4000; # Enable HTTP port for metrics
+      ports.http = metricsPort; # Enable HTTP port for metrics
       
       prometheus = {
         enable = true;
@@ -67,13 +70,28 @@ in {
     };
   };
 
-  # Add Blocky to Prometheus scrape targets
-  services.prometheus.scrapeConfigs = [
-    {
-      job_name = "blocky";
-      static_configs = [{
-        targets = [ "localhost:4000" ];
-      }];
-    }
+  # Add Blocky to Prometheus scrape targets using monitoring helper
+  services.prometheus.scrapeConfigs = lib.mkMerge [
+    [
+      (monitoring.mkPrometheusScrape {
+        jobName = serviceName;
+        port = metricsPort;
+        path = "/metrics";
+        labels = {
+          service = serviceName;
+        };
+      })
+    ]
+  ];
+
+  # Add alerting rules for Blocky
+  services.prometheus.ruleFiles = [
+    (pkgs.writeText "${serviceName}-alerts.yml" (
+      builtins.toJSON (monitoring.mkServiceAlerts {
+        serviceName = serviceName;
+        jobName = serviceName;
+        port = metricsPort;
+      })
+    ))
   ];
 }

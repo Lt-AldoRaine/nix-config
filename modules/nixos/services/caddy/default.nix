@@ -1,9 +1,12 @@
 { config, pkgs, lib, ... }:
 let
+  monitoring = import ../../../../lib/monitoring { inherit lib; };
   cfg = config.services.my-caddy;
   
   # Define your base domain here
   baseDomain = "aldoraine.com";
+  serviceName = "caddy";
+  metricsPort = 2019; # Caddy admin API port
 in {
   options.services.my-caddy = {
     enable = lib.mkEnableOption "Caddy web server";
@@ -15,6 +18,14 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    # Use agenix secret for Cloudflare API token
+    age.secrets."cloudflare-api-token" = {
+      file = ../../../../hosts/homelab/secrets/cloudflare-api-token.age;
+      owner = "caddy";
+      group = "caddy";
+      mode = "600";
+    };
+
     # Open ports
     networking.firewall.allowedTCPPorts = [ 80 443 ];
     networking.firewall.allowedUDPPorts = [ 443 ];
@@ -23,8 +34,8 @@ in {
       enable = true;
       email = cfg.email;
 
-      # Load Cloudflare token for DNS challenge
-      environmentFile = "/home/connor/nix-config/hosts/homelab/secrets/cloudflare_caddy.env";
+      # Load Cloudflare token from agenix secret
+      environmentFile = config.age.secrets."cloudflare-api-token".path;
 
       # Use a package that includes the Cloudflare DNS plugin
       package = pkgs.caddy.withPlugins {
@@ -69,6 +80,11 @@ in {
               reverse_proxy localhost:3000
             }
 
+            @authentik host authentik.${baseDomain}
+            handle @authentik {
+              reverse_proxy localhost:9000
+            }
+
             # Add other services here
             # @sonarr host sonarr.${baseDomain}
             # handle @sonarr {
@@ -84,14 +100,29 @@ in {
       };
     };
     
-    # Add Caddy to Prometheus scrape targets
-    services.prometheus.scrapeConfigs = [
-      {
-        job_name = "caddy";
-        static_configs = [{
-          targets = [ "localhost:2019" ];
-        }];
-      }
+    # Add Caddy to Prometheus scrape targets using monitoring helper
+    services.prometheus.scrapeConfigs = lib.mkMerge [
+      [
+        (monitoring.mkPrometheusScrape {
+          jobName = serviceName;
+          port = metricsPort;
+          path = "/metrics";
+          labels = {
+            service = serviceName;
+          };
+        })
+      ]
+    ];
+
+    # Add alerting rules for Caddy
+    services.prometheus.ruleFiles = [
+      (pkgs.writeText "${serviceName}-alerts.yml" (
+        builtins.toJSON (monitoring.mkServiceAlerts {
+          serviceName = serviceName;
+          jobName = serviceName;
+          port = metricsPort;
+        })
+      ))
     ];
   };
 }
