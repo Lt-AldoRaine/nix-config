@@ -35,6 +35,15 @@ in {
           ];
 
       blocking = {
+        allowlists = {
+          whitelist = [
+            "collegeboard.org"
+            "*.collegeboard.org"
+            "*.local"
+            "local"
+          ];
+        };
+
         denylists = {
           ads = [
             "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/pro.txt"
