@@ -1,20 +1,15 @@
 { config, pkgs, lib, ... }:
 let
   monitoring = import ../../../../lib/monitoring { inherit lib; };
-  cfg = config.services.authelia;
+  instanceName = "main";
   serviceName = "authelia";
   httpPort = 9091;
 in {
-  options.services.authelia = {
-    enable = lib.mkEnableOption "Authelia authentication server";
-  };
-
-  config = lib.mkIf cfg.enable {
-    services.authelia = {
-      enable = true;
+  config = {
+    services.authelia.instances.${instanceName} = {
       secrets = {
-        jwtSecretFile = "/var/lib/authelia/jwt_secret";
-        sessionSecretFile = "/var/lib/authelia/session_secret";
+        jwtSecretFile = config.age.secrets."authelia-jwt-secret".path;
+        storageEncryptionKeyFile = config.age.secrets."authelia-storage-encryption-key".path;
       };
       settings = {
         server = {
@@ -29,7 +24,7 @@ in {
         default_redirection_url = "https://auth.aldoraine.com";
         authentication_backend = {
           file = {
-            path = "/var/lib/authelia/users_database.yml";
+            path = "/var/lib/authelia-${instanceName}/users_database.yml";
             password = {
               algorithm = "argon2";
               iterations = 1;
@@ -66,24 +61,24 @@ in {
         };
         storage = {
           local = {
-            path = "/var/lib/authelia/db.sqlite3";
+            path = "/var/lib/authelia-${instanceName}/db.sqlite3";
           };
         };
         notifier = {
           filesystem = {
-            filename = "/var/lib/authelia/notification.txt";
+            filename = "/var/lib/authelia-${instanceName}/notification.txt";
           };
         };
       };
     };
 
-    systemd.services.authelia.serviceConfig = {
-      StateDirectory = "authelia";
+    systemd.services."authelia-${instanceName}".serviceConfig = {
+      StateDirectory = "authelia-${instanceName}";
       StateDirectoryMode = "0750";
     };
 
     services.prometheus.scrapeConfigs = lib.mkMerge [
-      [
+      (lib.mkIf config.services.authelia.instances.${instanceName}.enable [
         (monitoring.mkPrometheusScrape {
           jobName = serviceName;
           port = httpPort;
@@ -92,7 +87,7 @@ in {
             service = serviceName;
           };
         })
-      ]
+      ])
     ];
   };
 }

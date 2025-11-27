@@ -32,12 +32,26 @@
   ];
 	 
   services.my-caddy.enable = true;
-  services.authelia.enable = true;
+  services.authelia.instances.main.enable = true;
 
   age.secrets."cloudflare-api-token" = {
     file = ./secrets/cloudflare-api-token.age;
     owner = "caddy";
     group = "caddy";
+    mode = "600";
+  };
+
+  age.secrets."authelia-jwt-secret" = {
+    file = ./secrets/authelia-jwt-secret.age;
+    owner = "authelia";
+    group = "authelia";
+    mode = "600";
+  };
+
+  age.secrets."authelia-storage-encryption-key" = {
+    file = ./secrets/authelia-storage-encryption-key.age;
+    owner = "authelia";
+    group = "authelia";
     mode = "600";
   };
 	 

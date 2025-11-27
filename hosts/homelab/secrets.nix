@@ -9,4 +9,10 @@ let
 in {
   # Cloudflare API token for Caddy (format: CLOUDFLARE_DNS_API_TOKEN=token-value)
   "secrets/cloudflare-api-token.age".publicKeys = [ homelabHostKey homelabUserKey ];
+
+  # Authelia JWT secret
+  "secrets/authelia-jwt-secret.age".publicKeys = [ homelabHostKey homelabUserKey ];
+
+  # Authelia storage encryption key
+  "secrets/authelia-storage-encryption-key.age".publicKeys = [ homelabHostKey homelabUserKey ];
 }
