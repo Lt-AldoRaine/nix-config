@@ -139,46 +139,6 @@ Remote VPS on Hetzner Cloud for public-facing services and monitoring.
 - Provisioned using Hetzner Cloud NixOS images
 - Pure Nix-based deployment workflow (no bash scripts)
 
-### 📁 Structure
-
-```
-.
-├── flake.nix                    # Flake definition and inputs
-├── flake-parts/                 # Flake-parts modules
-│   ├── nixos-configurations.nix
-│   └── home-configurations.nix
-├── hosts/                       # Local host configurations
-│   ├── homelab/                # Homelab server config
-│   │   ├── configuration.nix
-│   │   ├── secrets.nix         # Agenix secret key definitions
-│   │   └── secrets/            # Encrypted secrets (.age files)
-│   └── aldoraine/              # Desktop workstation config
-├── machines/                    # Remote/VPS machine configurations
-│   ├── default.nix             # Machine definitions
-│   ├── flake-module.nix        # Terraform apps and outputs
-│   └── odin/                   # Hetzner VPS config
-│       ├── configuration.nix
-│       ├── terraform-configuration.nix
-│       └── variables.nix
-├── modules/                    # Reusable NixOS modules
-│   ├── nixos/                  # System-level modules
-│   │   ├── services/           # Service configurations
-│   │   └── system/             # System configs (users, fonts, etc.)
-│   ├── home/                   # Home Manager modules
-│   │   ├── programs/          # Program configurations
-│   │   ├── services/          # Home Manager services
-│   │   └── system/            # System-level home configs
-│   └── terranix/               # Terranix Terraform modules
-│       ├── base.nix           # Base Terraform configuration
-│       └── hcloud.nix         # Hetzner Cloud resources
-├── vars/                        # Shared variables
-│   ├── users/                  # User configurations
-│   └── themes.nix             # Theme definitions
-├── lib/                         # Helper functions
-│   └── monitoring/             # Monitoring helpers and templates
-└── themes/                      # Styling and theming configs
-```
-
 ### 🔐 Secrets Management
 
 Secrets are managed with [agenix](https://github.com/ryantm/agenix), which encrypts secrets using SSH keys. The `secrets.nix` file defines which SSH keys can decrypt each secret, and the encrypted `.age` files are safe to commit to git.
