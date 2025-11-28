@@ -1,25 +1,12 @@
-{ config, ... }: {
+{ config, ... }:
+let
+  user = import ../../vars/users/connor.nix;
+  themes = import ../../vars/themes.nix;
+in
+{
   imports = [ ../../modules/nixos/system/variables-config/default.nix ];
-  config.var = {
+  config.var = user // {
     hostname = "aldoraine";
-    username = "connor";
-
-    configDirectory = "/home/" + config.var.username + "/nix-config";
-
-    keyboardLayout = "us";
-
-    location = "America/Chicago";
-    timeZone = "America/Chicago";
-    defaultLocale = "en_US.UTF-8";
-    extraLocale = "en_US.UTF-8";
-
-    git = {
-      username = "Lt-AldoRaine";
-      email = "harambefallon@gmail.com";
-    };
-
-    autoGarbageCollector = true;
-
-    theme = import ../../themes/var/2025.nix;
+    theme = themes."2025";
   };
 }

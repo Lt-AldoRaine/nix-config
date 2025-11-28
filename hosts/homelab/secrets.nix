@@ -15,4 +15,8 @@ in {
 
   # Authelia storage encryption key
   "secrets/authelia-storage-encryption-key.age".publicKeys = [ homelabHostKey homelabUserKey ];
+
+  # CurseForge API key for Minecraft server (format: CF_API_KEY=your-key-here)
+  "secrets/curseforge-api-key.age".publicKeys = [ homelabHostKey homelabUserKey ];
+
 }

@@ -1,1 +1,5 @@
-./hosts/homelab/secrets/
+terraform/
+.terraform/
+*.tfstate
+*.tfstate.*
+

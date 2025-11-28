@@ -1,21 +1,26 @@
-{ config, pkgs, ... }: {
-  imports = [
-    ./variables.nix
-
-    # system
-    ../../modules/home/system/wofi
-    ../../modules/home/system/hyprpanel
-    ../../modules/home/system/hyprland
-    ../../modules/home/system/hyprpaper
-
-    # programs
-    ../../modules/home/programs/git
-    ../../modules/home/programs/kitty
-    ../../modules/home/programs/shell
-    ../../modules/home/programs/nvim
-    ../../modules/home/programs/thunar
-    ../../modules/home/programs/spicetify
-  ];
+{ config, pkgs, inputs, ... }:
+let
+  inherit (inputs.self.homeManagerModules) programs system;
+in
+{
+  imports =
+    [
+      ./variables.nix
+    ]
+    ++ (with system; [
+      wofi
+      hyprpanel
+      hyprland
+      hyprpaper
+    ])
+    ++ (with programs; [
+      git
+      kitty
+      shell
+      nvim
+      thunar
+      spicetify
+    ]);
 
   home = {
     inherit (config.var) username;

@@ -6,7 +6,7 @@
     <p>
         My personal infrastructure, fully managed with
         <a href="https://nixos.org">NixOS</a> and <a href="https://nixos.wiki/wiki/Flakes">Nix Flakes</a>. This repository contains
-        all configurations for my homelab server and personal desktop.
+        all configurations for my homelab server, personal desktop, and VPS deployments.
     </p>
 </div>
 
@@ -18,6 +18,7 @@ This is a complete NixOS configuration that manages:
 
 - **Homelab Server**: Self-hosted services for media, monitoring, and infrastructure
 - **Desktop Workstation**: Personal development and productivity setup
+- **VPS Deployments**: Remote servers managed via Terraform and Terranix
 
 Everything is declarative, reproducible, and version-controlled.
 
@@ -26,25 +27,6 @@ Everything is declarative, reproducible, and version-controlled.
 I'm using NixOS for infrastructure management because:
 
 > Reproducible, declarative, and reliable system configuration
-
-#### Key benefits
-
-- **Declarative Configuration**: Everything in code, no manual steps
-- **Reproducible Builds**: Same inputs always produce the same outputs
-- **Atomic Updates**: System updates are atomic - rollback if anything breaks
-- **Service Management**: Native NixOS services with automatic dependency management
-
-### 🛠️ Deployment Strategy
-
-I follow a hybrid approach:
-
-- **NixOS services first**: Most applications run as native NixOS services
-- **Docker when needed**: Some apps use containers to:
-  - Use features not well-supported in NixOS
-  - Maintain stability during version upgrades
-  - Isolate services for easier management
-
-This gives me the best of both worlds: NixOS reproducibility with container flexibility.
 
 ### 📦 Services & Applications
 
@@ -108,10 +90,16 @@ All available homelab services:
         <br/>Docker
       </a>
     </td>
+    <td align="center" width="16%">
+      <a href="https://gethomepage.dev" title="Modern homepage">
+        <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/homepage.png" width="48" height="48" alt="Homepage"/>
+        <br/>Homepage
+      </a>
+    </td>
   </tr>
 </table>
 
-### 🖥️ Hosts
+### 🖥️ Hosts & Machines
 
 #### 🏠 [homelab](./hosts/homelab/)
 
@@ -131,34 +119,85 @@ Main server running self-hosted services for media, monitoring, and infrastructu
 Personal desktop workstation for daily development and productivity.
 
 **Setup:**
-- **🖥️ Desktop Environment**: GNOME with custom theming
+- **🖥️ Desktop Environment**: Hyprland window manager with custom theming
 - **🛠️ Development Tools**: Neovim, Git, and full development environment
 - **🎨 System Management**: Custom utilities and system configurations
+
+#### ☁️ [odin](./machines/odin/)
+
+Remote VPS on Hetzner Cloud for public-facing services and monitoring.
+
+**Services:**
+- **🔐 Authentication**: Authelia for SSO
+- **📊 Monitoring Stack**: Prometheus and Grafana
+- **🌐 Reverse Proxy**: Caddy with Cloudflare DNS
+- **📊 Dashboard**: Homepage for service overview
+- **🔒 VPN**: Tailscale for secure access
+
+**Deployment:**
+- Managed via [Terranix](https://terranix.org/) for declarative Terraform configuration
+- Provisioned using Hetzner Cloud NixOS images
+- Pure Nix-based deployment workflow (no bash scripts)
 
 ### 📁 Structure
 
 ```
 .
-├── flake.nix              # Flake definition and inputs
-├── hosts/                 # Host-specific configurations
-│   ├── homelab/          # Homelab server config
+├── flake.nix                    # Flake definition and inputs
+├── flake-parts/                 # Flake-parts modules
+│   ├── nixos-configurations.nix
+│   └── home-configurations.nix
+├── hosts/                       # Local host configurations
+│   ├── homelab/                # Homelab server config
 │   │   ├── configuration.nix
-│   │   ├── secrets.nix   # Agenix secret key definitions
-│   │   └── secrets/      # Encrypted secrets (.age files)
-│   └── aldoraine/        # Desktop workstation config
-├── modules/              # Reusable NixOS modules
-│   ├── nixos/           # System-level modules
-│   │   ├── services/    # Service configurations
-│   │   └── system/      # System configs (users, fonts, etc.)
-│   └── home/            # Home Manager modules
-├── lib/                  # Helper functions
-│   └── monitoring/       # Monitoring helpers and templates
-└── themes/               # Styling and theming configs
+│   │   ├── secrets.nix         # Agenix secret key definitions
+│   │   └── secrets/            # Encrypted secrets (.age files)
+│   └── aldoraine/              # Desktop workstation config
+├── machines/                    # Remote/VPS machine configurations
+│   ├── default.nix             # Machine definitions
+│   ├── flake-module.nix        # Terraform apps and outputs
+│   └── odin/                   # Hetzner VPS config
+│       ├── configuration.nix
+│       ├── terraform-configuration.nix
+│       └── variables.nix
+├── modules/                    # Reusable NixOS modules
+│   ├── nixos/                  # System-level modules
+│   │   ├── services/           # Service configurations
+│   │   └── system/             # System configs (users, fonts, etc.)
+│   ├── home/                   # Home Manager modules
+│   │   ├── programs/          # Program configurations
+│   │   ├── services/          # Home Manager services
+│   │   └── system/            # System-level home configs
+│   └── terranix/               # Terranix Terraform modules
+│       ├── base.nix           # Base Terraform configuration
+│       └── hcloud.nix         # Hetzner Cloud resources
+├── vars/                        # Shared variables
+│   ├── users/                  # User configurations
+│   └── themes.nix             # Theme definitions
+├── lib/                         # Helper functions
+│   └── monitoring/             # Monitoring helpers and templates
+└── themes/                      # Styling and theming configs
 ```
 
 ### 🔐 Secrets Management
 
 Secrets are managed with [agenix](https://github.com/ryantm/agenix), which encrypts secrets using SSH keys. The `secrets.nix` file defines which SSH keys can decrypt each secret, and the encrypted `.age` files are safe to commit to git.
+
+### ☁️ Infrastructure as Code
+
+Infrastructure provisioning is handled declaratively using [Terranix](https://terranix.org/), which generates Terraform configurations from Nix expressions. This provides:
+
+- **Pure Nix**: All Terraform configs written in Nix, no HCL
+- **Type Safety**: Nix's type system catches errors early
+- **Reusability**: Shared modules for common patterns
+- **Integration**: Seamless integration with the rest of the NixOS config
+
+Terraform commands are available as Nix apps:
+```bash
+nix run .#terraform-odin-init
+nix run .#terraform-odin-plan
+nix run .#terraform-odin-apply
+```
 
 ### 📊 Monitoring
 
@@ -176,4 +215,6 @@ A big thank you to the contributors of OpenSource projects, in particular:
 - [NixOS](https://nixos.org/) - The purely functional Linux distribution
 - [Home Manager](https://github.com/nix-community/home-manager) - Manage a user environment using Nix
 - [agenix](https://github.com/ryantm/agenix) - Secret management for NixOS using age
+- [Terranix](https://terranix.org/) - Terraform configuration in Nix
+- [badele/nix-homelab](https://github.com/badele/nix-homelab) - Inspiration for this configuration structure (and bar for bar readme)
 - All the service maintainers and the NixOS community

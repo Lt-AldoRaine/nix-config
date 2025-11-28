@@ -39,33 +39,22 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    terranix = {
+      url = "github:terranix/terranix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
-  outputs = inputs@{ nixpkgs, flake-parts, ... }:
-    let
-      inherit (nixpkgs) lib;
-      customLib = import ./lib { inherit inputs lib; };
-      hostSpecs = import ./hosts { mkHost = customLib.mkHost; };
-      nixosModules = import ./modules/nixos {
-        collectModules = customLib.collectModules;
-      };
-      homeManagerModules = import ./modules/home {
-        collectModules = customLib.collectModules;
-      };
-    in
+  outputs = inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        ./flake-parts/nixos-configurations.nix
+        ./flake-parts/home-configurations.nix
+        ./machines/flake-module.nix
+      ];
+
       systems =
         [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
-
-      perSystem = { pkgs, ... }: {
-        formatter = pkgs.nixfmt-rfc-style;
-      };
-
-      flake = {
-        lib = customLib;
-        inherit nixosModules homeManagerModules;
-        nixosConfigurations =
-          customLib.mkNixosConfigurations hostSpecs;
-      };
     };
 }
