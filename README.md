@@ -21,31 +21,6 @@ This is a complete NixOS configuration that manages:
 
 Everything is declarative, reproducible, and version-controlled.
 
-### Why NixOS?
-
-I'm using NixOS for infrastructure management because:
-
-> Reproducible, declarative, and reliable system configuration
-
-#### Key benefits
-
-- **Declarative Configuration**: Everything in code, no manual steps
-- **Reproducible Builds**: Same inputs always produce the same outputs
-- **Atomic Updates**: System updates are atomic - rollback if anything breaks
-- **Service Management**: Native NixOS services with automatic dependency management
-
-### 🛠️ Deployment Strategy
-
-I follow a hybrid approach:
-
-- **NixOS services first**: Most applications run as native NixOS services
-- **Docker when needed**: Some apps use containers to:
-  - Use features not well-supported in NixOS
-  - Maintain stability during version upgrades
-  - Isolate services for easier management
-
-This gives me the best of both worlds: NixOS reproducibility with container flexibility.
-
 ### 📦 Services & Applications
 
 All available homelab services:
