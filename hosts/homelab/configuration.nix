@@ -1,4 +1,4 @@
-{ config, inputs, ... }:
+{ config, inputs, lib, ... }:
 {
   imports = [
     # services
@@ -25,7 +25,7 @@
     ../../modules/nixos/system/network-manager/default.nix
   ]
     ++ [
-    inputs.agenix.nixosModules.age
+    ./secrets/default.nix
 
     ../../themes/style/dracula.nix
 
@@ -33,6 +33,14 @@
     ./variables.nix
   ];
 	 
+  services.resolved.enable = lib.mkForce false;
+
+  services.tailscale = {
+    enable = true;
+    authKeyFile = config.sops.secrets."tailscale-auth-key".path;
+    useRoutingFeatures = "both";
+  };
+
   services.my-caddy.enable = true;
   services.authelia.instances.main.enable = true;
   
@@ -40,37 +48,9 @@
   services.docker-containers.minecraft = {
     enable = true;
     ops = [ "Lt_Ald0Raine" "AvrgAndy" ];
-    curseforgeApiKeyFile = config.age.secrets."curseforge-api-key".path;
+    curseforgeApiKeyFile = config.sops.secrets."curseforge-api-key".path;
   };
 
-  age.secrets."cloudflare-api-token" = {
-    file = ./secrets/cloudflare-api-token.age;
-    owner = "caddy";
-    group = "caddy";
-    mode = "600";
-  };
-
-  age.secrets."authelia-jwt-secret" = {
-    file = ./secrets/authelia-jwt-secret.age;
-    owner = "authelia-main";
-    group = "authelia-main";
-    mode = "600";
-  };
-
-  age.secrets."authelia-storage-encryption-key" = {
-    file = ./secrets/authelia-storage-encryption-key.age;
-    owner = "authelia-main";
-    group = "authelia-main";
-    mode = "600";
-  };
-
-  age.secrets."curseforge-api-key" = {
-    file = ./secrets/curseforge-api-key.age;
-    owner = "root";
-    group = "root";
-    mode = "600";
-  };
-	 
   home-manager.users."${config.var.username}" = import ./home.nix;
 
   system.stateVersion = "24.11";
