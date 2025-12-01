@@ -14,7 +14,8 @@ The VPS deployment process follows this workflow:
 
 - Hetzner Cloud account with API token
 - SSH key for server access (stored as `~/.ssh/homelab` or `~/.ssh/id_ed25519`)
-- Secrets encrypted with agenix (hcloud-token, tailscale-auth-key, etc.)
+- Secrets encrypted with sops (see `sops/secrets.yaml`)
+- Age identity derived from your SSH key for local decryption (e.g. `ssh-to-age ~/.ssh/id_ed25519 > ~/.config/sops/age/keys.txt`)
 
 ## Deployment Steps
 
@@ -33,12 +34,12 @@ nix run .#terraform -- plan
 nix run .#terraform -- apply
 ```
 
-The wrapper now generates `terraform.tf.json` on demand, selects an `AGENIX_IDENTITY`, decrypts secrets, and keeps all Terraform state in `~/terraform/odin`, so no additional scripting is required inside the repo.
+The wrapper now generates `terraform.tf.json` on demand, selects an `AGENIX_IDENTITY`, decrypts secrets, and keeps all Terraform state in `terraform/odin` inside this repository, so no additional scripting is required inside the repo.
 
 Running the plan/apply cycle will:
 - Create the Hetzner Cloud server (`odin`)
 - Configure networking (IPv4 and IPv6)
-- Upload the SSH public key stored in `hosts/homelab/secrets/terraform/odin/ssh-public-key.age`
+- Upload the SSH public key stored in `sops/secrets.yaml` (key: `odin-ssh-public-key`)
 - Output the server IP addresses
 
 ### 2. Install NixOS with Clan
@@ -112,6 +113,8 @@ nix run .#terraform -- destroy
 nix run .#terraform -- output
 ```
 
+The `.#terraform` app is just a thin wrapper over the Terranix/OpenTofu configuration, so whatever follows the `--` is passed directly to `tofu`. Running it without arguments (`nix run .#terraform -- --help`) prints the upstream CLI help.
+
 ### Clan
 
 ```bash
@@ -142,20 +145,20 @@ clan machines update odin
 
 ## Secrets Management
 
-Secrets for Terraform are stored in:
-- `hosts/homelab/secrets/terraform/odin/hcloud-token.age` - Hetzner Cloud API token
-- `hosts/homelab/secrets/terraform/odin/tailscale-auth-key.age` - Tailscale auth key
-- `hosts/homelab/secrets/terraform/odin/ssh-public-key.age` - SSH key uploaded to Hetzner
-
-These are encrypted with agenix and decrypted automatically by the Terraform wrapper.
-
-To (re)create the SSH public key secret so it matches the private key on your workstation, run:
+All runtime and Terraform secrets now live in [`sops/secrets.yaml`](../sops/secrets.yaml) (see the [`sops/secrets.example.yaml`](../sops/secrets.example.yaml) template for the expected keys). Encrypt the file with your SSH key converted via `ssh-to-age`, e.g.
 
 ```bash
-agenix -e hosts/homelab/secrets/terraform/odin/ssh-public-key.age
+cp sops/secrets.example.yaml sops/secrets.yaml
+nix shell 'nixpkgs#sops' -c sops --encrypt --in-place sops/secrets.yaml
 ```
 
-Keep the `publicKeys` list in `hosts/homelab/secrets.nix` up to date so both your laptop and the deploying machines can decrypt it.
+To edit secrets later:
+
+```bash
+nix shell 'nixpkgs#sops' -c sops sops/secrets.yaml
+```
+
+Make sure your Age identity (generated from your SSH key via `ssh-to-age ~/.ssh/id_ed25519 > ~/.config/sops/age/keys.txt`) is available whenever you run Terraform or Clan commands locally.
 
 ## Troubleshooting
 

@@ -141,7 +141,7 @@ Remote VPS on Hetzner Cloud for public-facing services and monitoring.
 
 ### 🔐 Secrets Management
 
-Secrets are managed with [agenix](https://github.com/ryantm/agenix), which encrypts secrets using SSH keys. The `secrets.nix` file defines which SSH keys can decrypt each secret, and the encrypted `.age` files are safe to commit to git.
+Secrets are managed with [sops-nix](https://github.com/Mic92/sops-nix). Encrypted values live in [`sops/secrets.yaml`](./sops/secrets.yaml) (see [`sops/secrets.example.yaml`](./sops/secrets.example.yaml) for the structure). Add your SSH host/user keys as age recipients, run `sops --encrypt --in-place sops/secrets.yaml`, and the NixOS modules will decrypt them at activation time.
 
 ### ☁️ Infrastructure as Code
 
@@ -167,7 +167,7 @@ A big thank you to the contributors of OpenSource projects, in particular:
 
 - [NixOS](https://nixos.org/) - The purely functional Linux distribution
 - [Home Manager](https://github.com/nix-community/home-manager) - Manage a user environment using Nix
-- [agenix](https://github.com/ryantm/agenix) - Secret management for NixOS using age
+- [sops-nix](https://github.com/Mic92/sops-nix) - Secret management for NixOS using sops + age
 - [Terranix](https://terranix.org/) - Terraform configuration in Nix
 - [Clan](https://clan.lol/) - Infrastructure management framework for NixOS
 - [badele/nix-homelab](https://github.com/badele/nix-homelab) - Inspiration for this configuration structure (and bar for bar readme)

@@ -1,6 +1,8 @@
+keys:
+  - &connor age10ww6jvrdvd2pkqt5ypszdydr72guqhtva2suwgdq0034ayz78grshz38f5
+  - &odin age1m6xmlm0j7pc53z2xn44cus3x2fzqhjh6vdy9urhv8w0zx9xphptsx8y87n
 creation_rules:
   - path_regex: ^sops/.*\.ya?ml$
     age:
-      - age150par84m0mmfz020xf6ee5ctwwa5y6u4l2l2fdtrjxq33ych9c7sx6jk9m
-      - age10ww6jvrdvd2pkqt5ypszdydr72guqhtva2suwgdq0034ayz78grshz38f5
-
+      - *connor
+      - *odin
