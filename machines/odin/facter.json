@@ -1095,7 +1095,7 @@
           "srso",
           "ibpb_no_ret"
         ],
-        "bogo": 4890.81,
+        "bogo": 4890.8,
         "cache": 512,
         "units": 2,
         "physical_id": 0,
@@ -1169,7 +1169,7 @@
           "range": 16
         },
         "unix_device_names": [
-          "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_107525075",
+          "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_107526601",
           "/dev/disk/by-path/pci-0000:06:00.0-scsi-0:0:0:0",
           "/dev/sda"
         ],
