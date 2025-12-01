@@ -1,6 +1,6 @@
 { config, ... }:
 let
-  user = import ../../vars/users/connor.nix;
+  user = import ../../vars/users/homelab.nix;
   themes = import ../../vars/themes.nix;
 in
 {

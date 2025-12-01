@@ -15,7 +15,6 @@
       ../../modules/nixos/system/utils/default.nix
       ../../modules/nixos/system/timezone/default.nix
       ../../modules/nixos/system/home-manager/default.nix
-      ../../modules/nixos/system/systemd-boot/default.nix
       ../../modules/nixos/system/network-manager/default.nix
 
       ./disko.nix
@@ -23,6 +22,7 @@
       ./variables.nix
       ./deploy.nix
       ../../themes/style/dracula.nix
+      ../../hosts/homelab/secrets/default.nix
     ];
 
   services = {
@@ -40,14 +40,14 @@
       {
         job_name = "node-exporter-homelab";
         static_configs = [{
-          targets = [ "homelab:9100" ];
+          targets = [ "homelab-server:9100" ];
           labels = { host = "homelab"; };
         }];
       }
       {
         job_name = "caddy-homelab";
         static_configs = [{
-          targets = [ "homelab:2019" ];
+          targets = [ "homelab-server:2019" ];
           labels = {
             service = "caddy";
             host = "homelab";
@@ -57,41 +57,24 @@
       }
     ];
 
-    tailscale.useRoutingFeatures = "both";
+    # Tailscale configuration with automatic authentication
+    tailscale = {
+      enable = true;
+      useRoutingFeatures = "both";
+      # Auth key from sops secrets for automatic Tailscale login
+      authKeyFile = config.sops.secrets."tailscale-auth-key".path;
+
+    };
   };
 
+  # Set hostname for Tailscale network
+  networking.hostName = "odin";
+
+  # Clan target host - use Tailscale hostname after initial setup
+  # After first deployment, SSH is only accessible via Tailscale
   clan.core.networking.targetHost = "root@odin";
-  age.secrets = {
-    "authelia-jwt-secret" = {
-      file = ../../hosts/homelab/secrets/authelia-jwt-secret.age;
-      owner = "authelia-main";
-      group = "authelia-main";
-      mode = "600";
-    };
 
-    "authelia-storage-encryption-key" = {
-      file = ../../hosts/homelab/secrets/authelia-storage-encryption-key.age;
-      owner = "authelia-main";
-      group = "authelia-main";
-      mode = "600";
-    };
-
-    "cloudflare-api-token" = {
-      file = ../../hosts/homelab/secrets/cloudflare-api-token.age;
-      owner = "caddy";
-      group = "caddy";
-      mode = "600";
-    };
-
-    "tailscale-auth-key" = {
-      file = ../../hosts/homelab/secrets/terraform/odin/tailscale-auth-key.age;
-      owner = "root";
-      group = "root";
-      mode = "600";
-    };
-  };
-
-  services.tailscale.authKeyFile = config.age.secrets."tailscale-auth-key".path;
+  boot.loader.efi.canTouchEfiVariables = lib.mkForce false;
 
   home-manager.users."${config.var.username}" = {
     imports = [ ./home.nix ];

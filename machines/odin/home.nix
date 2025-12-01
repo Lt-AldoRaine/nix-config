@@ -19,7 +19,6 @@ in
       ripgrep
       zip
       unzip
-      inputs.agenix.packages.${pkgs.system}.default
     ];
     stateVersion = "24.11";
   };
