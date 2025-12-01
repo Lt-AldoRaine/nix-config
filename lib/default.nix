@@ -32,6 +32,7 @@ let
     inherit lib;
   };
 
+  # Base modules for all NixOS configurations (local machines)
   baseModules = [
     {
       nixpkgs.overlays = [ inputs.nur.overlays.default ];
@@ -40,12 +41,18 @@ let
         inherit inputs;
         self = inputs.self;
       };
-      clan.core.settings.directory = lib.mkDefault (builtins.toString inputs.self);
     }
     inputs.stylix.nixosModules.stylix
     inputs.home-manager.nixosModules.home-manager
-    inputs.agenix.nixosModules.age
+    inputs.sops-nix.nixosModules.sops
+  ];
+
+  # Additional modules for clan-managed machines (VPS)
+  clanModules = [
     inputs.clan-core.nixosModules.clanCore
+    {
+      clan.core.settings.directory = lib.mkDefault (builtins.toString inputs.self);
+    }
   ];
 
   mkHost = { system, modules ? [ ], extraModules ? [ ] }:
@@ -76,6 +83,7 @@ in
 {
   inherit
     baseModules
+    clanModules
     mkHost
     mkNixosConfigurations
     collectModules
@@ -84,4 +92,3 @@ in
     homeManagerModules
     modules;
 }
-

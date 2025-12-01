@@ -7,7 +7,7 @@ in
 {
   flake = {
     lib = customLib;
-    inherit (customLib) nixosModules homeManagerModules modules;
+    inherit (customLib) nixosModules homeManagerModules;
     nixosConfigurations = customLib.mkNixosConfigurations allSpecs;
   };
 }
