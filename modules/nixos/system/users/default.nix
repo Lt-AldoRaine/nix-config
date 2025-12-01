@@ -14,7 +14,5 @@ in {
       ];
 
     };
-
-    mutableUsers = true;
   };
 }

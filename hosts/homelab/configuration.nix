@@ -25,13 +25,13 @@
     ../../modules/nixos/system/network-manager/default.nix
   ]
     ++ [
-      inputs.agenix.nixosModules.age
+    inputs.agenix.nixosModules.age
 
-      ../../themes/style/dracula.nix
+    ../../themes/style/dracula.nix
 
-      ./hardware-configuration.nix
-      ./variables.nix
-    ];
+    ./hardware-configuration.nix
+    ./variables.nix
+  ];
 	 
   services.my-caddy.enable = true;
   services.authelia.instances.main.enable = true;

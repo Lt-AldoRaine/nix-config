@@ -1,40 +1,31 @@
-{ lib }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
-  merge = attrsList: lib.foldl' lib.recursiveUpdate { } attrsList;
-
-  mkBlock = kind: name: value: {
-    ${kind}.${name} = value;
-  };
+  secretsFile = ../../sops/secrets.yaml;
 in
 {
-  inherit merge;
+  terraform.required_providers.external.source = "hashicorp/external";
+  terraform.required_providers.hcloud.source = "hetznercloud/hcloud";
 
-  mkVariable = name: attrs: mkBlock "variable" name attrs;
-
-  mkOutput = name: attrs: mkBlock "output" name attrs;
-
-  mkProvider = name: attrs: mkBlock "provider" name attrs;
-
-  mkResource = type: name: attrs: {
-    resource.${type}.${name} = attrs;
+  # Fetch hcloud token using sops decryption
+  data.external.hcloud-token = {
+    program = [
+      (lib.getExe (
+        pkgs.writeShellApplication {
+          name = "get-hcloud-token";
+          runtimeInputs = [ pkgs.sops pkgs.jq ];
+          text = ''
+            secret="$(sops --decrypt --extract '["hcloud-token"]' ${secretsFile})"
+            jq -n --arg secret "$secret" '{"secret":$secret}'
+          '';
+        }
+      ))
+    ];
   };
 
-  mkData = type: name: attrs: {
-    data.${type}.${name} = attrs;
-  };
-
-  mkLocals = attrs: { locals = attrs; };
-
-  mkTerraform = attrs: { terraform = attrs; };
-
-  mkRequiredProviders = providers: mkTerraform {
-    required_providers = providers;
-  };
-
-  mkBackend = backend: attrs: mkTerraform {
-    backend.${backend} = attrs;
-  };
-
-  mkConfig = blocks: merge blocks;
+  provider.hcloud.token = config.data.external.hcloud-token "result.secret";
 }
-

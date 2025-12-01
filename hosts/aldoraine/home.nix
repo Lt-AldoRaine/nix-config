@@ -5,7 +5,7 @@ in
 {
   imports =
     [
-      ./variables.nix
+    ./variables.nix
     ]
     ++ (with system; [
       wofi

@@ -1,69 +1,30 @@
-{ lib }:
-let
-  base = import ./base.nix { inherit lib; };
-
-  mkLabelAttrs = labels:
-    if labels == null then { } else { inherit labels; };
-in
+{ config, lib, adminPublicKey, machineName, ... }:
 {
-  inherit (base)
-    merge
-    mkVariable
-    mkOutput
-    mkProvider
-    mkResource
-    mkData
-    mkLocals
-    mkTerraform
-    mkRequiredProviders
-    mkBackend
-    mkConfig;
+  terraform.required_providers.tls.source = "hashicorp/tls";
+  terraform.required_providers.local.source = "hashicorp/local";
+  terraform.required_providers.hcloud.source = "hetznercloud/hcloud";
 
-  mkTokenVariable = {
-    description ? "Hetzner Cloud API token",
-    sensitive ? true,
-  }: mkVariable "hcloud_token" {
-    inherit description sensitive;
-    type = "string";
+  # Generate SSH deploy key for initial server access
+  resource.tls_private_key.ssh_deploy_key = {
+    algorithm = "ED25519";
   };
 
-  mkProviderConfig = { tokenVar ? "\${var.hcloud_token}" }:
-    mkProvider "hcloud" {
-      token = tokenVar;
-    };
+  # Write deploy key to filesystem for SSH access during provisioning
+  resource.local_sensitive_file.ssh_deploy_key = {
+    filename = "${lib.tf.ref "path.module"}/.terraform-deploy-key";
+    file_permission = "600";
+    content = config.resource.tls_private_key.ssh_deploy_key "private_key_openssh";
+  };
 
-  mkSshKeyData = { name }: mkData "hcloud_ssh_key" name { inherit name; };
+  # Admin SSH key (your personal key)
+  resource.hcloud_ssh_key."homelab" = {
+    name = "homelab";
+    public_key = adminPublicKey;
+  };
 
-  mkServer = {
-    name,
-    serverType,
-    image,
-    location,
-    sshKeyName,
-    ipv4 ? true,
-    ipv6 ? true,
-    backups ? false,
-    labels ? { },
-    publicNet ? { },
-  }:
-    mkResource "hcloud_server" name ({
-      inherit name image location backups;
-      server_type = serverType;
-      public_net = {
-        ipv4_enabled = ipv4;
-        ipv6_enabled = ipv6;
-      } // publicNet;
-      ssh_keys = [ "\${data.hcloud_ssh_key.${sshKeyName}.id}" ];
-    } // mkLabelAttrs labels);
-
-  mkServerOutputs = name:
-    mkConfig [
-      (mkOutput "${name}_ipv4" {
-        value = "\${hcloud_server.${name}.ipv4_address}";
-      })
-      (mkOutput "${name}_ipv6" {
-        value = "\${hcloud_server.${name}.ipv6_address}";
-      })
-    ];
+  # Terraform-generated deploy key for clan installation
+  resource.hcloud_ssh_key."clan-${machineName}" = {
+    name = "clan-${machineName}";
+    public_key = config.resource.tls_private_key.ssh_deploy_key "public_key_openssh";
+  };
 }
-

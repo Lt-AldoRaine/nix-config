@@ -1,17 +1,14 @@
 { config, pkgs, inputs, ... }:
 let
-  inherit (inputs.self.homeManagerModules) programs;
+  homeModulesDir = ../../modules/home/programs;
 in
 {
-  imports =
-    [
-      ./variables.nix
-    ]
-    ++ (with programs; [
-      git
-      shell
-      nvim
-    ]);
+  imports = [
+    ./variables.nix
+    (homeModulesDir + "/git/default.nix")
+    (homeModulesDir + "/shell/default.nix")
+    (homeModulesDir + "/nvim/default.nix")
+  ];
 
   home = {
     inherit (config.var) username;

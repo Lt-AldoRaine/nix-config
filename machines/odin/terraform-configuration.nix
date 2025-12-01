@@ -1,43 +1,47 @@
-{ lib }:
+{ config, lib, ... }:
 let
-  terranix = import ../../modules/terranix { inherit lib; };
-  inherit (terranix.base) mkConfig mkRequiredProviders mkOutput merge;
-  inherit (terranix.hcloud)
-    mkTokenVariable
-    mkProviderConfig
-    mkSshKeyData
-    mkServer
-    mkServerOutputs;
+  deployKey = config.resource.hcloud_ssh_key.odin_deploy;
 in
-merge [
-  (mkRequiredProviders {
-    hcloud = {
-      source = "hetznercloud/hcloud";
-      version = "1.56.0";
-    };
-  })
-  (mkTokenVariable { })
-  (mkProviderConfig { })
-  (mkSshKeyData { name = "homelab"; })
-  (mkServer {
+{
+  terraform.required_providers.hcloud.source = "hetznercloud/hcloud";
+  terraform.required_providers.null.source = "hashicorp/null";
+
+  resource.hcloud_server.odin = {
     name = "odin";
-    serverType = "cpx11";
-    image = "nixos-25.05";
+    server_type = "cpx11";
+    image = "debian-11";
     location = "ash";
-    sshKeyName = "homelab";
+    public_net = {
+      ipv4_enabled = true;
+      ipv6_enabled = true;
+    };
+    backups = false;
+    ssh_keys = [
+      config.resource.hcloud_ssh_key.odin.name
+      deployKey.name
+    ];
     labels = {
       hostname = "odin";
       role = "vps";
     };
-  })
-  (mkConfig [
-    (mkOutput "server_ip" {
-      value = "\${hcloud_server.odin.ipv4_address}";
-    })
-    (mkOutput "server_ipv6" {
-      value = "\${hcloud_server.odin.ipv6_address}";
-    })
-  ])
-  (mkServerOutputs "odin")
-]
+  };
 
+  resource.null_resource.install-odin = {
+    triggers = {
+      instance_id = "\${hcloud_server.odin.id}";
+    };
+
+    provisioner.local-exec = {
+      command =
+        "clan machines install odin --update-hardware-config nixos-facter --target-host root@\${hcloud_server.odin.ipv4_address} --yes";
+    };
+  };
+
+  output.server_ip = {
+    value = "\${hcloud_server.odin.ipv4_address}";
+  };
+
+  output.server_ipv6 = {
+    value = "\${hcloud_server.odin.ipv6_address}";
+  };
+}

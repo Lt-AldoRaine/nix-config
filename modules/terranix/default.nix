@@ -1,6 +1,8 @@
-{ lib }:
+# Terranix modules - these are paths to module files
+# Used by lib/default.nix for backward compatibility
+# Primary access is via flake.modules.terranix from modules/flake-module.nix
+{ lib, ... }:
 {
-  base = import ./base.nix { inherit lib; };
-  hcloud = import ./hcloud.nix { inherit lib; };
+  base = ./base.nix;
+  hcloud = ./hcloud.nix;
 }
-

@@ -135,9 +135,9 @@ Remote VPS on Hetzner Cloud for public-facing services and monitoring.
 - **🔒 VPN**: Tailscale for secure access
 
 **Deployment:**
-- Managed via [Terranix](https://terranix.org/) for declarative Terraform configuration
-- Provisioned using Hetzner Cloud NixOS images
-- Pure Nix-based deployment workflow (no bash scripts)
+- Infrastructure managed via [Terranix](https://terranix.org/) for declarative Terraform configuration
+- OS installation and updates managed via [Clan](https://clan.lol/) framework
+- See [VPS Deployment Guide](./docs/clan-vps.md) for detailed instructions
 
 ### 🔐 Secrets Management
 
@@ -151,13 +151,6 @@ Infrastructure provisioning is handled declaratively using [Terranix](https://te
 - **Type Safety**: Nix's type system catches errors early
 - **Reusability**: Shared modules for common patterns
 - **Integration**: Seamless integration with the rest of the NixOS config
-
-Terraform commands are available as Nix apps:
-```bash
-nix run .#terraform-odin-init
-nix run .#terraform-odin-plan
-nix run .#terraform-odin-apply
-```
 
 ### 📊 Monitoring
 
@@ -176,5 +169,6 @@ A big thank you to the contributors of OpenSource projects, in particular:
 - [Home Manager](https://github.com/nix-community/home-manager) - Manage a user environment using Nix
 - [agenix](https://github.com/ryantm/agenix) - Secret management for NixOS using age
 - [Terranix](https://terranix.org/) - Terraform configuration in Nix
+- [Clan](https://clan.lol/) - Infrastructure management framework for NixOS
 - [badele/nix-homelab](https://github.com/badele/nix-homelab) - Inspiration for this configuration structure (and bar for bar readme)
 - All the service maintainers and the NixOS community
