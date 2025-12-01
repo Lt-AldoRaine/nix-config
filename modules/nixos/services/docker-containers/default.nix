@@ -15,7 +15,7 @@ in {
       curseforgeApiKeyFile = lib.mkOption {
         type = lib.types.nullOr lib.types.path;
         default = null;
-        description = "Path to file containing CurseForge API key (from agenix)";
+        description = "Path to file containing CurseForge API key (managed via sops)";
       };
       ops = lib.mkOption {
         type = lib.types.listOf lib.types.str;

@@ -26,8 +26,8 @@ in {
       enable = true;
       email = cfg.email;
 
-      # Load Cloudflare token from agenix secret
-      environmentFile = config.age.secrets."cloudflare-api-token".path;
+      # Load Cloudflare token from sops secret
+      environmentFile = config.sops.secrets."cloudflare-api-token".path;
 
       # Use a package that includes the Cloudflare DNS plugin
       package = pkgs.caddy.withPlugins {

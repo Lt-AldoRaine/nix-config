@@ -9,8 +9,8 @@ in {
     services.authelia.instances.${instanceName} = {
 			enable = true;
       secrets = {
-        jwtSecretFile = config.age.secrets."authelia-jwt-secret".path;
-        storageEncryptionKeyFile = config.age.secrets."authelia-storage-encryption-key".path;
+        jwtSecretFile = config.sops.secrets."authelia-jwt-secret".path;
+        storageEncryptionKeyFile = config.sops.secrets."authelia-storage-encryption-key".path;
       };
       settings = {
         server = {
