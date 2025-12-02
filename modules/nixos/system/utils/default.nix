@@ -9,6 +9,7 @@ in {
       allowedTCPPorts = [ 22 8096 8082 8080 ];
 
     };
+		nameservers = [ "1.1.1.1" "9.9.9.9" ];
   };
 
   services = {

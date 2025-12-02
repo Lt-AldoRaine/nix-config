@@ -4,9 +4,8 @@
 
     # system
     ../../modules/home/system/wofi
-    ../../modules/home/system/hyprpanel
+		#../../modules/home/system/hyprpanel
     ../../modules/home/system/hyprland
-    ../../modules/home/system/hyprpaper
 
     # programs
     ../../modules/home/programs/git
