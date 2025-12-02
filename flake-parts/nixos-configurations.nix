@@ -2,7 +2,8 @@
 let
   customLib = import ../lib { inherit inputs lib; };
   hostSpecs = import ../hosts { mkHost = customLib.mkHost; };
-  allSpecs = hostSpecs;
+  machineSpecs = import ../machines { mkHost = customLib.mkHost; };
+  allSpecs = hostSpecs // machineSpecs;
 in
 {
   flake = {

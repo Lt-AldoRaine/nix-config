@@ -1,6 +1,6 @@
 { config, lib, ... }:
 let
-  secretsFile = ../../../sops/secrets.yaml;
+  secretsFile = ../../../../sops/secrets.yaml;
   hasSecretsFile = builtins.pathExists secretsFile;
 in {
   assertions = [{

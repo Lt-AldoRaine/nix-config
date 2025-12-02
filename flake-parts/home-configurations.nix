@@ -4,7 +4,7 @@ let
   hostSpecs = import ../hosts { mkHost = customLib.mkHost; };
   allSpecs = hostSpecs;
 
-  hostsDir = ../hosts;
+  hostsDir = ../configuration/hosts;
   homePathFor = hostName:
     let
       hostPath = hostsDir + "/${hostName}/home.nix";
