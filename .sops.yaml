@@ -1,8 +1,10 @@
 keys:
   - &connor age10ww6jvrdvd2pkqt5ypszdydr72guqhtva2suwgdq0034ayz78grshz38f5
+  - &homelab age10ww6jvrdvd2pkqt5ypszdydr72guqhtva2suwgdq0034ayz78grshz38f5
   - &odin age1m6xmlm0j7pc53z2xn44cus3x2fzqhjh6vdy9urhv8w0zx9xphptsx8y87n
 creation_rules:
   - path_regex: ^sops/.*\.ya?ml$
     age:
       - *connor
+      - *homelab
       - *odin
