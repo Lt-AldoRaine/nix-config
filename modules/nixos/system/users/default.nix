@@ -3,6 +3,7 @@ let inherit (config.var) username;
 
 in {
   programs.zsh.enable = true;
+  programs.starship.enable = false;
   users = {
     defaultUserShell = pkgs.zsh;
     users."${username}" = {

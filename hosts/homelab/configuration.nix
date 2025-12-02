@@ -9,7 +9,7 @@
     ../../modules/nixos/services/prometheus/default.nix
     ../../modules/nixos/services/grafana/default.nix
     ../../modules/nixos/services/glance/default.nix
-    ../../modules/nixos/services/blocky/default.nix
+#    ../../modules/nixos/services/blocky/default.nix
     ../../modules/nixos/services/authelia/default.nix
 
     # system
@@ -55,7 +55,7 @@
     mode = "600";
   };
 	 
-  home-manager.users."${config.var.username}" = import ./home.nix;
+	#home-manager.users.${config.var.username} = import ./home.nix;
 
   system.stateVersion = "24.11";
 }
