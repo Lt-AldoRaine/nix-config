@@ -15,7 +15,7 @@ in
     networkId = 2;
     networks = {
       lan = {
-        vlanId = 254;
+        vlanId = 2;
         net = "192.168.${toString nets.lan.vlanId}.2";
         mask = 24;
       };

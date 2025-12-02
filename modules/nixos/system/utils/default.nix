@@ -6,9 +6,9 @@ in {
     firewall = {
       enable = true;
 
-      allowedTCPPorts = [ 22 8096 8082 8080 ];
-
+      allowedTCPPorts = [ 22 443 ];
     };
+    nameservers = [ "127.0.0.1" "1.1.1.1" "::1" ];
   };
 
   services = {
@@ -29,7 +29,7 @@ in {
     EDITOR = "nvim";
   };
 
-	services.mullvad-vpn.enable = true;
+  services.mullvad-vpn.enable = true;
   services.libinput.enable = true;
   programs.dconf.enable = true;
   services = {
@@ -76,6 +76,6 @@ in {
     solaar
     wget
     xdg-utils
-		age
+    age
   ];
 }

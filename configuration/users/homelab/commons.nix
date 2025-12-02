@@ -1,5 +1,4 @@
-{ config, pkgs, lib, inputs, ... }:
-{
+{ config, pkgs, lib, inputs, ... }: {
   ##############################################################################
   # Common user conf for homelab across all hosts
   ##############################################################################
@@ -30,7 +29,7 @@
   programs = {
     git = {
       enable = true;
-      userName = "Connor Pennington";
+      userName = "Lt-AldoRaine";
       userEmail = "harambefallon@gmail.com";
 
       extraConfig = {
@@ -60,4 +59,11 @@
     lm_sensors
   ];
 }
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
 
+
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes

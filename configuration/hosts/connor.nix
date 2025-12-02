@@ -1,6 +1,3 @@
-# #########################################################
-# NIXOS - User connor configuration
-##########################################################
 { pkgs, config, lib, ... }:
 let
   ifTheyExist = groups:
@@ -17,7 +14,7 @@ let
 in
 {
   sops.secrets = {
-    "connor-password-hash" = {
+    "connor-password" = {
       sopsFile = ../../sops/secrets.yaml;
       neededForUsers = true;
     };
@@ -30,11 +27,12 @@ in
       inherit extraGroups;
       shell = pkgs.zsh;
       uid = 1000;
-      hashedPasswordFile = config.sops.secrets."connor-password-hash".path;
+      hashedPasswordFile = config.sops.secrets."connor-password".path;
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBuobqAqi0hDAk4k5q0GY0EEmFYlcxvGRPZS05Yf9tRu connor@ConnorPC"
       ];
     };
   };
 }
+
 

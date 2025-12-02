@@ -13,7 +13,7 @@ let
 
     autologin = {
       user = "connor";
-      session = "hyprland";
+      session = "tty";
     };
 
     parent = null;

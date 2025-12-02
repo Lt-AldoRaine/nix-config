@@ -1,5 +1,4 @@
-{ config, inputs, lib, ... }:
-{
+{ config, inputs, lib, ... }: {
   imports = [
     # services
     ../../../modules/nixos/services/docker/default.nix
@@ -23,15 +22,18 @@
     ../../../modules/nixos/system/home-manager/default.nix
     ../../../modules/nixos/system/systemd-boot/default.nix
     ../../../modules/nixos/system/network-manager/default.nix
-  ]
-    ++ [
+  ] ++ [
     ./secrets/default.nix
+    ../root.nix
 
     ../../../themes/style/dracula.nix
 
     ./hardware-configuration.nix
     ./variables.nix
   ];
+
+  # Override to allow root login with keys
+  services.openssh.settings.PermitRootLogin = lib.mkForce "prohibit-password";
 
   services.resolved.enable = lib.mkForce false;
 
@@ -46,7 +48,7 @@
 
   services.docker-containers.enable = true;
   services.docker-containers.minecraft = {
-    enable = true;
+    enable = false;
     ops = [ "Lt_Ald0Raine" "AvrgAndy" ];
     curseforgeApiKeyFile = config.sops.secrets."curseforge-api-key".path;
   };

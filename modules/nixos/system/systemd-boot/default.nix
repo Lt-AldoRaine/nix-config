@@ -28,6 +28,6 @@
     initrd.verbose = false;
 
   };
-  systemd.services."getty#tty1".enable = false;
+  systemd.services."getty#tty1".enable = true;
   systemd.services."autovt#tty1".enable = false;
 }

@@ -1,8 +1,7 @@
 # #########################################################
 # HOME-MANAGER - Connor user configuration for aldoraine
 ##########################################################
-{ config, inputs, pkgs, lib, ... }:
-{
+{ config, inputs, pkgs, lib, ... }: {
   imports = [
     # Common tools and packages for connor user
     ./commons.nix
@@ -53,4 +52,11 @@
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 }
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
 
+
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes

@@ -17,7 +17,7 @@ let
   font = "${config.stylix.fonts.serif.name}";
   fontSize = "${toString config.stylix.fonts.sizes.desktop}";
 in {
-  imports = [ inputs.hyprpanel.homeModules.hyprpanel ];
+  imports = [ inputs.hyprpanel.homeManagerModules.hyprpanel ];
 
 	home.packages = with pkgs; [
 		libgtop

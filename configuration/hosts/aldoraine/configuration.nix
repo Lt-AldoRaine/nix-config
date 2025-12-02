@@ -17,6 +17,8 @@
     ../../../modules/nixos/system/xdg-portal/default.nix
   ]
     ++ [
+    ../homelab/secrets/default.nix
+
     ../../../themes/style/dracula.nix
 
     ./hardware-configuration.nix
