@@ -28,10 +28,6 @@ let
     collectModules = collectModules;
   };
 
-  terranixModules = import ../modules/terranix {
-    inherit lib;
-  };
-
   # Base modules for all NixOS configurations (local machines)
   baseModules = [
     {
@@ -45,14 +41,6 @@ let
     inputs.stylix.nixosModules.stylix
     inputs.home-manager.nixosModules.home-manager
     inputs.sops-nix.nixosModules.sops
-  ];
-
-  # Additional modules for clan-managed machines (VPS)
-  clanModules = [
-    inputs.clan-core.nixosModules.clanCore
-    {
-      clan.core.settings.directory = lib.mkDefault (builtins.toString inputs.self);
-    }
   ];
 
   mkHost = { system, modules ? [ ], extraModules ? [ ] }:
@@ -75,7 +63,6 @@ let
       hosts;
 
   modules = {
-    terranix = terranixModules;
     nixos = nixosModules;
     home = homeManagerModules;
   };
@@ -83,7 +70,6 @@ in
 {
   inherit
     baseModules
-    clanModules
     mkHost
     mkNixosConfigurations
     collectModules

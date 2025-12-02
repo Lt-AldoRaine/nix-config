@@ -2,11 +2,6 @@
   description = "My Nix Config";
 
   inputs = {
-    clan-core = {
-      url = "git+https://git.clan.lol/clan/clan-core";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
@@ -39,12 +34,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    terranix = {
-      url = "github:terranix/terranix";
-      inputs.flake-parts.follows = "flake-parts";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -55,7 +44,6 @@
   outputs = inputs@{ self, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
-        inputs.clan-core.flakeModules.default
         ./flake-parts/nixos-configurations.nix
         ./flake-parts/home-configurations.nix
         ./modules/flake-module.nix

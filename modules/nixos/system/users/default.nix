@@ -15,7 +15,6 @@ in {
       home = "/home/${username}";
       isNormalUser = true;
       extraGroups = [ "wheel" "networkmanager" ];
-      # Use mkDefault so Clan can override if it manages the user
       hashedPasswordFile = lib.mkDefault (
         if hasPasswordSecret || hasLegacySecret then
           config.sops.secrets.${passwordSecret}.path
