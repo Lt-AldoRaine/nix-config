@@ -1,29 +1,86 @@
-{ config, lib, inputs, self, ... }:
 {
-  imports =
-    [
-      ../../modules/nixos/services/tailscale/default.nix
-      ../../modules/nixos/services/caddy/default.nix
-      ../../modules/nixos/services/prometheus/default.nix
-      ../../modules/nixos/services/grafana/default.nix
-      ../../modules/nixos/services/authelia/default.nix
-      ../../modules/nixos/services/homepage/default.nix
+  self,
+  config,
+  lib,
+  inputs,
+  ...
+}:
+let
+  targetIP = null; # Set this if you need a specific IP, otherwise use hostname
+in
+{
+  imports = [
+    # Service modules
+    ../../modules/nixos/services/tailscale/default.nix
+    ../../modules/nixos/services/caddy/default.nix
+    ../../modules/nixos/services/prometheus/default.nix
+    ../../modules/nixos/services/grafana/default.nix
+    ../../modules/nixos/services/authelia/default.nix
+    ../../modules/nixos/services/homepage/default.nix
 
-      ../../modules/nixos/system/nix/default.nix
-      ../../modules/nixos/system/fonts/default.nix
-      ../../modules/nixos/system/users/default.nix
-      ../../modules/nixos/system/utils/default.nix
-      ../../modules/nixos/system/timezone/default.nix
-      ../../modules/nixos/system/home-manager/default.nix
-      ../../modules/nixos/system/network-manager/default.nix
+    # System modules
+    ../../modules/nixos/system/nix/default.nix
+    ../../modules/nixos/system/fonts/default.nix
+    ../../modules/nixos/system/users/default.nix
+    ../../modules/nixos/system/utils/default.nix
+    ../../modules/nixos/system/timezone/default.nix
+    ../../modules/nixos/system/home-manager/default.nix
+    ../../modules/nixos/system/network-manager/default.nix
 
-      ./disko.nix
-      ./hardware-configuration.nix
-      ./variables.nix
-      ./deploy.nix
-      ../../themes/style/dracula.nix
-      ../../hosts/homelab/secrets/default.nix
-    ];
+    # Odin infrastructure
+    ./disko.nix
+    ./hardware-configuration.nix
+    ./variables.nix
+    ./deploy.nix
+
+    # Themes
+    ../../themes/style/dracula.nix
+
+    # Secrets
+    ../../configuration/hosts/homelab/secrets/default.nix
+  ];
+
+  # For user namespace remapping for docker/podman rootfull containers
+  users = {
+    users.root = {
+      subUidRanges = [
+        {
+          startUid = 100000;
+          count = 65536;
+        }
+      ];
+      subGidRanges = [
+        {
+          startGid = 100000;
+          count = 65536;
+        }
+      ];
+    };
+  };
+
+  # Fix nixos build limits
+  systemd.settings.Manager.DefaultLimitNOFILE = "8192:524288";
+
+  # Host information
+  homelab = {
+    domain = "homelab.lan";
+    domainEmailAdmin = "connor@homelab";
+    stmpAccountUsername = "connor@homelab";
+
+    host = {
+      hostname = config.networking.hostName;
+      description = "Odin VPS server";
+      interface = "enp1s0";
+      address = targetIP;
+      # gateway = null;
+
+      nproc = 2;
+    };
+
+    features = {
+      # Add feature flags here as needed
+    };
+  };
 
   services = {
     my-caddy.enable = true;
@@ -63,22 +120,25 @@
       useRoutingFeatures = "both";
       # Auth key from sops secrets for automatic Tailscale login
       authKeyFile = config.sops.secrets."tailscale-auth-key".path;
-
     };
+  };
+
+  services.resolved = {
+    extraConfig = ''
+      MulticastDNS=no
+    '';
   };
 
   # Set hostname for Tailscale network
   networking.hostName = "odin";
-
-  # Clan target host - use Tailscale hostname after initial setup
-  # After first deployment, SSH is only accessible via Tailscale
-  clan.core.networking.targetHost = "root@odin";
 
   boot.loader.efi.canTouchEfiVariables = lib.mkForce false;
 
   home-manager.users."${config.var.username}" = {
     imports = [ ./home.nix ];
   };
+
+  nixpkgs.hostPlatform = "x86_64-linux";
 
   system.stateVersion = "24.11";
 }
