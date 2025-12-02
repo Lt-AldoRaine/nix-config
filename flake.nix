@@ -37,22 +37,9 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
-    };
   };
 
-  outputs = inputs@{ self, nixpkgs, flake-parts, ... }: 
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
-      
-      perSystem = { config, self', inputs', pkgs, system, ... }: {
-        formatter = pkgs.nixfmt-rfc-style;
-      };
-
-      flake = {
+  outputs = inputs@{ self, nixpkgs, ... }: {
         nixosConfigurations = {
           aldoraine = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
@@ -83,5 +70,4 @@
           };
         };
       };
-    };
 }
