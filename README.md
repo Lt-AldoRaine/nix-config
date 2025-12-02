@@ -18,7 +18,7 @@ This is a complete NixOS configuration that manages:
 
 - **Homelab Server**: Self-hosted services for media, monitoring, and infrastructure
 - **Desktop Workstation**: Personal development and productivity setup
-- **VPS Deployments**: Remote servers managed via Terraform and Terranix
+- **VPS Deployments**: Remote servers running NixOS
 
 Everything is declarative, reproducible, and version-controlled.
 
@@ -101,7 +101,7 @@ All available homelab services:
 
 ### 🖥️ Hosts & Machines
 
-#### 🏠 [homelab](./hosts/homelab/)
+#### 🏠 [homelab](./configuration/hosts/homelab/)
 
 Main server running self-hosted services for media, monitoring, and infrastructure.
 
@@ -114,7 +114,7 @@ Main server running self-hosted services for media, monitoring, and infrastructu
 - **📊 Dashboards**: Homepage and Glance for service management
 - **🔒 VPN**: Tailscale for secure remote access
 
-#### 💻 [aldoraine](./hosts/aldoraine/)
+#### 💻 [aldoraine](./configuration/hosts/aldoraine/)
 
 Personal desktop workstation for daily development and productivity.
 
@@ -134,23 +134,9 @@ Remote VPS on Hetzner Cloud for public-facing services and monitoring.
 - **📊 Dashboard**: Homepage for service overview
 - **🔒 VPN**: Tailscale for secure access
 
-**Deployment:**
-- Infrastructure managed via [Terranix](https://terranix.org/) for declarative Terraform configuration
-- OS installation and updates managed via [Clan](https://clan.lol/) framework
-- See [VPS Deployment Guide](./docs/clan-vps.md) for detailed instructions
-
 ### 🔐 Secrets Management
 
 Secrets are managed with [sops-nix](https://github.com/Mic92/sops-nix). Encrypted values live in [`sops/secrets.yaml`](./sops/secrets.yaml) (see [`sops/secrets.example.yaml`](./sops/secrets.example.yaml) for the structure). Add your SSH host/user keys as age recipients, run `sops --encrypt --in-place sops/secrets.yaml`, and the NixOS modules will decrypt them at activation time.
-
-### ☁️ Infrastructure as Code
-
-Infrastructure provisioning is handled declaratively using [Terranix](https://terranix.org/), which generates Terraform configurations from Nix expressions. This provides:
-
-- **Pure Nix**: All Terraform configs written in Nix, no HCL
-- **Type Safety**: Nix's type system catches errors early
-- **Reusability**: Shared modules for common patterns
-- **Integration**: Seamless integration with the rest of the NixOS config
 
 ### 📊 Monitoring
 
@@ -168,7 +154,5 @@ A big thank you to the contributors of OpenSource projects, in particular:
 - [NixOS](https://nixos.org/) - The purely functional Linux distribution
 - [Home Manager](https://github.com/nix-community/home-manager) - Manage a user environment using Nix
 - [sops-nix](https://github.com/Mic92/sops-nix) - Secret management for NixOS using sops + age
-- [Terranix](https://terranix.org/) - Terraform configuration in Nix
-- [Clan](https://clan.lol/) - Infrastructure management framework for NixOS
 - [badele/nix-homelab](https://github.com/badele/nix-homelab) - Inspiration for this configuration structure (and bar for bar readme)
 - All the service maintainers and the NixOS community
