@@ -5,9 +5,6 @@
   inputs,
   ...
 }:
-let
-  targetIP = null; # Set this if you need a specific IP, otherwise use hostname
-in
 {
   imports = [
     # Service modules
@@ -60,27 +57,6 @@ in
 
   # Fix nixos build limits
   systemd.settings.Manager.DefaultLimitNOFILE = "8192:524288";
-
-  # Host information
-  homelab = {
-    domain = "homelab.lan";
-    domainEmailAdmin = "connor@homelab";
-    stmpAccountUsername = "connor@homelab";
-
-    host = {
-      hostname = config.networking.hostName;
-      description = "Odin VPS server";
-      interface = "enp1s0";
-      address = targetIP;
-      # gateway = null;
-
-      nproc = 2;
-    };
-
-    features = {
-      # Add feature flags here as needed
-    };
-  };
 
   services = {
     my-caddy.enable = true;
