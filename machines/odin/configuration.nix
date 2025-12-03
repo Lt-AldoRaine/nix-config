@@ -8,12 +8,12 @@
 {
   imports = [
     # System modules (minimal for clan/terraform)
-    ../../modules/nixos/system/nix/default.nix
     ../../modules/nixos/system/users/default.nix
     ../../modules/nixos/system/utils/default.nix
     ../../modules/nixos/system/timezone/default.nix
     ../../modules/nixos/system/home-manager/default.nix
     ../../modules/nixos/system/network-manager/default.nix
+    ../../modules/nixos/system/sops/default.nix
 
     # Odin infrastructure
     ./disko.nix

@@ -13,7 +13,6 @@ let
   ];
 in
 {
-  # No password hash - set password manually with 'passwd' if needed
   users.users = {
     connor = {
       isNormalUser = true;
@@ -21,7 +20,8 @@ in
       inherit extraGroups;
       shell = pkgs.zsh;
       uid = 1000;
-      # No password hash - set password manually if needed
+      hashedPasswordFile = lib.mkIf (config.sops.secrets ? "connor-password-hash")
+        config.sops.secrets."connor-password-hash".path;
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBuobqAqi0hDAk4k5q0GY0EEmFYlcxvGRPZS05Yf9tRu connor@ConnorPC"
       ];

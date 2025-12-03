@@ -125,18 +125,35 @@ Personal desktop workstation for daily development and productivity.
 
 #### ☁️ [odin](./machines/odin/)
 
-Remote VPS on Hetzner Cloud for public-facing services and monitoring.
+Remote VPS on Hetzner Cloud dedicated to clan/terraform infrastructure management.
 
-**Services:**
-- **🔐 Authentication**: Authelia for SSO
-- **📊 Monitoring Stack**: Prometheus and Grafana
-- **🌐 Reverse Proxy**: Caddy with Cloudflare DNS
-- **📊 Dashboard**: Homepage for service overview
-- **🔒 VPN**: Tailscale for secure access
+**Purpose:**
+- **🛠️ Infrastructure as Code**: Clan and Terraform deployments
+- **🔐 Minimal Services**: SSH access and basic system utilities only
+
+### 📁 Configuration Structure
+
+This configuration follows a modular structure inspired by [badele/nix-homelab](https://github.com/badele/nix-homelab):
+
+- **`configuration/`** - Host and user-specific configurations
+  - `hosts/` - NixOS host configurations (aldoraine, homelab)
+  - `users/` - Home Manager user configurations
+- **`modules/`** - Reusable NixOS and Home Manager modules
+  - `nixos/` - NixOS system and service modules
+  - `home/` - Home Manager program and system modules
+- **`nix/`** - Systemwide nix settings and utilities
+  - `nix.nix` - Systemwide nix configuration (registry, settings, GC)
+  - `home-manager/apps/` - User application configurations
+  - `nixos/features/` - NixOS feature modules
+  - `nixos/roles/` - Service role configurations
+  - `overlays/` - Nixpkgs overlays
+  - `pkgs/` - Custom packages
+- **`machines/`** - Machine-specific configurations (odin VPS)
+- **`sops/`** - Encrypted secrets managed with sops-nix
 
 ### 🔐 Secrets Management
 
-Secrets are managed with [sops-nix](https://github.com/Mic92/sops-nix). Encrypted values live in [`sops/secrets.yaml`](./sops/secrets.yaml) (see [`sops/secrets.example.yaml`](./sops/secrets.example.yaml) for the structure). Add your SSH host/user keys as age recipients, run `sops --encrypt --in-place sops/secrets.yaml`, and the NixOS modules will decrypt them at activation time.
+Secrets are managed with [sops-nix](https://github.com/Mic92/sops-nix). Encrypted values live in [`sops/secrets.yaml`](./sops/secrets.yaml). The sops module automatically detects host-specific secrets files at `configuration/hosts/<hostname>/secrets.yml` or falls back to the global `sops/secrets.yaml`. Add your SSH host/user keys as age recipients, run `sops --encrypt --in-place sops/secrets.yaml`, and the NixOS modules will decrypt them at activation time.
 
 ### 📊 Monitoring
 

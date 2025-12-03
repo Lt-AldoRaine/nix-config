@@ -2,11 +2,10 @@
 {
   imports = [
     # services
-    ../../../modules/nixos/services/audio/default.nix
-    ../../../modules/nixos/services/bluetooth/default.nix
+    ../../../modules/nixos/services/audio.nix
+    ../../../modules/nixos/services/bluetooth.nix
 
     # system
-    ../../../modules/nixos/system/nix/default.nix
     ../../../modules/nixos/system/fonts/default.nix
     ../../../modules/nixos/system/users/default.nix
     ../../../modules/nixos/system/utils/default.nix
@@ -15,6 +14,7 @@
     ../../../modules/nixos/system/systemd-boot/default.nix
     ../../../modules/nixos/system/network-manager/default.nix
     ../../../modules/nixos/system/xdg-portal/default.nix
+    ../../../modules/nixos/system/sops/default.nix
   ]
     ++ [
     ../homelab/secrets/default.nix

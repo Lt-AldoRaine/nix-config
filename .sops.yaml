@@ -3,6 +3,13 @@ keys:
   - &odin age1m6xmlm0j7pc53z2xn44cus3x2fzqhjh6vdy9urhv8w0zx9xphptsx8y87n
 creation_rules:
   - path_regex: ^sops/.*\.ya?ml$
-    age:
-      - *connor
-      - *odin
+    key_groups:
+      - age:
+        - *connor
+        - *odin
+  - path_regex: configuration/hosts/homelab/secrets.yml$
+    key_groups:
+      - age:
+        - *connor
+        - *odin
+

@@ -3,8 +3,8 @@
     # services
     ../../../modules/nixos/services/docker/default.nix
     ../../../modules/nixos/services/jellyfin/default.nix
-    ../../../modules/nixos/services/tailscale/default.nix
-    ../../../modules/nixos/services/caddy/default.nix
+    ../../../modules/nixos/services/tailscale.nix
+		#    ../../../modules/nixos/services/caddy/default.nix
     ../../../modules/nixos/services/homepage/default.nix
     ../../../modules/nixos/services/prometheus/default.nix
     ../../../modules/nixos/services/grafana/default.nix
@@ -14,7 +14,6 @@
     ../../../modules/nixos/services/docker-containers/default.nix
 
     # system
-    ../../../modules/nixos/system/nix/default.nix
     ../../../modules/nixos/system/fonts/default.nix
     ../../../modules/nixos/system/users/default.nix
     ../../../modules/nixos/system/utils/default.nix
@@ -22,6 +21,7 @@
     ../../../modules/nixos/system/home-manager/default.nix
     ../../../modules/nixos/system/systemd-boot/default.nix
     ../../../modules/nixos/system/network-manager/default.nix
+    ../../../modules/nixos/system/sops/default.nix
   ] ++ [
     ./secrets/default.nix
     ../root.nix
@@ -39,11 +39,11 @@
 
   services.tailscale = {
     enable = true;
-    authKeyFile = config.sops.secrets."tailscale-auth-key".path;
+		#authKeyFile = config.sops.secrets."tailscale-auth-key".path;
     useRoutingFeatures = "both";
   };
 
-  services.my-caddy.enable = true;
+  # services.my-caddy.enable = true;
   services.authelia.instances.main.enable = true;
 
   services.docker-containers.enable = true;

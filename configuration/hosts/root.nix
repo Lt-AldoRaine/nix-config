@@ -1,15 +1,5 @@
-# #########################################################
-# NIXOS - Root user configuration
-##########################################################
 { pkgs, config, lib, ... }:
 {
-  sops.secrets = {
-    "root-password-hash" = {
-      sopsFile = ../../sops/secrets.yaml;
-      neededForUsers = true;
-    };
-  };
-
   users.users = {
     root = {
       shell = pkgs.zsh;
@@ -23,9 +13,8 @@
     };
   };
 
-  # Needed so that we can set a root password
   users.mutableUsers = false;
-  nix.settings.trusted-users = [ "connor" "homelab" ];
+  nix.settings.trusted-users = [ "connor" ];
 
   security.sudo.wheelNeedsPassword = false;
 }

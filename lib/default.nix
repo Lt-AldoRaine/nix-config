@@ -32,12 +32,12 @@ let
   baseModules = [
     {
       nixpkgs.overlays = [ inputs.nur.overlays.default ];
-      nixpkgs.config.allowUnfree = true;
       _module.args = {
         inherit inputs;
         self = inputs.self;
       };
     }
+    ../nix/nix.nix
     inputs.stylix.nixosModules.stylix
     inputs.home-manager.nixosModules.home-manager
     inputs.sops-nix.nixosModules.sops
