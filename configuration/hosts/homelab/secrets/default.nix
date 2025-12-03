@@ -58,13 +58,6 @@ in {
         group = "root";
         mode = "0400";
       };
-      "connor-password-hash" = {
-        key = "connor-password";
-        path = "/run/secrets/connor-password";
-        owner = "root";
-        group = "root";
-        mode = "0400";
-      };
     };
 
   };

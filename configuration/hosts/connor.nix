@@ -13,13 +13,7 @@ let
   ];
 in
 {
-  sops.secrets = {
-    "connor-password" = {
-      sopsFile = ../../sops/secrets.yaml;
-      neededForUsers = true;
-    };
-  };
-
+  # No password hash - set password manually with 'passwd' if needed
   users.users = {
     connor = {
       isNormalUser = true;
@@ -27,7 +21,7 @@ in
       inherit extraGroups;
       shell = pkgs.zsh;
       uid = 1000;
-      hashedPasswordFile = config.sops.secrets."connor-password".path;
+      # No password hash - set password manually if needed
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBuobqAqi0hDAk4k5q0GY0EEmFYlcxvGRPZS05Yf9tRu connor@ConnorPC"
       ];

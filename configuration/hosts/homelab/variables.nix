@@ -6,7 +6,7 @@ in
 {
   imports = [ ../../../modules/nixos/system/variables-config/default.nix ];
   config.var = user // {
-    hostname = "homelab";
+    hostname = "connor";
     theme = themes.dracula;
   };
 }
