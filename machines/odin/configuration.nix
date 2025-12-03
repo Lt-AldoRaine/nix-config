@@ -7,17 +7,8 @@
 }:
 {
   imports = [
-    # Service modules
-    ../../modules/nixos/services/tailscale/default.nix
-    ../../modules/nixos/services/caddy/default.nix
-    ../../modules/nixos/services/prometheus/default.nix
-    ../../modules/nixos/services/grafana/default.nix
-    ../../modules/nixos/services/authelia/default.nix
-    ../../modules/nixos/services/homepage/default.nix
-
-    # System modules
+    # System modules (minimal for clan/terraform)
     ../../modules/nixos/system/nix/default.nix
-    ../../modules/nixos/system/fonts/default.nix
     ../../modules/nixos/system/users/default.nix
     ../../modules/nixos/system/utils/default.nix
     ../../modules/nixos/system/timezone/default.nix
@@ -30,10 +21,7 @@
     ./variables.nix
     ./deploy.nix
 
-    # Themes
-    ../../themes/style/dracula.nix
-
-    # Secrets
+    # Secrets (for SSH keys and basic secrets)
     ../../configuration/hosts/homelab/secrets/default.nix
   ];
 
@@ -58,54 +46,9 @@
   # Fix nixos build limits
   systemd.settings.Manager.DefaultLimitNOFILE = "8192:524288";
 
-  services = {
-    my-caddy.enable = true;
-    authelia.instances.main.enable = true;
+  # Odin is for clan/terraform only - no services needed
 
-    prometheus.scrapeConfigs = [
-      {
-        job_name = "node-exporter-odin";
-        static_configs = [{
-          targets = [ "localhost:9100" ];
-          labels = { host = "odin"; };
-        }];
-      }
-      {
-        job_name = "node-exporter-homelab";
-        static_configs = [{
-          targets = [ "homelab-server:9100" ];
-          labels = { host = "homelab"; };
-        }];
-      }
-      {
-        job_name = "caddy-homelab";
-        static_configs = [{
-          targets = [ "homelab-server:2019" ];
-          labels = {
-            service = "caddy";
-            host = "homelab";
-          };
-        }];
-        metrics_path = "/metrics";
-      }
-    ];
-
-    # Tailscale configuration with automatic authentication
-    tailscale = {
-      enable = true;
-      useRoutingFeatures = "both";
-      # Auth key from sops secrets for automatic Tailscale login
-      authKeyFile = config.sops.secrets."tailscale-auth-key".path;
-    };
-  };
-
-  services.resolved = {
-    extraConfig = ''
-      MulticastDNS=no
-    '';
-  };
-
-  # Set hostname for Tailscale network
+  # Set hostname
   networking.hostName = "odin";
 
   boot.loader.efi.canTouchEfiVariables = lib.mkForce false;
