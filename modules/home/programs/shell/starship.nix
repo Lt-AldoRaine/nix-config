@@ -1,7 +1,9 @@
 { config, lib, ... }:
 let
-  accent = "#${config.lib.stylix.colors.base0D}";
-  background-alt = "#${config.lib.stylix.colors.base01}";
+  # Use stylix colors if available, otherwise use fallback colors
+  hasStylix = lib.hasAttrByPath [ "lib" "stylix" "colors" ] config;
+  accent = if hasStylix then "#${config.lib.stylix.colors.base0D}" else "#bd93f9";
+  background-alt = if hasStylix then "#${config.lib.stylix.colors.base01}" else "#282a36";
 in {
   programs.starship = lib.mkMerge [
     { enable = lib.mkDefault true; }

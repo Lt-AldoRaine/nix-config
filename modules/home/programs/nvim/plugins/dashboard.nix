@@ -1,8 +1,9 @@
-{ config, ... }:
+{ config, lib, ... }:
 let
-  accent = "#${config.lib.stylix.colors.base0D}";
-  muted = "#${config.lib.stylix.colors.base03}";
-  foreground = "#${config.lib.stylix.colors.base05}";
+  hasStylix = lib.hasAttrByPath [ "lib" "stylix" "colors" ] config;
+  accent = if hasStylix then "#${config.lib.stylix.colors.base0D}" else "#bd93f9";
+  muted = if hasStylix then "#${config.lib.stylix.colors.base03}" else "#6272a4";
+  foreground = if hasStylix then "#${config.lib.stylix.colors.base05}" else "#f8f8f2";
 in {
 
   programs.nixvim.highlight = {

@@ -1,7 +1,8 @@
 { pkgs, lib, config, inputs, ... }:
 let
   spicetify = inputs.spicetify-nix.legacyPackages.${pkgs.system};
-  ac = "${config.lib.stylix.colors.base0D}";
+  hasStylix = lib.hasAttrByPath [ "lib" "stylix" "colors" ] config;
+  ac = if hasStylix then "${config.lib.stylix.colors.base0D}" else "bd93f9";
 in {
   imports = [ inputs.spicetify-nix.homeModules.default ];
 

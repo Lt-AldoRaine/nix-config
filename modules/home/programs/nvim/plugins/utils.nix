@@ -1,8 +1,12 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }:
+let
+  hasStylix = lib.hasAttrByPath [ "lib" "stylix" "colors" ] config;
+  accent = if hasStylix then "#${config.lib.stylix.colors.base0D}" else "#bd93f9";
+in {
   home.packages = with pkgs; [ ctags ];
   programs.nixvim = {
     highlightOverride = {
-      FloatBorder.fg = "#${config.lib.stylix.colors.base0D}";
+      FloatBorder.fg = accent;
       SignColumn.fg = "none";
       LineNr.fg = "none";
       LineNrAbove.fg = "none";
