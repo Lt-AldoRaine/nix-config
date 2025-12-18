@@ -1,6 +1,1 @@
-{ lib, ... }: {
-  imports = lib.flatten [
-    [ ./zsh.nix ]
-    [ ./starship.nix ]
-  ];
-}
+{ lib, ... }: { imports = lib.flatten [ [ ./zsh.nix ] [ ./starship.nix ] ]; }
