@@ -45,7 +45,7 @@
     let
       inherit (nixpkgs) lib;
       customLib = import ./lib { inherit inputs lib; };
-      hostSpecs = import ./hosts { mkHost = customLib.mkHost; };
+      hostSpecs = import ./configuration/hosts { mkHost = customLib.mkHost; };
       nixosModules = import ./modules/nixos {
         collectModules = customLib.collectModules;
       };

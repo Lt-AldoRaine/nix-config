@@ -1,0 +1,27 @@
+{ config, ... }: {
+  imports = [ ../../modules/nixos/system/variables-config/default.nix ];
+  config.var = {
+    hostname = "homelab";
+    username = "connor";
+
+    configDirectory = "/home/" + config.var.username + "/nix-config";
+
+    keyboardLayout = "us";
+
+    location = "America/Chicago";
+    timeZone = "America/Chicago";
+    defaultLocale = "en_US.UTF-8";
+    extraLocale = "en_US.UTF-8";
+
+    git = {
+			settings = {
+				username = "Lt-AldoRaine";
+				email = "harambefallon@gmail.com";
+			};
+    };
+
+    autoGarbageCollector = true;
+
+    theme = import ../../themes/var/dracula.nix;
+  };
+}

@@ -53,6 +53,10 @@ in {
     };
   };
 
+	services.nfs.server = {
+		enable = true;
+	};
+
   documentation = {
     enable = true;
     doc.enable = false;
