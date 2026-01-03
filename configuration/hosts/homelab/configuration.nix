@@ -1,31 +1,39 @@
 { config, inputs, ... }: {
   imports = [
     # services
-    ../../modules/nixos/services/docker/default.nix
-    ../../modules/nixos/services/jellyfin/default.nix
-    ../../modules/nixos/services/tailscale/default.nix
-    ../../modules/nixos/services/caddy/default.nix
-    ../../modules/nixos/services/homepage/default.nix
-    ../../modules/nixos/services/prometheus/default.nix
-    ../../modules/nixos/services/grafana/default.nix
-    ../../modules/nixos/services/glance/default.nix
-    ../../modules/nixos/services/blocky/default.nix
-    ../../modules/nixos/services/authelia/default.nix
+    ../../../modules/nixos/services/docker/default.nix
+    ../../../modules/nixos/services/jellyfin/default.nix
+    ../../../modules/nixos/services/tailscale/default.nix
+    ../../../modules/nixos/services/caddy/default.nix
+    ../../../modules/nixos/services/homepage/default.nix
+    ../../../modules/nixos/services/prometheus/default.nix
+    ../../../modules/nixos/services/grafana/default.nix
+    ../../../modules/nixos/services/glance/default.nix
+    ../../../modules/nixos/services/blocky/default.nix
+    ../../../modules/nixos/services/authelia/default.nix
+
+    # media services
+    ../../../modules/nixos/services/media/lidarr/default.nix
+    ../../../modules/nixos/services/media/readarr/default.nix
+    ../../../modules/nixos/services/media/sonarr/default.nix
+    ../../../modules/nixos/services/media/prowlarr/default.nix
+    ../../../modules/nixos/services/media/jellyseerr/default.nix
+    ../../../modules/nixos/services/media/qbittorrent/default.nix
 
     # system
-    ../../modules/nixos/system/nix/default.nix
-    ../../modules/nixos/system/fonts/default.nix
-    ../../modules/nixos/system/users/default.nix
-    ../../modules/nixos/system/utils/default.nix
-    ../../modules/nixos/system/timezone/default.nix
-    ../../modules/nixos/system/home-manager/default.nix
-    ../../modules/nixos/system/systemd-boot/default.nix
-    ../../modules/nixos/system/network-manager/default.nix
+    ../../../modules/nixos/system/nix/default.nix
+    ../../../modules/nixos/system/fonts/default.nix
+    ../../../modules/nixos/system/users/default.nix
+    ../../../modules/nixos/system/utils/default.nix
+    ../../../modules/nixos/system/timezone/default.nix
+    ../../../modules/nixos/system/home-manager/default.nix
+    ../../../modules/nixos/system/systemd-boot/default.nix
+    ../../../modules/nixos/system/network-manager/default.nix
 
     # agenix
     inputs.agenix.nixosModules.age
 
-    ../../themes/style/dracula.nix
+    ../../../themes/style/gruv.nix
 
     ./hardware-configuration.nix
     ./variables.nix
