@@ -32,7 +32,7 @@ in {
       # Use a package that includes the Cloudflare DNS plugin
       package = pkgs.caddy.withPlugins {
         plugins = [ "github.com/caddy-dns/cloudflare@v0.2.2" ];
-        hash = "sha256-4qUWhrv3/8BtNCi48kk4ZvbMckh/cGRL7k+MFvXKbTw="; # We need to let Nix build this once to get the hash
+        hash = "sha256-ea8PC/+SlPRdEVVF/I3c1CBprlVp1nrumKM5cMwJJ3U="; # We need to let Nix build this once to get the hash
       };
 
       globalConfig = ''
@@ -77,11 +77,36 @@ in {
               reverse_proxy localhost:9091
             }
 
-            # Add other services here
-            # @sonarr host sonarr.${baseDomain}
-            # handle @sonarr {
-            #   reverse_proxy localhost:8989
-            # }
+            # Media services
+            @lidarr host lidarr.${baseDomain}
+            handle @lidarr {
+              reverse_proxy localhost:8686
+            }
+
+            @readarr host readarr.${baseDomain}
+            handle @readarr {
+              reverse_proxy localhost:8787
+            }
+
+            @sonarr host sonarr.${baseDomain}
+            handle @sonarr {
+              reverse_proxy localhost:8989
+            }
+
+            @prowlarr host prowlarr.${baseDomain}
+            handle @prowlarr {
+              reverse_proxy localhost:9696
+            }
+
+            @jellyseerr host jellyseerr.${baseDomain}
+            handle @jellyseerr {
+              reverse_proxy localhost:5055
+            }
+
+            @qbittorrent host qbittorrent.${baseDomain}
+            handle @qbittorrent {
+              reverse_proxy localhost:8080
+            }
             
             # Fallback for unknown subdomains
             handle {
