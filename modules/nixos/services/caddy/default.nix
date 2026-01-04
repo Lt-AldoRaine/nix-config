@@ -83,9 +83,9 @@ in {
               reverse_proxy localhost:8686
             }
 
-            @readarr host readarr.${baseDomain}
-            handle @readarr {
-              reverse_proxy localhost:8787
+            @radarr host radarr.${baseDomain}
+            handle @radarr {
+              reverse_proxy localhost:7878
             }
 
             @sonarr host sonarr.${baseDomain}
@@ -106,6 +106,11 @@ in {
             @qbittorrent host qbittorrent.${baseDomain}
             handle @qbittorrent {
               reverse_proxy localhost:8080
+            }
+
+            @sabnzbd host sabnzbd.${baseDomain}
+            handle @sabnzbd {
+              reverse_proxy localhost:8081
             }
             
             # Fallback for unknown subdomains

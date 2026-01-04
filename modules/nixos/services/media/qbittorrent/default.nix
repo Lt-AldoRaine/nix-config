@@ -16,10 +16,15 @@ in
     # Configure qbittorrent to bind to Mullvad interface via serverConfig
     # This ensures traffic only goes through VPN
     serverConfig = {
-      "Connection\\Interface" = mullvadInterface;
-      "Connection\\InterfaceName" = mullvadInterface;
-      # Enable web UI
-      "Preferences\\WebUI\\Enabled" = true;
+      Preferences = {
+        Connection = {
+          Interface = mullvadInterface;
+          InterfaceName = mullvadInterface;
+        };
+        WebUI = {
+          Enabled = true;
+        };
+      };
     };
   };
 

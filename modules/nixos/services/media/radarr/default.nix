@@ -1,10 +1,9 @@
 { pkgs, ... }:
 
 {
-  services.readarr = {
+  services.radarr = {
     enable = true;
-    dataDir = "/var/lib/readarr";
+    dataDir = "/var/lib/radarr";
     openFirewall = true;
   };
 }
-

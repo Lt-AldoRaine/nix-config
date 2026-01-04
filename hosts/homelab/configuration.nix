@@ -14,11 +14,12 @@
 
     # media services
     ../../modules/nixos/services/media/lidarr/default.nix
-    ../../modules/nixos/services/media/readarr/default.nix
+    ../../modules/nixos/services/media/radarr/default.nix
     ../../modules/nixos/services/media/sonarr/default.nix
     ../../modules/nixos/services/media/prowlarr/default.nix
     ../../modules/nixos/services/media/jellyseerr/default.nix
     ../../modules/nixos/services/media/qbittorrent/default.nix
+    ../../modules/nixos/services/media/sabnzbd/default.nix
 
     # system
     ../../modules/nixos/system/nix/default.nix

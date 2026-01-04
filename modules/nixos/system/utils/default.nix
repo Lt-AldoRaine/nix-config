@@ -6,7 +6,7 @@ in {
     firewall = {
       enable = true;
 
-      allowedTCPPorts = [ 22 53 8096 8082 8080 8686 8787 8989 9696 5055 ];
+      allowedTCPPorts = [ 22 53 8096 8082 8080 8081 8686 7878 8989 9696 5055 ];
 
     };
   };
