@@ -59,16 +59,28 @@ in {
 
 						@dash host dash.${baseDomain}
 						handle @dash {
+              forward_auth http://localhost:9091 {
+                uri /api/verify?rd=https://auth.${baseDomain}
+                copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+              }
 							reverse_proxy localhost:8282
 						}
 
 						@prometheus host prometheus.${baseDomain}
 						handle @prometheus {
+              forward_auth http://localhost:9091 {
+                uri /api/verify?rd=https://auth.${baseDomain}
+                copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+              }
 							reverse_proxy localhost:9090
 						}
             
             @grafana host grafana.${baseDomain}
             handle @grafana {
+              forward_auth http://localhost:9091 {
+                uri /api/verify?rd=https://auth.${baseDomain}
+                copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+              }
               reverse_proxy localhost:3000
             }
 
@@ -77,7 +89,7 @@ in {
               reverse_proxy localhost:9091
             }
 
-            # Media services
+            # Media services (no Authelia - use built-in auth)
             @lidarr host lidarr.${baseDomain}
             handle @lidarr {
               reverse_proxy localhost:8686
@@ -108,9 +120,13 @@ in {
               reverse_proxy localhost:8080
             }
 
-            @sabnzbd host sabnzbd.${baseDomain}
-            handle @sabnzbd {
-              reverse_proxy localhost:8081
+            @sab host sab.${baseDomain}
+            handle @sab {
+              forward_auth http://localhost:9091 {
+                uri /api/verify?rd=https://auth.${baseDomain}
+                copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
+              }
+              reverse_proxy localhost:8085
             }
             
             # Fallback for unknown subdomains

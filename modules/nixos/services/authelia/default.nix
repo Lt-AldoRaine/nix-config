@@ -35,12 +35,31 @@ in {
         access_control = {
           default_policy = "deny";
           rules = [
-            {
-              domain = "*.aldoraine.com";
-              policy = "bypass";
-            }
+            # Allow access to auth endpoint without authentication
             {
               domain = "auth.aldoraine.com";
+              policy = "bypass";
+            }
+            # Require authentication for monitoring/admin services
+            {
+              domain = "prometheus.aldoraine.com";
+              policy = "one_factor";
+            }
+            {
+              domain = "grafana.aldoraine.com";
+              policy = "one_factor";
+            }
+            {
+              domain = "dash.aldoraine.com";
+              policy = "one_factor";
+            }
+            {
+              domain = "sab.aldoraine.com";
+              policy = "one_factor";
+            }
+            # Media services use bypass (no forward_auth, use built-in auth)
+            {
+              domain = "*.aldoraine.com";
               policy = "bypass";
             }
           ];
