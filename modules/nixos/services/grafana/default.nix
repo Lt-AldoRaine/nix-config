@@ -22,12 +22,26 @@
       }];
 
       # Provision dashboards
-      dashboards.settings.providers = [{
-        name = "Blocky";
-        options = {
-					path = ./dashboards;
-				};
-      }];
+      dashboards.settings.providers = [
+        {
+          name = "Blocky";
+          options = {
+            path = ./dashboards/blocky.json;
+          };
+        }
+        {
+          name = "Sonarr";
+          options = {
+            path = ./dashboards/sonarr.json;
+          };
+        }
+        {
+          name = "Radarr";
+          options = {
+            path = ./dashboards/radarr.json;
+          };
+        }
+      ];
     };
   };
 
