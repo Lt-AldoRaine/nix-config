@@ -61,10 +61,36 @@
               }
               {
                 type = "monitor";
-                sites = [{
-                  title = "Jellyfin";
-                  url = "https://jellyfin.aldoraine.com";
-                }];
+                sites = [
+                  {
+                    title = "Jellyfin";
+                    url = "https://jellyfin.aldoraine.com";
+                  }
+                  {
+                    title = "Lidarr";
+                    url = "https://lidarr.aldoraine.com";
+                  }
+                  {
+                    title = "Radarr";
+                    url = "https://radarr.aldoraine.com";
+                  }
+                  {
+                    title = "Sonarr";
+                    url = "https://sonarr.aldoraine.com";
+                  }
+                  {
+                    title = "Prowlarr";
+                    url = "https://prowlarr.aldoraine.com";
+                  }
+                  {
+                    title = "Jellyseerr";
+                    url = "https://jellyseerr.aldoraine.com";
+                  }
+                  {
+                    title = "qBittorrent";
+                    url = "https://qbittorrent.aldoraine.com";
+                  }
+                ];
               }
               {
                 type = "videos";
@@ -143,6 +169,40 @@
                       {
                         title = "Tailscale";
                         url = "https://login.tailscale.com/admin/machines";
+                      }
+                    ];
+                  }
+                  {
+                    title = "Media Services";
+                    same-tab = true;
+                    links = [
+                      {
+                        title = "Jellyfin";
+                        url = "https://jellyfin.aldoraine.com";
+                      }
+                      {
+                        title = "Lidarr";
+                        url = "https://lidarr.aldoraine.com";
+                      }
+                      {
+                        title = "Radarr";
+                        url = "https://radarr.aldoraine.com";
+                      }
+                      {
+                        title = "Sonarr";
+                        url = "https://sonarr.aldoraine.com";
+                      }
+                      {
+                        title = "Prowlarr";
+                        url = "https://prowlarr.aldoraine.com";
+                      }
+                      {
+                        title = "Jellyseerr";
+                        url = "https://jellyseerr.aldoraine.com";
+                      }
+                      {
+                        title = "qBittorrent";
+                        url = "https://qbittorrent.aldoraine.com";
                       }
                     ];
                   }
