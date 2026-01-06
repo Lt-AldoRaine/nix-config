@@ -16,8 +16,6 @@ in
     openFirewall = true;
     webuiPort = 8080;
     
-    # Configure qbittorrent to bind to Mullvad interface via serverConfig
-    # This ensures traffic only goes through VPN
     serverConfig = {
       Preferences = {
         Connection = {

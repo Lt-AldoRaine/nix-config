@@ -1,116 +1,42 @@
-<div align="center">
-    <h1>
-        <img src="https://nixos.wiki/images/thumb/2/20/Home-nixos-logo.png/207px-Home-nixos-logo.png" width="64" height="64"/>
-    </h1>
-    <h3 align="center"><strong>Immutable NixOS configuration for homelab and desktop</strong></h3>
-    <p>
-        My personal infrastructure, fully managed with
-        <a href="https://nixos.org">NixOS</a> and <a href="https://nixos.wiki/wiki/Flakes">Nix Flakes</a>. This repository contains
-        all configurations for my homelab server and personal desktop.
-    </p>
-</div>
+# NixOS Configuration
 
----
+My personal NixOS setup for both my homelab server and desktop workstation. Everything is managed declaratively with Nix Flakes.
 
-## What is this?
+## What's in here
 
-This is a complete NixOS configuration that manages:
+This repo contains the complete configuration for:
 
-- **Homelab Server**: Self-hosted services for media, monitoring, and infrastructure
-- **Desktop Workstation**: Personal development and productivity setup
+- **Homelab server**: Self-hosted media services, monitoring, and infrastructure tools
+- **Desktop workstation**: Development environment and daily use setup
 
-Everything is declarative, reproducible, and version-controlled.
+All the services, system settings, and user configs are defined here and can be rebuilt from scratch.
 
-### 📦 Services & Applications
+## Services
 
-All available homelab services:
+The homelab runs a bunch of self-hosted services:
 
-<table align="center">
-  <tr>
-    <td align="center" width="16%">
-      <a href="https://caddyserver.com" title="Fast, multi-platform web server with automatic HTTPS">
-        <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/caddy.png" width="48" height="48" alt="Caddy"/>
-        <br/>Caddy
-      </a>
-    </td>
-    <td align="center" width="16%">
-      <a href="https://jellyfin.org" title="The Free Software Media System">
-        <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/jellyfin.png" width="48" height="48" alt="Jellyfin"/>
-        <br/>Jellyfin
-      </a>
-    </td>
-    <td align="center" width="16%">
-      <a href="https://github.com/0xERR0R/blocky" title="Fast and lightweight DNS proxy as ad-blocker for local network">
-        <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/blocky.png" width="48" height="48" alt="Blocky"/>
-        <br/>Blocky
-      </a>
-    </td>
-    <td align="center" width="16%">
-      <a href="https://www.authelia.com" title="The Single Sign-On Multi-Factor portal for web apps">
-        <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/authelia.png" width="48" height="48" alt="Authelia"/>
-        <br/>Authelia
-      </a>
-    </td>
-    <td align="center" width="16%">
-      <a href="https://prometheus.io" title="Monitoring system and time series database">
-        <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/prometheus.png" width="48" height="48" alt="Prometheus"/>
-        <br/>Prometheus
-      </a>
-    </td>
-    <td align="center" width="16%">
-      <a href="https://grafana.com" title="Analytics and monitoring platform">
-        <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/grafana.png" width="48" height="48" alt="Grafana"/>
-        <br/>Grafana
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="16%">
-      <a href="https://github.com/glance-app/glance" title="Self-hosted dashboard">
-        <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/glance.png" width="48" height="48" alt="Glance"/>
-        <br/>Glance
-      </a>
-    </td>
-    <td align="center" width="16%">
-      <a href="https://tailscale.com" title="Mesh VPN for secure access">
-        <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/tailscale.png" width="48" height="48" alt="Tailscale"/>
-        <br/>Tailscale
-      </a>
-    </td>
-    <td align="center" width="16%">
-      <a href="https://www.docker.com" title="Container runtime platform">
-        <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/docker.png" width="48" height="48" alt="Docker"/>
-        <br/>Docker
-      </a>
-    </td>
-  </tr>
-</table>
+- **Caddy** - Reverse proxy with automatic HTTPS
+- **Jellyfin** - Media server for movies and TV
+- **Blocky** - DNS filtering and ad-blocking
+- **Authelia** - Single sign-on for web services
+- **Prometheus & Grafana** - Monitoring and dashboards
+- **Glance** - Service dashboard
+- **Tailscale** - VPN for remote access
+- **Docker** - Container runtime
 
-### 🖥️ Hosts
+Plus the usual media automation stack (Sonarr, Radarr, Lidarr, Prowlarr, Jellyseerr, qBittorrent, SABnzbd).
 
-#### 🏠 [homelab](./hosts/homelab/)
+## Hosts
 
-Main server running self-hosted services for media, monitoring, and infrastructure.
+### homelab
 
-**Services:**
-- **🔐 Authentication**: Authelia for SSO across all services
-- **📊 Monitoring Stack**: Prometheus, Grafana with custom dashboards and alerts
-- **🌐 Reverse Proxy**: Caddy with automatic HTTPS via Cloudflare DNS challenge
-- **📱 Media Server**: Jellyfin for movies, TV shows, and music
-- **🛡️ DNS Filtering**: Blocky with ad-blocking and multiple blocklists
-- **📊 Dashboards**: Homepage and Glance for service management
-- **🔒 VPN**: Tailscale for secure remote access
+The main server that runs all the self-hosted services. Uses Authelia for authentication, Caddy for reverse proxying with Cloudflare DNS challenge, and has monitoring set up with Prometheus and Grafana.
 
-#### 💻 [aldoraine](./hosts/aldoraine/)
+### aldoraine
 
-Personal desktop workstation for daily development and productivity.
+My desktop workstation. GNOME desktop, Neovim for editing, and the usual development tools.
 
-**Setup:**
-- **🖥️ Desktop Environment**: GNOME with custom theming
-- **🛠️ Development Tools**: Neovim, Git, and full development environment
-- **🎨 System Management**: Custom utilities and system configurations
-
-### 📁 Structure
+## Repository Structure
 
 ```
 .
@@ -131,24 +57,18 @@ Personal desktop workstation for daily development and productivity.
 └── themes/               # Styling and theming configs
 ```
 
-### 🔐 Secrets Management
+## Secrets
 
-Secrets are managed with [agenix](https://github.com/ryantm/agenix), which encrypts secrets using SSH keys. The `secrets.nix` file defines which SSH keys can decrypt each secret, and the encrypted `.age` files are safe to commit to git.
+Secrets are managed with [agenix](https://github.com/ryantm/agenix). The `secrets.nix` file defines which SSH keys can decrypt each secret, and the encrypted `.age` files are committed to git.
 
-### 📊 Monitoring
+## Monitoring
 
-I've set up a monitoring stack with Prometheus and Grafana. Each service can easily add its own metrics and alerts using the monitoring helpers in `lib/monitoring/`. The setup includes:
+I've got Prometheus scraping metrics from all the services, and Grafana for visualization. There's a monitoring helper library in `lib/monitoring/` that makes it easy to add metrics and alerts for new services.
 
-- Prometheus scraping configs for all services
-- Pre-configured dashboards (currently Blocky)
-- Reusable monitoring template for adding new services
-- Alerting rules for service health
+## Credits
 
-### ❤️ Thanks
+Thanks to the NixOS community and all the open source projects that make this possible, especially:
 
-A big thank you to the contributors of OpenSource projects, in particular:
-
-- [NixOS](https://nixos.org/) - The purely functional Linux distribution
-- [Home Manager](https://github.com/nix-community/home-manager) - Manage a user environment using Nix
-- [agenix](https://github.com/ryantm/agenix) - Secret management for NixOS using age
-- All the service maintainers and the NixOS community
+- [NixOS](https://nixos.org/)
+- [Home Manager](https://github.com/nix-community/home-manager)
+- [agenix](https://github.com/ryantm/agenix)

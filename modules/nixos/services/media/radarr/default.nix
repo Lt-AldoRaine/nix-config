@@ -10,18 +10,15 @@ in
     enable = true;
     dataDir = "/var/lib/radarr";
     openFirewall = true;
-    # Disable built-in authentication - Authelia handles it
-    # This is configured via config.xml after first run
-    # Set AuthenticationMethod to "None" in /var/lib/radarr/config.xml
   };
 
-  # Add Prometheus monitoring via blackbox exporter HTTP health check
+  # Add Prometheus monitoring via HTTP check
   services.prometheus.scrapeConfigs = lib.mkMerge [
     [
-      (monitoring.mkBlackboxHttpCheck {
+      (monitoring.mkPrometheusScrape {
         jobName = serviceName;
         port = servicePort;
-        path = "/";
+        path = "/api/v3/system/status";
         labels = {
           service = serviceName;
         };
@@ -36,7 +33,6 @@ in
         serviceName = serviceName;
         jobName = serviceName;
         port = servicePort;
-        useBlackbox = true;
       })
     ))
   ];

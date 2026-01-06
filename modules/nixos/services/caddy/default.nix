@@ -3,7 +3,6 @@ let
   monitoring = import ../../../../lib/monitoring { inherit lib; };
   cfg = config.services.my-caddy;
   
-  # Define your base domain here
   baseDomain = "aldoraine.com";
   serviceName = "caddy";
   metricsPort = 2019; # Caddy admin API port
@@ -32,7 +31,7 @@ in {
       # Use a package that includes the Cloudflare DNS plugin
       package = pkgs.caddy.withPlugins {
         plugins = [ "github.com/caddy-dns/cloudflare@v0.2.2" ];
-        hash = "sha256-ea8PC/+SlPRdEVVF/I3c1CBprlVp1nrumKM5cMwJJ3U="; # We need to let Nix build this once to get the hash
+        hash = "sha256-ea8PC/+SlPRdEVVF/I3c1CBprlVp1nrumKM5cMwJJ3U=";
       };
 
       globalConfig = ''
@@ -54,7 +53,16 @@ in {
 
             @jellyfin host jellyfin.${baseDomain}
             handle @jellyfin {
-              reverse_proxy localhost:8096
+              reverse_proxy localhost:8096 {
+                transport http {
+                  dial_timeout 30s
+                  response_header_timeout 60s
+                }
+                header_up Host {host}
+                header_up X-Real-IP {remote}
+                header_up X-Forwarded-For {remote}
+                header_up X-Forwarded-Proto {scheme}
+              }
             }
 
 						@dash host dash.${baseDomain}

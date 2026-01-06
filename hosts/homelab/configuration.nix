@@ -11,6 +11,7 @@
     ../../modules/nixos/services/glance/default.nix
     ../../modules/nixos/services/blocky/default.nix
     ../../modules/nixos/services/authelia/default.nix
+    ../../modules/nixos/services/fail2ban/default.nix
 
     # media services
     ../../modules/nixos/services/media/lidarr/default.nix

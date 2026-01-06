@@ -11,43 +11,13 @@ let
       metrics_path = path;
     };
 
-  # Helper function to create a blackbox exporter HTTP health check
-  mkBlackboxHttpCheck = { jobName, port, path ? "/", labels ? {}, blackboxPort ? 9115 }:
-    {
-      job_name = jobName;
-      metrics_path = "/probe";
-      params = {
-        module = [ "http_2xx" ];
-      };
-      static_configs = [{
-        targets = [ "http://localhost:${toString port}${path}" ];
-        inherit labels;
-      }];
-      relabel_configs = [
-        {
-          source_labels = [ "__address__" ];
-          target_label = "__param_target";
-        }
-        {
-          source_labels = [ "__param_target" ];
-          target_label = "instance";
-        }
-        {
-          target_label = "__address__";
-          replacement = "localhost:${toString blackboxPort}";
-        }
-      ];
-    };
-
   # Helper function to create Prometheus alerting rules
-  mkServiceAlerts = { serviceName, jobName, port ? null, useBlackbox ? false }:
+  mkServiceAlerts = { serviceName, jobName, port ? null }:
     let
-      # Use probe_success for blackbox exporter, up for direct metrics
-      downExpr = if useBlackbox then "probe_success{job=\"${jobName}\"} == 0" else "up{job=\"${jobName}\"} == 0";
       baseRules = [
         {
           alert = "${serviceName}_down";
-          expr = downExpr;
+          expr = "up{job=\"${jobName}\"} == 0";
           for = "1m";
           labels = {
             severity = "critical";
@@ -59,23 +29,29 @@ let
         }
       ];
       
-      # Use blackbox exporter metrics if enabled, otherwise standard HTTP metrics
-      responseTimeExpr = if useBlackbox then
-        "probe_http_duration_seconds{job=\"${jobName}\"} > 1"
-      else
-        "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job=\"${jobName}\"}[5m])) > 1";
-      
       httpRules = lib.optionals (port != null) [
         {
           alert = "${serviceName}_high_response_time";
-          expr = responseTimeExpr;
+          expr = "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job=\"${jobName}\"}[5m])) > 1";
           for = "5m";
           labels = {
             severity = "warning";
           };
           annotations = {
             summary = "${serviceName} has high response time";
-            description = "${serviceName} response time is above 1s for 5 minutes.";
+            description = "${serviceName} 95th percentile response time is above 1s for 5 minutes.";
+          };
+        }
+        {
+          alert = "${serviceName}_high_error_rate";
+          expr = "rate(http_requests_total{job=\"${jobName}\",status=~\"5..\"}[5m]) > 0.05";
+          for = "5m";
+          labels = {
+            severity = "warning";
+          };
+          annotations = {
+            summary = "${serviceName} has high error rate";
+            description = "${serviceName} error rate is above 5% for 5 minutes.";
           };
         }
       ];
@@ -91,5 +67,5 @@ let
     };
 in
 {
-  inherit mkPrometheusScrape mkServiceAlerts mkBlackboxHttpCheck;
+  inherit mkPrometheusScrape mkServiceAlerts;
 }

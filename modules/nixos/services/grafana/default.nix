@@ -26,19 +26,7 @@
         {
           name = "Blocky";
           options = {
-            path = ./dashboards/blocky.json;
-          };
-        }
-        {
-          name = "Sonarr";
-          options = {
-            path = ./dashboards/sonarr.json;
-          };
-        }
-        {
-          name = "Radarr";
-          options = {
-            path = ./dashboards/radarr.json;
+            path = ./dashboards;
           };
         }
       ];

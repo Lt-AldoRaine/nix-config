@@ -4,8 +4,6 @@
     enable = true;
     port = 9090;
     
-    # Scrape configurations are empty here; 
-    # other modules will add to this list via lib.mkMerge
     scrapeConfigs = [
     ];
 
@@ -39,22 +37,6 @@
     enable = true;
     enabledCollectors = [ "systemd" ];
     port = 9100;
-  };
-
-  # Enable blackbox exporter for HTTP health checks
-  services.prometheus.exporters.blackbox = {
-    enable = true;
-    configFile = pkgs.writeText "blackbox.yml" ''
-      modules:
-        http_2xx:
-          prober: http
-          timeout: 5s
-          http:
-            valid_http_versions: ["HTTP/1.1", "HTTP/2.0"]
-            valid_status_codes: [200, 301, 302]
-            follow_redirects: true
-    '';
-    port = 9115;
   };
 }
 
