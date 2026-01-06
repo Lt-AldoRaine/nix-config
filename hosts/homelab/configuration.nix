@@ -1,23 +1,39 @@
-{ config, ... }: {
+{ config, inputs, ... }: {
   imports = [
     # services
-    ../../nixos/services/docker/default.nix
-    ../../nixos/services/jellyfin/default.nix
-    ../../nixos/services/tailscale/default.nix
-    ../../nixos/services/homepage/default.nix
-    ../../nixos/services/glance/default.nix
-    ../../nixos/services/fail2ban/default.nix
-    ../../nixos/services/blocky/default.nix
+    ../../modules/nixos/services/docker/default.nix
+    ../../modules/nixos/services/jellyfin/default.nix
+    ../../modules/nixos/services/tailscale/default.nix
+    ../../modules/nixos/services/caddy/default.nix
+    ../../modules/nixos/services/homepage/default.nix
+    ../../modules/nixos/services/prometheus/default.nix
+    ../../modules/nixos/services/grafana/default.nix
+    ../../modules/nixos/services/glance/default.nix
+    ../../modules/nixos/services/blocky/default.nix
+    ../../modules/nixos/services/authelia/default.nix
+    ../../modules/nixos/services/fail2ban/default.nix
+
+    # media services
+    ../../modules/nixos/services/media/lidarr/default.nix
+    ../../modules/nixos/services/media/radarr/default.nix
+    ../../modules/nixos/services/media/sonarr/default.nix
+    ../../modules/nixos/services/media/prowlarr/default.nix
+    ../../modules/nixos/services/media/jellyseerr/default.nix
+    ../../modules/nixos/services/media/qbittorrent/default.nix
+    ../../modules/nixos/services/media/sabnzbd/default.nix
 
     # system
-    ../../nixos/system/nix/default.nix
-    ../../nixos/system/fonts/default.nix
-    ../../nixos/system/users/default.nix
-    ../../nixos/system/utils/default.nix
-    ../../nixos/system/timezone/default.nix
-    ../../nixos/system/home-manager/default.nix
-    ../../nixos/system/systemd-boot/default.nix
-    ../../nixos/system/network-manager/default.nix
+    ../../modules/nixos/system/nix/default.nix
+    ../../modules/nixos/system/fonts/default.nix
+    ../../modules/nixos/system/users/default.nix
+    ../../modules/nixos/system/utils/default.nix
+    ../../modules/nixos/system/timezone/default.nix
+    ../../modules/nixos/system/home-manager/default.nix
+    ../../modules/nixos/system/systemd-boot/default.nix
+    ../../modules/nixos/system/network-manager/default.nix
+
+    # agenix
+    inputs.agenix.nixosModules.age
 
     ../../themes/style/dracula.nix
 
@@ -25,7 +41,31 @@
     ./variables.nix
   ];
 	 
-  home-manager.users."${config.var.username}" = import ./home.nix;
+  services.my-caddy.enable = true;
+  services.authelia.instances.main.enable = true;
+
+  age.secrets."cloudflare-api-token" = {
+    file = ./secrets/cloudflare-api-token.age;
+    owner = "caddy";
+    group = "caddy";
+    mode = "600";
+  };
+
+  age.secrets."authelia-jwt-secret" = {
+    file = ./secrets/authelia-jwt-secret.age;
+    owner = "authelia-main";
+    group = "authelia-main";
+    mode = "600";
+  };
+
+  age.secrets."authelia-storage-encryption-key" = {
+    file = ./secrets/authelia-storage-encryption-key.age;
+    owner = "authelia-main";
+    group = "authelia-main";
+    mode = "600";
+  };
+	 
+  home-manager.users.${config.var.username} = import ./home.nix;
 
   system.stateVersion = "24.11";
 }

@@ -3,15 +3,14 @@
     ./variables.nix
 
     # programs
-    ../../home/programs/git
-    ../../home/programs/shell
-    ../../home/programs/nvim
+    ../../modules/home/programs/git
+    ../../modules/home/programs/shell
+    ../../modules/home/programs/nvim
   ];
 
   home = {
     inherit (config.var) username;
     homeDirectory = "/home/" + config.var.username;
-
 
     packages = with pkgs; [
       git
@@ -20,14 +19,11 @@
       unzip
       pfetch
       ripgrep
-			just
 			ansible
-			terraform
 			nodejs
 
-			dnsutils
-			unixtools.netstat
 			lm_sensors
+      inputs.agenix.packages.${pkgs.system}.default
     ];
     stateVersion = "24.11";
   };
