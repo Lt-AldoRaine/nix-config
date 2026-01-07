@@ -134,7 +134,16 @@ in {
                 uri /api/verify?rd=https://auth.${baseDomain}
                 copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
               }
-              reverse_proxy localhost:8085
+              reverse_proxy localhost:6336 {
+                transport http {
+                  dial_timeout 30s
+                  response_header_timeout 60s
+                }
+                header_up Host {host}
+                header_up X-Real-IP {remote}
+                header_up X-Forwarded-For {remote}
+                header_up X-Forwarded-Proto {scheme}
+              }
             }
             
             # Fallback for unknown subdomains

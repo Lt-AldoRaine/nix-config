@@ -2,7 +2,6 @@
   imports = [
     # services
     ../../../modules/nixos/services/docker/default.nix
-    ../../../modules/nixos/services/jellyfin/default.nix
     ../../../modules/nixos/services/tailscale/default.nix
     ../../../modules/nixos/services/caddy/default.nix
     ../../../modules/nixos/services/homepage/default.nix
@@ -12,14 +11,7 @@
     ../../../modules/nixos/services/blocky/default.nix
     ../../../modules/nixos/services/authelia/default.nix
 
-    # media services
-    ../../../modules/nixos/services/media/lidarr/default.nix
-    ../../../modules/nixos/services/media/radarr/default.nix
-    ../../../modules/nixos/services/media/sonarr/default.nix
-    ../../../modules/nixos/services/media/prowlarr/default.nix
-    ../../../modules/nixos/services/media/jellyseerr/default.nix
-    ../../../modules/nixos/services/media/qbittorrent/default.nix
-    ../../../modules/nixos/services/media/sabnzbd/default.nix
+		../../../modules/nixos/services/nixarr/default.nix
 
     # system
     ../../../modules/nixos/system/nix/default.nix

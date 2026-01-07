@@ -7,6 +7,7 @@ let
     }
     inputs.stylix.nixosModules.stylix
     inputs.home-manager.nixosModules.home-manager
+		inputs.nixarr.nixosModules.default
   ];
 
   mkHost = { system, modules ? [ ], extraModules ? [ ] }:
