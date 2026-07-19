@@ -8,6 +8,9 @@
         domain = "grafana.aldoraine.com";
         root_url = "https://grafana.aldoraine.com";
       };
+			security = {
+				secret_key = "SW2YcwTIb9zpOOhoPsMm";
+			};
     };
 
     # Provision Prometheus as a data source automatically

@@ -41,6 +41,8 @@ in {
             "*.collegeboard.org"
             "*.local"
             "local"
+						"sdk.split.io"
+						"cdn.split.io"
           ];
         };
 
@@ -75,6 +77,7 @@ in {
         };
 
         clientGroupsBlock.default = [ "ads" "adult" "fakenews" "gambling" "trackers"  "threats" ];
+				# clientGroupsAllow.default = [ "whitelist" ];
       };
     };
   };

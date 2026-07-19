@@ -31,7 +31,7 @@ in {
       # Use a package that includes the Cloudflare DNS plugin
       package = pkgs.caddy.withPlugins {
         plugins = [ "github.com/caddy-dns/cloudflare@v0.2.2" ];
-        hash = "sha256-ea8PC/+SlPRdEVVF/I3c1CBprlVp1nrumKM5cMwJJ3U=";
+        hash = "sha256-7DGnojZvcQBZ6LEjT0e5O9gZgsvEeHlQP9aKaJIs/Zg=";
       };
 
       globalConfig = ''
@@ -130,16 +130,13 @@ in {
 
             @sab host sab.${baseDomain}
             handle @sab {
-              forward_auth http://localhost:9091 {
-                uri /api/verify?rd=https://auth.${baseDomain}
-                copy_headers Remote-User Remote-Groups Remote-Name Remote-Email
-              }
-              reverse_proxy localhost:6336 {
+              reverse_proxy https://127.0.0.1:8085 {
                 transport http {
                   dial_timeout 30s
                   response_header_timeout 60s
+                  tls_insecure_skip_verify
                 }
-                header_up Host {host}
+                header_up Host localhost:8085
                 header_up X-Real-IP {remote}
                 header_up X-Forwarded-For {remote}
                 header_up X-Forwarded-Proto {scheme}

@@ -6,7 +6,7 @@ in {
     firewall = {
       enable = true;
 
-      allowedTCPPorts = [ 22 53 8096 8082 8080 8081 8686 7878 8989 9696 5055 ];
+      allowedTCPPorts = [ 22 53 2049 16262 ];
 
     };
   };
@@ -50,16 +50,12 @@ in {
     };
   };
 
-	services.nfs.server = {
-		enable = true;
-	};
+	 fileSystems."/mnt/Media" = {
+	   device = "192.168.2.200:/var/nfs/shared/Jellyfin";
+	 	fsType = "nfs";
+	 };
 
-	fileSystems."/mnt/Media" = {
-	  device = "192.168.2.200:/var/nfs/shared/Media";
-		fsType = "nfs";
-	};
-
-	boot.supportedFilesystems = [ "nfs" ];
+	 boot.supportedFilesystems = [ "nfs" ];
 
   documentation = {
     enable = true;

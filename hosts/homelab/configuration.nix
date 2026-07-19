@@ -2,7 +2,8 @@
   imports = [
     # services
     ../../modules/nixos/services/docker/default.nix
-    ../../modules/nixos/services/jellyfin/default.nix
+    # NOTE: jellyfin, radarr, sonarr, lidarr, prowlarr, jellyseerr, sabnzbd, bazarr, recyclarr are managed by nixarr
+    # DO NOT import their individual modules here as it conflicts with nixarr
     ../../modules/nixos/services/tailscale/default.nix
     ../../modules/nixos/services/caddy/default.nix
     ../../modules/nixos/services/homepage/default.nix
@@ -13,14 +14,10 @@
     ../../modules/nixos/services/authelia/default.nix
     ../../modules/nixos/services/fail2ban/default.nix
 
-    # media services
-    ../../modules/nixos/services/media/lidarr/default.nix
-    ../../modules/nixos/services/media/radarr/default.nix
-    ../../modules/nixos/services/media/sonarr/default.nix
-    ../../modules/nixos/services/media/prowlarr/default.nix
-    ../../modules/nixos/services/media/jellyseerr/default.nix
+    # media services - only qbittorrent is separate, others are managed by nixarr
     ../../modules/nixos/services/media/qbittorrent/default.nix
-    ../../modules/nixos/services/media/sabnzbd/default.nix
+    # nixarr module is imported globally in lib/default.nix, but we also need our local config
+    ../../modules/nixos/services/nixarr/default.nix
 
     # system
     ../../modules/nixos/system/nix/default.nix

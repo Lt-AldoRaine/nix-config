@@ -25,7 +25,7 @@
 			lm_sensors
       inputs.agenix.packages.${pkgs.system}.default
     ];
-    stateVersion = "24.11";
+    stateVersion = "26.05";
   };
 
   #enable home-manager programs

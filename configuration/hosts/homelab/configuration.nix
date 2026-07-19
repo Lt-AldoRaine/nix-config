@@ -10,6 +10,7 @@
     ../../../modules/nixos/services/glance/default.nix
     ../../../modules/nixos/services/blocky/default.nix
     ../../../modules/nixos/services/authelia/default.nix
+		../../../modules/nixos/services/fail2ban/default.nix
 
 		../../../modules/nixos/services/nixarr/default.nix
 
@@ -30,6 +31,19 @@
 
     ./hardware-configuration.nix
     ./variables.nix
+  ];
+  nixpkgs.overlays = [
+    (final: prev: {
+      jellyfin-web = prev.jellyfin-web.overrideAttrs (finalAttrs: previousAttrs: {
+        installPhase = ''
+          runHook preInstall
+          sed -i "s#</head>#<script src=\"configurationpage?name=skip-intro-button.js\"></script></head>#" dist/index.html
+          mkdir -p $out/share
+          cp -a dist $out/share/jellyfin-web
+          runHook postInstall
+        '';
+      });
+    })
   ];
 	 
   services.my-caddy.enable = true;
@@ -58,5 +72,5 @@
 	 
   home-manager.users.${config.var.username} = import ./home.nix;
 
-  system.stateVersion = "24.11";
+  system.stateVersion = "26.05";
 }
