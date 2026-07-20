@@ -31,9 +31,18 @@
       enable = true;
       openFirewall = true;
       guiPort = 8085;
+      whitelistHostnames = [
+        "sab.aldoraine.com"
+        "homelab"
+      ];
     };
+		bazarr = {
+			enable = true;
+			openFirewall = true;
+		};
   };
 
+	services.sabnzbd.allowConfigWrite = true;
   # Keep Arr services from starting before the NFS media mount exists.
   systemd.services = {
     sonarr = {
@@ -69,7 +78,7 @@
     "d /media/.state/nixarr/sonarr 0755 sonarr sonarr -"
     "d /media/.state/nixarr/radarr 0755 radarr radarr -"
     "d /media/.state/nixarr/prowlarr 0755 prowlarr prowlarr -"
-    "d /media/.state/nixarr/sabnzbd 0755 sabnzbd sabnzbd -"
+    "d /var/lib/sabnzbd 0755 sabnzbd sabnzbd -"
     "d /media/.state/nixarr/jellyfin 0755 jellyfin jellyfin -"
     "d /media/.state/nixarr/jellyfin/data 0755 jellyfin jellyfin -"
     "d /media/.state/nixarr/jellyfin/data/plugins 0755 jellyfin jellyfin -"
