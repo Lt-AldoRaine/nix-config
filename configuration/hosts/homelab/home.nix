@@ -7,8 +7,6 @@
     ../../../modules/home/programs/shell
     ../../../modules/home/programs/nvim
 
-		#system
-		../../../modules/home/system/nfs/default.nix
   ];
 
   home = {

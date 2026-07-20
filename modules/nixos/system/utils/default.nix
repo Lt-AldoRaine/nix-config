@@ -50,12 +50,12 @@ in {
     };
   };
 
-	 # fileSystems."/mnt/Media" = {
-	 #   device = "192.168.2.200:/var/nfs/shared/Jellyfin";
-	 # 	fsType = "nfs";
-	 # };
-		#
-	 # boot.supportedFilesystems = [ "nfs" ];
+	 fileSystems."/mnt/Media" = {
+	   device = "192.168.2.200:/var/nfs/shared/Jellyfin";
+	 	fsType = "nfs";
+	 };
+
+	 boot.supportedFilesystems = [ "nfs" ];
 
   documentation = {
     enable = true;

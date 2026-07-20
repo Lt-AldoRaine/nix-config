@@ -40,7 +40,6 @@
     };
 
 		nixarr.url = "github:rasmus-kirk/nixarr";
-
   };
 
   outputs = inputs@{ nixpkgs, flake-parts, ... }:
