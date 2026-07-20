@@ -2,7 +2,7 @@
   imports = [
 		#services
 		../../../modules/nixos/services/audio/default.nix
-		../../../modules/nixos/services/bluetooth/default
+		../../../modules/nixos/services/bluetooth/default.nix
 
 		#system
 		../../../modules/nixos/system/nix/default.nix
@@ -15,7 +15,7 @@
 		../../../modules/nixos/system/network-manager/default.nix
     ../../../modules/nixos/system/xdg-portal/default.nix
 
-    ../../themes/style/dracula.nix
+    ../../../themes/style/gruv.nix
 
     ./hardware-configuration.nix
     ./variables.nix
