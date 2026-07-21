@@ -14,6 +14,7 @@
 		../../../modules/nixos/system/systemd-boot/default.nix
 		../../../modules/nixos/system/network-manager/default.nix
     ../../../modules/nixos/system/xdg-portal/default.nix
+		../../../modules/nixos/system/nvidia/default.nix
 
     ../../../themes/style/gruv.nix
 
@@ -22,6 +23,7 @@
   ];
 
   home-manager.users."${config.var.username}" = import ./home.nix;
+	programs.hyprland.enable = true;
 
   system.stateVersion = "26.05";
 }

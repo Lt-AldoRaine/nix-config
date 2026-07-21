@@ -4,7 +4,7 @@
 
     # system
     ../../../modules/home/system/wofi
-		#../../../modules/home/system/hyprpanel
+		../../../modules/home/system/hyprpanel
     ../../../modules/home/system/hyprland
 
     # programs

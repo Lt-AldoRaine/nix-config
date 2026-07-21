@@ -5,7 +5,7 @@ let
 in {
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers =
-    [ "nvidia" "displayLink" ]; # or "nvidiaLegacy470 etc.
+    [ "nvidia" ]; # or "nvidiaLegacy470 etc.
 
   boot.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
 
@@ -47,7 +47,7 @@ in {
       enable32Bit = true;
       extraPackages = with pkgs; [
         nvidia-vaapi-driver
-        vaapiVdpau
+        libva-vdpau-driver
         libvdpau-va-gl
         mesa
         egl-wayland
