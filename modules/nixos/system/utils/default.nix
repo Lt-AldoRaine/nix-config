@@ -2,10 +2,10 @@
 let inherit (config.var) hostname keyboardLayout;
 in {
   networking = {
+		nameservers = [ "192.168.2.2" ];
     hostName = hostname;
     firewall = {
       enable = true;
-
       allowedTCPPorts = [ 22 53 2049 16262 ];
 
     };
