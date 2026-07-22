@@ -40,6 +40,8 @@
     };
 
 		nixarr.url = "github:rasmus-kirk/nixarr";
+
+		lanzaboote.url = "github:nix-community/lanzaboote/v1.1.0";
   };
 
   outputs = inputs@{ nixpkgs, flake-parts, ... }:

@@ -3,6 +3,7 @@
 		#services
 		../../../modules/nixos/services/audio/default.nix
 		../../../modules/nixos/services/bluetooth/default.nix
+		../../../modules/nixos/services/lanzaboote/default.nix
 
 		#system
 		../../../modules/nixos/system/nix/default.nix
