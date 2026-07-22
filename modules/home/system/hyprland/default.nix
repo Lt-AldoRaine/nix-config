@@ -64,6 +64,27 @@ in {
 
     package = inputs.hyprland.packages."${pkgs.system}".hyprland;
 
+    extraConfig = ''
+      local ok, wallustColors = pcall(require, "colors")
+      if ok and wallustColors then
+        hl.config({
+          general = {
+            ["col.active_border"] = wallustColors.active_border,
+            ["col.inactive_border"] = wallustColors.inactive_border,
+          },
+          misc = {
+            background_color = wallustColors.background_color,
+          },
+          group = {
+            ["col.border_active"] = wallustColors.border_active,
+            ["col.border_inactive"] = wallustColors.border_inactive,
+            ["col.border_locked_active"] = wallustColors.border_locked_active,
+            ["col.border_locked_inactive"] = wallustColors.border_locked_inactive,
+          },
+        })
+      end
+    '';
+
     settings = {
       env = envEntries;
       curve = animData.curves;
