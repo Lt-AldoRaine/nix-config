@@ -6,6 +6,8 @@ let
   hyprlandTemplate = ./templates/hyprland-colors.lua;
   kittyTemplate = ./templates/kitty-colors.conf;
   gtkTemplate = ./templates/gtk-colors.css;
+  starshipTemplate = ./templates/starship.toml;
+  hyprpanelColorsTemplate = ./templates/hyprpanel-colors.json;
 
   wallustConfig = pkgs.writeText "wallust.toml" ''
     backend = "resized"
@@ -28,6 +30,12 @@ let
 
     gtk4.template = "gtk-colors.css"
     gtk4.target = "~/.config/gtk-4.0/colors.css"
+
+    starship.template = "starship.toml"
+    starship.target = "~/.config/starship.toml"
+
+    hyprpanel.template = "hyprpanel-colors.json"
+    hyprpanel.target = "~/.cache/wallust/hyprpanel-colors.json"
   '';
 
   wallpaperCycle = pkgs.writeShellScriptBin "wallpaper-cycle" (
@@ -46,11 +54,17 @@ in {
     wallpaperCycle
   ];
 
+  # wallust owns ~/.config/starship.toml at runtime (like it does for kitty's
+  # colors.conf and hypr's colors.lua), so home-manager must not manage it.
+  programs.starship.settings = lib.mkForce { };
+
   xdg.configFile = {
     "wallust/wallust.toml".source = wallustConfig;
     "wallust/templates/hyprland-colors.lua".source = hyprlandTemplate;
     "wallust/templates/kitty-colors.conf".source = kittyTemplate;
     "wallust/templates/gtk-colors.css".source = gtkTemplate;
+    "wallust/templates/starship.toml".source = starshipTemplate;
+    "wallust/templates/hyprpanel-colors.json".source = hyprpanelColorsTemplate;
   };
 
   systemd.user.services.wallust-init = {

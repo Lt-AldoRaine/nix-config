@@ -44,10 +44,16 @@ wait_for_awww() {
 
 update_hyprpanel_wallpaper() {
   local path="$1"
+  local colors_file="${XDG_CACHE_HOME:-$HOME/.cache}/wallust/hyprpanel-colors.json"
   if [[ -f "$HP_CONF" ]] && command -v jq >/dev/null; then
     local tmp
     tmp="$(mktemp)"
-    jq --arg img "$path" '.["wallpaper.image"] = $img' "$HP_CONF" >"$tmp"
+    if [[ -f "$colors_file" ]]; then
+      jq --arg img "$path" --slurpfile patch "$colors_file" \
+        '. + $patch[0] | .["wallpaper.image"] = $img' "$HP_CONF" >"$tmp"
+    else
+      jq --arg img "$path" '.["wallpaper.image"] = $img' "$HP_CONF" >"$tmp"
+    fi
     mv "$tmp" "$HP_CONF"
   fi
 }
