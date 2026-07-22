@@ -17,7 +17,7 @@
     ../../../modules/nixos/system/xdg-portal/default.nix
 		../../../modules/nixos/system/nvidia/default.nix
 
-    ../../../themes/style/shrineTheme.nix
+    ../../../themes/style/tokyo-night.nix
 
     ./hardware-configuration.nix
     ./variables.nix
