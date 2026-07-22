@@ -11,9 +11,9 @@ error_symbol = "[❯](red)"
 vimcmd_symbol = "[❮](cyan)"
 
 [git_branch]
-symbol = "[]({{color8}}) "
-style = "fg:{{color4}} bg:{{color8}}"
-format = "on [$symbol$branch]($style)[]({{color8}}) "
+symbol = "[]({{ background | lighten(0.1) }}) "
+style = "fg:{{color4}} bg:{{ background | lighten(0.1) }}"
+format = "on [$symbol$branch]($style)[]({{ background | lighten(0.1) }}) "
 
 [git_status]
 format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218)($ahead_behind$stashed)]($style)"
