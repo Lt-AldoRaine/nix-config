@@ -6,6 +6,8 @@
     ../../../modules/home/system/wofi
 		../../../modules/home/system/hyprpanel
     ../../../modules/home/system/hyprland
+    ../../../modules/home/system/awww
+    ../../../modules/home/system/wallust
 
     # programs
     ../../../modules/home/programs/git
