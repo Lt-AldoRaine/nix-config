@@ -2,7 +2,8 @@
   home.packages = with pkgs; [ ctags ];
   programs.nixvim = {
     highlightOverride = {
-      FloatBorder.fg = "#${config.lib.stylix.colors.base0D}";
+      # FloatBorder.fg = "#${config.lib.stylix.colors.base0D}";
+      FloatBorder.fg = "#7aa2f7";
       SignColumn.fg = "none";
       LineNr.fg = "none";
       LineNrAbove.fg = "none";
