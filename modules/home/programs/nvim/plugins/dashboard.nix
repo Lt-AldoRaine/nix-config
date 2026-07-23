@@ -1,8 +1,11 @@
 { config, ... }:
 let
-  accent = "#${config.lib.stylix.colors.base0D}";
-  muted = "#${config.lib.stylix.colors.base03}";
-  foreground = "#${config.lib.stylix.colors.base05}";
+  # accent = "#${config.lib.stylix.colors.base0D}";
+  # muted = "#${config.lib.stylix.colors.base03}";
+  # foreground = "#${config.lib.stylix.colors.base05}";
+  accent = "#7aa2f7";
+  muted = "#565f89";
+  foreground = "#c0caf5";
 in {
 
   programs.nixvim.highlight = {
