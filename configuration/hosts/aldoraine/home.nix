@@ -25,12 +25,14 @@
     packages = with pkgs; [
       discord
       steam
-			noisetorch
+			alsa-scarlett-gui
+			scarlett2
 
       go
       git
       nodejs
       python3
+			cursor-cli
 
       libation
       zip
@@ -39,7 +41,6 @@
       pfetch
       pandoc
       ripgrep
-
       firefox
     ];
     stateVersion = "26.05";
