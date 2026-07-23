@@ -20,6 +20,6 @@
 
     autoGarbageCollector = true;
 
-    theme = import ../../../themes/var/shrineTheme.nix;
+    theme = import ../../../themes/var/2025.nix;
   };
 }
