@@ -47,7 +47,6 @@
     };
 
     polarity = "dark";
-    image = ./wallpapers/Tokyo_Pink.png;
   };
 
 }
