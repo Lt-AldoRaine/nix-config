@@ -104,5 +104,6 @@ in execEntries ++ [
   (mkBind "${mod} + Q" hlLib.dsp.windowClose)
   (mkBind "${mod} + F" (hlLib.dsp.windowFullscreen "maximized"))
   (mkBind "${mod} + SHIFT + F" (hlLib.dsp.windowFullscreen null))
+  (mkBind "${mod} + SHIFT + W" (hlLib.dsp.exec "wallpaper-cycle"))
 ] ++ focusEntries ++ moveWindowEntries ++ resizeEntries ++ workspaceEntries
 ++ mouseEntries
